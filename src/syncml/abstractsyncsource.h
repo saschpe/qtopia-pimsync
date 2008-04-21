@@ -117,12 +117,6 @@ private:
 	QList<QUniqueId> modified;
 	QList<QUniqueId> removed;
 
-	/*!
-	 * This one is ecessary because Qtopia does not
-	 * encapsulate SQL backend limitations well.
-	 */
-	static int s_transactionCounter;
-
 	QDateTime m_currentSync;
 	QDateTime m_lastSync;
 };

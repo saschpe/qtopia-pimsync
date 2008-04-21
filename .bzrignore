@@ -52,3 +52,5 @@ synczilla.pro.cache
 3rdparty/libraries/curl/curl/src/curl
 3rdparty/libraries/curl/curl/src/hugehelp.c
 3rdparty/libraries/curl/curl/lib/.libs
+.bzr-old
+.bzr-new

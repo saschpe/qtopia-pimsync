@@ -3,8 +3,6 @@
 #include <QPimModel>
 #include <QPimContext>
 
-int AbstractSyncSource::s_transactionCounter = 0;
-
 AbstractSyncSource::AbstractSyncSource(AbstractSyncSourceConfig *config, SyncManagerConfig* managerConfig)
 	: SyncSource(config->getName(), config)
 	, m_model(NULL)
@@ -69,7 +67,7 @@ int AbstractSyncSource::beginSync()
 	modified = m_model->modified(m_lastSync);
 	removed = m_model->removed(m_lastSync);
 
-	/*qDebug() << "AbstractSyncSource::beginSync() Added:";
+	qDebug() << "AbstractSyncSource::beginSync() Added:";
 	for (int i = 0; i < added.size(); i++)
 		qDebug() << added[i].toString();
 	qDebug() << "AbstractSyncSource::beginSync() Modified:";
@@ -80,31 +78,14 @@ int AbstractSyncSource::beginSync()
 		qDebug() << removed[i].toString();
 	qDebug() << "AbstractSyncSource::beginSync() All:";
 	for (int i = 0; i < m_model->count(); i++)
-		qDebug() << m_model->id(i).toString();*/
+		qDebug() << m_model->id(i).toString();
 
 	m_currentSync = QDateTime::currentDateTime().toUTC();
-	/*// Remark: Qtopia SQL backend (sqlite) does not properly support transactions
-	// and Qtopia neither encapsulates this well.
-	s_transactionCounter++;
-	if (s_transactionCounter == 1) {
-		qDebug() << "AbstractSyncSource::beginSync() start transaction";
-		if (!m_model->startSyncTransaction(m_currentSync))
-			return 1;
-	}*/
 	return 0;
 }
 
 int AbstractSyncSource::endSync()
 {
-	/*s_transactionCounter--;
-	if (s_transactionCounter == 0) {
-		qDebug() << "AbstractSyncSource::endSync() end transaction";
-		if (m_model->commitSyncTransaction()) {
-			m_lastSync = m_currentSync;
-		} else {
-			return 1;
-		}
-	}*/
 	return 0;
 }
 
@@ -113,50 +94,50 @@ SyncItem *AbstractSyncSource::getFirst(ItemSet set, bool withData)
 	qDebug() << "AbstractSyncSource::getFirst() From set" << set << "with data:" << withData;
 	QUniqueId id;
 	SyncState state = SYNC_STATE_NONE;
-	bool error = false;
+	bool endTransaction = false;
 
 	if (!m_model->startSyncTransaction(m_currentSync)) {
 		qDebug() << "AbstractSyncSource::getFirst() start sync failed" << m_currentSync;
+	} else {
+		if (set == All) {
+			m_indexAll = 0;
+			if (m_indexAll >= m_model->count()) {
+				qDebug() << "AbstractSyncSource::getFirst() No item available";
+				endTransaction = true;
+			} else {
+				id = m_model->id(m_indexAll);
+			}
+		} else if (set == New) {
+			m_indexNew = 0;
+			if (m_indexNew >= added.size()) {
+				qDebug() << "AbstractSyncSource::getFirst() No new item available";
+				endTransaction = true;
+			} else {
+				state = SYNC_STATE_NEW;
+				id = added[m_indexNew];
+			}
+		} else if (set == Updated) {
+			m_indexUpdated = 0;
+			if (m_indexUpdated >= modified.size()) {
+				qDebug() << "AbstractSyncSource::getFirst() No updated item available";
+				endTransaction = true;
+			} else {
+				state = SYNC_STATE_UPDATED;
+				id = modified[m_indexUpdated];
+			}
+		} else if (set == Deleted) {
+			m_indexDeleted = 0;
+			if (m_indexDeleted >= removed.size()) {
+				qDebug() << "AbstractSyncSource::getFirst() No deleted item available";
+				endTransaction = true;
+			} else {
+				state = SYNC_STATE_DELETED;
+				id = removed[m_indexDeleted];
+			}
+		}
 	}
 
-	if (set == All) {
-		m_indexAll = 0;
-		if (m_indexAll >= m_model->count()) {
-			qDebug() << "AbstractSyncSource::getFirst() No item available";
-			error = true;
-		} else {
-			id = m_model->id(m_indexAll);
-		}
-	} else if (set == New) {
-		m_indexNew = 0;
-		if (m_indexNew >= added.size()) {
-			qDebug() << "AbstractSyncSource::getFirst() No new item available";
-			error = true;
-		} else {
-			state = SYNC_STATE_NEW;
-			id = added[m_indexNew];
-		}
-	} else if (set == Updated) {
-		m_indexUpdated = 0;
-		if (m_indexUpdated >= modified.size()) {
-			qDebug() << "AbstractSyncSource::getFirst() No updated item available";
-			error = true;
-		} else {
-			state = SYNC_STATE_UPDATED;
-			id = modified[m_indexUpdated];
-		}
-	} else if (set == Deleted) {
-		m_indexDeleted = 0;
-		if (m_indexDeleted >= removed.size()) {
-			qDebug() << "AbstractSyncSource::getFirst() No deleted item available";
-			error = true;
-		} else {
-			state = SYNC_STATE_DELETED;
-			id = removed[m_indexDeleted];
-		}
-	}
-
-	if (error) {
+	if (endTransaction) {
 		if (!m_model->commitSyncTransaction())
 			qDebug() << "AbstractSyncSource::getFirst() commit sync failed" << m_currentSync;
 	} else {
@@ -173,13 +154,13 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 	qDebug() << "AbstractSyncSource::getNext() From set" << set << "with data:" << withData;
 	QUniqueId id;
 	SyncState state = SYNC_STATE_NONE;
-	bool error = false;
+	bool endTransaction = false;
 
 	if (set == All) {
 		m_indexAll++;
 		if (m_indexAll >= m_model->count()) {
 			qDebug() << "AbstractSyncSource::getNext() No further item available";
-			error = true;
+			endTransaction = true;
 		} else {
 			id = m_model->id(m_indexAll);
 		}
@@ -187,7 +168,7 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 		m_indexNew++;
 		if (m_indexNew >= added.size()) {
 			qDebug() << "AbstractSyncSource::getNext() No further new item available";
-			error = true;
+			endTransaction = true;
 		} else {
 			state = SYNC_STATE_NEW;
 			id = added[m_indexNew];
@@ -196,7 +177,7 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 		m_indexUpdated++;
 		if (m_indexUpdated >= modified.size()) {
 			qDebug() << "AbstractSyncSource::getNext() No further updated item available";
-			error = true;
+			endTransaction = true;
 		} else {
 			state = SYNC_STATE_UPDATED;
 			id = modified[m_indexUpdated];
@@ -205,15 +186,14 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 		m_indexDeleted++;
 		if (m_indexDeleted >= removed.size()) {
 			qDebug() << "AbstractSyncSource::getNext() No further deleted item available";
-			error = true;
+			endTransaction = true;
 		} else {
 			state = SYNC_STATE_DELETED;
 			id = removed[m_indexDeleted];
 		}
 	}
 
-
-	if (error) {
+	if (endTransaction) {
 		if (!m_model->commitSyncTransaction())
 			qDebug() << "AbstractSyncSource::endFirst() commit sync failed" << m_currentSync;
 	} else {
