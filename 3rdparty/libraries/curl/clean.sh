@@ -12,8 +12,7 @@ DIR_BIN=$DIR_PREFIX/bin
 DIR_SHARED=$DIR_PREFIX/share
 
 rm -rf $DIR_INCLUDE $DIR_LIB $DIR_SHARED $DIR_BIN
-cd curl
-make clean
+rm -rf curl-7.18.1
 
 echo "Done executing POSIX clean script"
 exit 0

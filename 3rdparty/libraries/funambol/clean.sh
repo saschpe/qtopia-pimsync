@@ -11,10 +11,8 @@ DIR_LIB=$DIR_PREFIX/lib
 DIR_SHARE=$DIR_PREFIX/share
 
 rm -rf $DIR_INCLUDE $DIR_LIB $DIR_SHARE
-
 cd build
 rm -rf autotools/
-tar xzvf autotools.tgz
 
 echo "Done executing POSIX clean script"
 exit 0

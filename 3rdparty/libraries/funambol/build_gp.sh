@@ -5,17 +5,14 @@
 
 echo "Executing POSIX build script"
 
-DIR_PREFIX=$PWD/x86
+DIR_PREFIX=$PWD/gp
 DIR_INCLUDE=$DIR_PREFIX/include
 DIR_LIB=$DIR_PREFIX/lib
 
-DIR_CURL_BIN=$DIR_PREFIX/../../curl/x86/bin
+DIR_CURL_BIN=$DIR_PREFIX/../../curl/gp/bin
 OLD_PATH=$PATH
 
-cd build
-rm -rf autotools/
-tar xzf autotools.tgz
-cd autotools
+cd build/autotools
 
 ${LIBTOOLIZE:-libtoolize} -c -f
 aclocal
