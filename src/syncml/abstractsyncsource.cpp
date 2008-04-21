@@ -6,20 +6,15 @@
 AbstractSyncSource::AbstractSyncSource(AbstractSyncSourceConfig *config, SyncManagerConfig* managerConfig)
 	: SyncSource(config->getName(), config)
 	, m_model(NULL)
-	, m_indexAll(0)
-	, m_indexNew(0)
-	, m_indexUpdated(0)
-	, m_indexDeleted(0)
+	, m_indexAll(0), m_indexNew(0), m_indexUpdated(0), m_indexDeleted(0)
+	, m_currentSync(QDateTime()), m_lastSync(QDateTime::fromTime_t(config->lastSync()-1))
 {
 	managerConfig->setSyncSourceConfig(*config);
-	m_lastSync = QDateTime::fromTime_t(config->lastSync());
-	m_currentSync = QDateTime();
 }
 
 AbstractSyncSource::~AbstractSyncSource()
 {
-	if (m_model)
-		delete m_model;
+	delete m_model;
 }
 
 int AbstractSyncSource::addItem(SyncItem& item)
@@ -51,10 +46,13 @@ int AbstractSyncSource::updateItem(SyncItem& item)
 
 int AbstractSyncSource::deleteItem(SyncItem& item)
 {
-	QString id((char *)item.getKey());
-	QUniqueId uid(id);
-	qDebug() << "AbstractSyncSource::deleteItem()" /*<< toString(item) */<< "Id:" << uid.toString();
-	if (m_model->removeRecord(uid))
+	QString strId;
+	strId.append(m_model->defaultSource().context);
+	strId.append(":");
+	strId.append((char *)item.getKey());
+	QUniqueId id(strId);
+	qDebug() << "AbstractSyncSource::deleteItem()" /*<< toString(item) */<< "Id:" << id.toString();
+	if (m_model->removeRecord(id))
 		return 200; //ok, the SyncML command completed successfully
 	else
 		return 211; //failed, the recipient encountered an error
@@ -76,9 +74,6 @@ int AbstractSyncSource::beginSync()
 	qDebug() << "AbstractSyncSource::beginSync() Removed:";
 	for (int i = 0; i < removed.size(); i++)
 		qDebug() << removed[i].toString();
-	qDebug() << "AbstractSyncSource::beginSync() All:";
-	for (int i = 0; i < m_model->count(); i++)
-		qDebug() << m_model->id(i).toString();
 
 	m_currentSync = QDateTime::currentDateTime().toUTC();
 	return 0;
