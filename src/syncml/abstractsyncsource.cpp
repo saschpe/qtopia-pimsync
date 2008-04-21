@@ -207,7 +207,6 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 
 SyncItem *AbstractSyncSource::createSyncItem(const QUniqueId &id, bool wantData, SyncState state) const
 {
-	// TODO: there is an error with appointments here
 	QByteArray record = m_model->record(id, m_type);
 	SyncItem *item = new SyncItem();
 	QString key = id.toString().split(":")[1];
