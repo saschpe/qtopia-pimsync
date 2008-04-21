@@ -22,32 +22,25 @@ SOURCES          += src/main.cpp \
                     src/syncml/syncclient.cpp \
                     src/syncml/abstractsyncsource.cpp
 
-INCLUDEPATH      += ./3rdparty/libraries/funambol/include/sync4j/common
-
-
 linux-x86-g++ {
-    LIBS             += -L3rdparty/libraries/funambol/x86/lib -L3rdparty/libraries/curl/x86/lib 
-    libs.commands     = $(COPY) 3rdparty/libraries/funambol/x86/lib/libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3.0.0; \
-                        $(COPY) 3rdparty/libraries/curl/x86/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4.0.1
+    PATH_FUNAMBOL = 3rdparty/libraries/funambol/x86
+    PATH_CURL     = 3rdparty/libraries/curl/x86
 }
 linux-generic-g++ {
-    LIBS             += -L3rdparty/libraries/funambol/x86/lib -L3rdparty/libraries/curl/x86/lib 
-    libs.commands     = $(COPY) 3rdparty/libraries/funambol/x86/lib/libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3.0.0; \
-                        $(COPY) 3rdparty/libraries/curl/x86/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4.0.1
+    PATH_FUNAMBOL = 3rdparty/libraries/funambol/x86
+    PATH_CURL     = 3rdparty/libraries/curl/x86
 }
 linux-greenphone-g++ {
-    LIBS             += -L3rdparty/libraries/funambol/gp/lib -L3rdparty/libraries/curl/gp/lib 
-    libs.commands     = $(COPY) 3rdparty/libraries/funambol/gp/lib/libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3.0.0; \
-                        $(COPY) 3rdparty/libraries/curl/gp/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4.0.1
-}
-linux-omap2430-g++ {
-    #nothing here for now
+    PATH_FUNAMBOL = 3rdparty/libraries/funambol/gp
+    PATH_CURL     = 3rdparty/libraries/curl/gp
 }
 
-
-LIBS             += -lsync4j -lcurl
-libs.commands    += ln -fs libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so; \
+INCLUDEPATH      += $${PATH_FUNAMBOL}/include/sync4j/common
+LIBS             += -L$${PATH_FUNAMBOL}/lib -L$${PATH_CURL}/lib -lsync4j -lcurl
+libs.commands     = $(COPY) $${PATH_FUNAMBOL}/lib/libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3.0.0; \
+                    ln -fs libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so; \
                     ln -fs libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3; \
+                    $(COPY) $${PATH_CURL}/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4.0.1; \
                     ln -fs libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so; \
                     ln -fs libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4
 libs.path         = /lib
@@ -72,7 +65,7 @@ INSTALLS         += help
 
 pkg.name          = synczilla
 pkg.desc          = A PIM synchronization tool
-pkg.version       = 0.2
+pkg.version       = 0.3
 pkg.maintainer    = Trolltech (www.trolltech.com)
 pkg.license       = GPL
 pkg.domain        = trusted
