@@ -1,0 +1,59 @@
+=========
+SyncZilla
+=========
+
+
+
+Prerequisites
+=============
+
+* Qt-4.4 and Qtopia-4.3.1
+* libcurl3-dev
+* Funambol C++ Client API
+
+
+Install and test
+================
+
+For the x86 emulator (QVFb) you have to start the emulator first:
+
+	$ $QPE_X86_BUILDDIR/bin/runqtopia
+
+Then build and run the project in the emulator:
+
+	$ $QPE_X86_BUILDDIR/bin/qtopiamake
+	$ make
+	$ make install
+	$ ./synctool
+
+To build a package for the greenphone (physical device) use the following steps:
+
+	$ $QPE_GP_BUILDDIR/bin/qtopiamake
+	$ make
+	$ make package
+	$ $QPE_GP_BUILDDIR/scripts/greenphone-sdk/scripts/gph -i    
+
+Or to include FileManager in the flash image do that:
+
+	$ $QPE_GP_BUILDDIR/bin/qtopiamake
+	$ make
+	$ make install
+	
+The next steps depend on wether you want to create a Qtopia package
+or include SyncTool into a flash image, please refer to the
+current Qtopia documentation on how to do that.
+
+
+Authors
+=======
+
+Sascha Peilicke <sascha.peilicke@trolltech.com>
+
+
+License
+=======
+
+Copyright (C) 2007-2008 TROLLTECH ASA. All rights reserved.
+
+This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
