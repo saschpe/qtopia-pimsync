@@ -1791,7 +1791,7 @@ configure:27309: $? = 0
 configure:27327: result: yes
 configure:27247: checking for RAND_screen
 configure:27303: gcc -o conftest -g -O2       conftest.c -lssl -lcrypto  -lssl -lcrypto   >&5
-/tmp/cc2iLSwg.o: In function `main':
+/tmp/cc23bFOW.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:81: undefined reference to `RAND_screen'
 collect2: ld returned 1 exit status
 configure:27309: $? = 1
@@ -2264,7 +2264,7 @@ configure: failed program was:
 configure:29047: result: no
 configure:29448: checking for inet_ntoa_r
 configure:29504: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/ccE3U4dK.o: In function `main':
+/tmp/cccETNez.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:93: undefined reference to `inet_ntoa_r'
 collect2: ld returned 1 exit status
 configure:29510: $? = 1
@@ -8974,7 +8974,7 @@ configure:36381: checking for strcasecmp
 configure:36461: result: yes
 configure:36381: checking for stricmp
 configure:36437: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/cca5ac6F.o: In function `main':
+/tmp/ccoNQT4x.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:185: undefined reference to `stricmp'
 collect2: ld returned 1 exit status
 configure:36443: $? = 1
@@ -9170,7 +9170,7 @@ configure: failed program was:
 configure:36461: result: no
 configure:36472: checking deeper for stricmp
 configure:36495: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/ccw15GC0.o: In function `main':
+/tmp/ccAaPHNT.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:155: undefined reference to `stricmp'
 collect2: ld returned 1 exit status
 configure:36501: $? = 1
@@ -9336,7 +9336,7 @@ configure: failed program was:
 configure:36520: result: but still no
 configure:36381: checking for strcmpi
 configure:36437: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/cc47rPpm.o: In function `main':
+/tmp/ccgRgxUk.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:185: undefined reference to `strcmpi'
 collect2: ld returned 1 exit status
 configure:36443: $? = 1
@@ -9532,7 +9532,7 @@ configure: failed program was:
 configure:36461: result: no
 configure:36472: checking deeper for strcmpi
 configure:36495: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/ccMDL0yH.o: In function `main':
+/tmp/ccyhl23H.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:155: undefined reference to `strcmpi'
 collect2: ld returned 1 exit status
 configure:36501: $? = 1
@@ -9722,7 +9722,7 @@ configure:36443: $? = 0
 configure:36461: result: yes
 configure:36381: checking for closesocket
 configure:36437: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/cc25kTV9.o: In function `main':
+/tmp/ccImdA2h.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:191: undefined reference to `closesocket'
 collect2: ld returned 1 exit status
 configure:36443: $? = 1
@@ -9924,7 +9924,7 @@ configure: failed program was:
 configure:36461: result: no
 configure:36472: checking deeper for closesocket
 configure:36495: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/ccCs0pef.o: In function `main':
+/tmp/ccSRoasm.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:161: undefined reference to `closesocket'
 collect2: ld returned 1 exit status
 configure:36501: $? = 1
@@ -10108,7 +10108,7 @@ configure:36443: $? = 0
 configure:36461: result: yes
 configure:36381: checking for getpass_r
 configure:36437: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/cccLvNxP.o: In function `main':
+/tmp/ccs6dtE0.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:194: undefined reference to `getpass_r'
 collect2: ld returned 1 exit status
 configure:36443: $? = 1
@@ -10313,7 +10313,7 @@ configure: failed program was:
 configure:36461: result: no
 configure:36472: checking deeper for getpass_r
 configure:36495: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/cciLCK59.o: In function `main':
+/tmp/ccqeWIEo.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:164: undefined reference to `getpass_r'
 collect2: ld returned 1 exit status
 configure:36501: $? = 1
@@ -10488,7 +10488,7 @@ configure: failed program was:
 configure:36520: result: but still no
 configure:36381: checking for strlcat
 configure:36437: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/cc4pU5oe.o: In function `main':
+/tmp/ccCseNvr.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:194: undefined reference to `strlcat'
 collect2: ld returned 1 exit status
 configure:36443: $? = 1
@@ -10693,7 +10693,7 @@ configure: failed program was:
 configure:36461: result: no
 configure:36472: checking deeper for strlcat
 configure:36495: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/ccQLaK7D.o: In function `main':
+/tmp/ccC7lXcS.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:164: undefined reference to `strlcat'
 collect2: ld returned 1 exit status
 configure:36501: $? = 1
@@ -10884,7 +10884,7 @@ configure:36443: $? = 0
 configure:36461: result: yes
 configure:36381: checking for sigsetjmp
 configure:36437: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/ccm0vHMk.o: In function `main':
+/tmp/ccgkdRWC.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:198: undefined reference to `sigsetjmp'
 collect2: ld returned 1 exit status
 configure:36443: $? = 1
@@ -11093,7 +11093,7 @@ configure: failed program was:
 configure:36461: result: no
 configure:36472: checking deeper for sigsetjmp
 configure:36495: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/ccs6TBsH.o: In function `main':
+/tmp/ccyAWLg0.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:168: undefined reference to `sigsetjmp'
 collect2: ld returned 1 exit status
 configure:36501: $? = 1
@@ -11309,7 +11309,7 @@ configure:36443: $? = 0
 configure:36461: result: yes
 configure:36381: checking for setmode
 configure:36437: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/ccKsb5rm.o: In function `main':
+/tmp/ccGorqww.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:207: undefined reference to `setmode'
 collect2: ld returned 1 exit status
 configure:36443: $? = 1
@@ -11527,7 +11527,7 @@ configure: failed program was:
 configure:36461: result: no
 configure:36472: checking deeper for setmode
 configure:36495: gcc -o conftest -g -O2       conftest.c -lidn -lssl -lcrypto  -lssl -lcrypto   -lz >&5
-/tmp/ccy8MIeo.o: In function `main':
+/tmp/cc4NZc6W.o: In function `main':
 /home/speilicke/Projects/synczilla/3rdparty/libraries/curl/curl/conftest.c:177: undefined reference to `setmode'
 collect2: ld returned 1 exit status
 configure:36501: $? = 1
@@ -19303,64 +19303,7 @@ generated by GNU Autoconf 2.61.  Invocation command line was
 
 on cato
 
-config.status:742: creating Makefile
-config.status:742: creating docs/Makefile
-config.status:742: creating docs/examples/Makefile
-config.status:742: creating docs/libcurl/Makefile
-config.status:742: creating include/Makefile
-config.status:742: creating include/curl/Makefile
-config.status:742: creating src/Makefile
-config.status:742: creating lib/Makefile
-config.status:742: creating tests/Makefile
-config.status:742: creating tests/data/Makefile
-config.status:742: creating tests/server/Makefile
-config.status:742: creating tests/libtest/Makefile
-config.status:742: creating packages/Makefile
-config.status:742: creating packages/Win32/Makefile
-config.status:742: creating packages/Win32/cygwin/Makefile
-config.status:742: creating packages/Linux/Makefile
-config.status:742: creating packages/Linux/RPM/Makefile
-config.status:742: creating packages/Linux/RPM/curl.spec
-config.status:742: creating packages/Linux/RPM/curl-ssl.spec
-config.status:742: creating packages/Solaris/Makefile
-config.status:742: creating packages/DOS/Makefile
-config.status:742: creating packages/EPM/curl.list
-config.status:742: creating packages/EPM/Makefile
-config.status:742: creating packages/vms/Makefile
-config.status:742: creating packages/AIX/Makefile
-config.status:742: creating packages/AIX/RPM/Makefile
-config.status:742: creating packages/AIX/RPM/curl.spec
-config.status:742: creating curl-config
-config.status:742: creating libcurl.pc
-config.status:742: creating lib/config.h
-config.status:1164: lib/config.h is unchanged
-config.status:742: creating src/config.h
-config.status:1164: src/config.h is unchanged
-config.status:1211: executing depfiles commands
-configure:40312: Configured to build curl/libcurl:
-
-  curl version:    7.18.1
-  Host setup:      i686-pc-linux-gnu
-  Install prefix:  /home/speilicke/Projects/synczilla/3rdparty/libraries/curl
-  Compiler:        gcc
-  SSL support:     enabled (OpenSSL)
-  SSH support:     no      (--with-libssh2)
-  zlib support:    enabled
-  krb4 support:    no      (--with-krb4*)
-  GSSAPI support:  no      (--with-gssapi)
-  SPNEGO support:  no      (--with-spnego)
-  c-ares support:  no      (--enable-ares)
-  ipv6 support:    enabled
-  IDN support:     enabled
-  Build libcurl:   Shared=yes, Static=yes
-  Built-in manual: no      (--enable-manual)
-  Verbose errors:  enabled (--disable-verbose)
-  SSPI support:    no      (--enable-sspi)
-  ca cert bundle:  /etc/ssl/certs/ca-certificates.crt
-  ca cert path:    no
-  LDAP support:    no      (--enable-ldap / --with-ldap-lib / --with-lber-lib)
-  LDAPS support:   no      (--enable-ldaps)
-
+config.status:728: error: cannot find input file: Makefile.in
 
 ## ---------------- ##
 ## Cache variables. ##
@@ -19959,4 +19902,4 @@ target_alias=''
 #define HAVE_ARPA_INET_H 1
 #define HAVE_POLL_FINE 1
 
-configure: exit 0
+configure: exit 1

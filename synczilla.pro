@@ -23,24 +23,36 @@ SOURCES          += src/main.cpp \
                     src/syncml/abstractsyncsource.cpp
 
 INCLUDEPATH      += ./3rdparty/libraries/funambol/include/sync4j/common
-LIBS             += -L3rdparty/libraries/funambol/lib -lsync4j \
-                    -L3rdparty/libraries/curl/lib -lcurl
 
 
-libs.commands     = $(COPY) 3rdparty/libraries/funambol/lib/libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3.0.0; \
-                    ln -fs libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so; \
+linux-x86-g++ {
+    LIBS             += -L3rdparty/libraries/funambol/x86/lib -L3rdparty/libraries/curl/x86/lib 
+    libs.commands     = $(COPY) 3rdparty/libraries/funambol/x86/lib/libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3.0.0; \
+                        $(COPY) 3rdparty/libraries/curl/x86/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4.0.1
+}
+linux-generic-g++ {
+    LIBS             += -L3rdparty/libraries/funambol/x86/lib -L3rdparty/libraries/curl/x86/lib 
+    libs.commands     = $(COPY) 3rdparty/libraries/funambol/x86/lib/libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3.0.0; \
+                        $(COPY) 3rdparty/libraries/curl/x86/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4.0.1
+}
+linux-greenphone-g++ {
+    LIBS             += -L3rdparty/libraries/funambol/gp/lib -L3rdparty/libraries/curl/gp/lib 
+    libs.commands     = $(COPY) 3rdparty/libraries/funambol/gp/lib/libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3.0.0; \
+                        $(COPY) 3rdparty/libraries/curl/gp/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4.0.1
+}
+linux-omap2430-g++ {
+    #nothing here for now
+}
+
+
+LIBS             += -lsync4j -lcurl
+libs.commands    += ln -fs libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so; \
                     ln -fs libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3; \
-                    $(COPY) 3rdparty/libraries/curl/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4.0.1; \
                     ln -fs libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so; \
                     ln -fs libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4
 libs.path         = /lib
 INSTALLS         += libs
 
-# TODO: ship some default profiles
-#stuff.files       = data/new_profile.qsp
-#stuff.path        = /apps/Applications
-#stuff.hint        = content
-#INSTALLS         += stuff
 
 desktop.files     = data/synczilla.desktop
 desktop.path      = /apps/Applications

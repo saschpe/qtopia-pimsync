@@ -5,7 +5,7 @@
 
 echo "Executing POSIX clean script"
 
-DIR_PREFIX=$PWD
+DIR_PREFIX=$PWD/x86
 DIR_INCLUDE=$DIR_PREFIX/include
 DIR_LIB=$DIR_PREFIX/lib
 DIR_BIN=$DIR_PREFIX/bin

@@ -5,7 +5,7 @@
 
 echo "Executing POSIX build script"
 
-DIR_PREFIX=$PWD
+DIR_PREFIX=$PWD/x68
 DIR_INCLUDE=$DIR_PREFIX/include
 DIR_LIB=$DIR_PREFIX/lib
 DIR_SHARED=$DIR_PREFIX/shared
