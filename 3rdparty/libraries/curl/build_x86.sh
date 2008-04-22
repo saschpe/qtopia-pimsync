@@ -12,7 +12,8 @@ DIR_SHARED=$DIR_PREFIX/shared
 rm -rf curl-7.18.1
 tar xjf curl-7.18.1.tar.bz2
 cd curl-7.18.1
-./configure --prefix=$DIR_PREFIX --includedir=$DIR_INCLUDE --libdir=$DIR_LIB --disable-manual
+./configure --prefix=$DIR_PREFIX --includedir=$DIR_INCLUDE --libdir=$DIR_LIB \
+	--disable-manual --disable-telnet --disable-ldap --disable-ldaps --disable-tftp --disable-dict
 make
 make install
 cd ..

@@ -12,7 +12,7 @@ OLD_PATH=$PATH
 
 rm -rf funambol
 tar xjf funambol.tar.bz2
-cd build/autotools
+cd funambol/build/autotools
 ${LIBTOOLIZE:-libtoolize} -c -f
 aclocal
 autoheader

@@ -1,3 +1,16 @@
+/****************************************************************************
+**
+** Copyright (C) 2007-2008 TROLLTECH ASA. All rights reserved.
+**
+** This file is part of the Phone Edition of the Qtopia Toolkit.
+**
+** $TROLLTECH_DUAL_LICENSE$
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+****************************************************************************/
+
 #include "syncclient.h"
 #include "../syncprofile.h"
 #include "contactsyncsource.h"
@@ -57,7 +70,8 @@ QtopiaSyncClient::QtopiaSyncClient()
 	dc->setUtc                  (TRUE);
 	dc->setLoSupport            (FALSE);
 	dc->setNocSupport           (FALSE);
-	dc->setLogLevel             (LOG_LEVEL_DEBUG);
+	dc->setLogLevel             (LOG_LEVEL_NONE);
+	//dc->setLogLevel             (LOG_LEVEL_DEBUG);
 	dc->setMaxObjSize           (0);
 	dc->setDevInfHash           ("");
 	m_managerConfig->setDeviceConfig(*dc);
