@@ -23,9 +23,6 @@ public:
 protected:
 	void keyPressEvent(QKeyEvent *event);
 
-public slots:
-	void setDocument(const QString &fileName);
-
 private slots:
 	void sync();
 	void newProfile();

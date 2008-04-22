@@ -9,6 +9,8 @@
 #include <QSoftMenuBar>
 #include <QtopiaApplication>
 
+#include <QDebug>
+
 SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 	: QStackedWidget(parent)
 	, m_mainScreen(NULL)
@@ -18,6 +20,21 @@ SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 	, m_profile(NULL)
 {
 	setCurrentWidget(mainScreen());
+
+	// Do first time initialization
+	QSettings settings("synczilla", "synczilla");
+	if (settings.value("firstRun").toString() == "true") {
+		qDebug() << "firstRun";
+		profile()->newFromSettings("profile-funambol-local");
+		profile()->save();
+		profile()->newFromSettings("profile-myfunambol-web");
+		profile()->save();
+		profile()->newFromSettings("profile-scheduleworld-web");
+		profile()->save();
+		profile()->newFromSettings("profile-mobical-web");
+		profile()->save();
+		settings.setValue("firstRun", "false");
+	}
 }
 
 QWidget *SyncZilla::mainScreen()
@@ -100,12 +117,6 @@ void SyncZilla::keyPressEvent(QKeyEvent *event)
 	} else {
 		QStackedWidget::keyPressEvent(event);
 	}
-}
-
-void SyncZilla::setDocument(const QString &fileName)
-{
-	QContent tmp(fileName);
-	editProfile(tmp);
 }
 
 void SyncZilla::sync()

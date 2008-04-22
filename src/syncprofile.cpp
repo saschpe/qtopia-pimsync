@@ -37,6 +37,63 @@ void SyncProfile::newProfile()
 	m_currentProfile = QContent();
 }
 
+void SyncProfile::newFromSettings(const QString &name)
+{
+	QSettings settings("synczilla", name);
+	QString tmp;
+
+	m_name = settings.value("name").toString();
+	m_comment = settings.value("comment").toString();
+	tmp = settings.value("protocol").toString();
+	if (tmp == "SyncML")
+		m_protocol = SyncML;
+	else
+		m_protocol = SyncML;
+	tmp = settings.value("mode").toString();
+	if (tmp == "Slow")
+		m_mode = Slow;
+	else if (tmp == "TwoWay")
+		m_mode = TwoWay;
+	else if (tmp == "OneWayFromClient")
+		m_mode = OneWayFromClient;
+	else if (tmp == "OneWayFromServer")
+		m_mode = OneWayFromServer;
+	else if (tmp == "RefreshFromClient")
+		m_mode = RefreshFromClient;
+	else if (tmp == "RefreshFromServer")
+		m_mode = RefreshFromServer;
+	else
+		m_mode = Slow;
+
+	settings.beginGroup("Sources");
+	m_contactsEnabled = settings.value("contacts.enabled").toString() == "true" ? true : false;
+	m_contactsLastSync = settings.value("contacts.timestamp").toUInt();
+	m_contactsUrl = settings.value("contacts.url").toString();
+	m_tasksEnabled = settings.value("tasks.enabled").toString() == "true" ? true : false;
+	m_tasksLastSync = settings.value("tasks.timestamp").toUInt();
+	m_tasksUrl = settings.value("tasks.url").toString();
+	m_appointmentsEnabled = settings.value("appointments.enabled").toString() == "true" ? true : false;
+	m_appointmentsLastSync = settings.value("appointments.timestamp").toUInt();
+	m_appointmentsUrl = settings.value("appointments.url").toString();
+	settings.endGroup();
+
+	settings.beginGroup("Transport");
+	tmp = settings.value("type").toString();
+	if (tmp == "Http")
+		m_transportType = Http;
+	else if (tmp == "Bluetooth")
+		m_transportType = Bluetooth;
+	else
+		m_transportType = Http;
+	m_transportUser = settings.value("user").toString();
+	m_transportPassword = settings.value("password").toString();
+	m_transportUrl = settings.value("url").toString();
+	settings.endGroup();
+
+	m_saved = false;
+	m_currentProfile = QContent();
+}
+
 bool SyncProfile::load(const QContent &profile)
 {
 	m_currentProfile = profile;
@@ -190,6 +247,8 @@ bool SyncProfile::save()
 		transport = "bluetooth";
 	else
 		transport = "http";
+
+	// TODO: encoding in base64 would be nice
 
 	QString xml = \
 			"<?xml version=\"1.0\"?>\n" \
