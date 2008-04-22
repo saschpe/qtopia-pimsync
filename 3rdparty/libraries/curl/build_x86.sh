@@ -1,9 +1,8 @@
 #!/bin/bash
 #
-# This script must be run from $CURL_BASE_DIR
+# This script must be run from $CURL_BASE_DIR.
 #
-
-echo "Executing POSIX build script"
+echo "Executing x86 build script"
 
 DIR_PREFIX=$PWD/x86
 DIR_INCLUDE=$DIR_PREFIX/include
@@ -19,5 +18,5 @@ make install
 cd ..
 rm -rf x86/share
 
-echo "Done executing POSIX build script"
+echo "Done executing x86 build script"
 exit 0

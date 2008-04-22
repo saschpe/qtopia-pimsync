@@ -9,8 +9,6 @@
 #include <QSoftMenuBar>
 #include <QtopiaApplication>
 
-#include <QDebug>
-
 SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 	: QStackedWidget(parent)
 	, m_mainScreen(NULL)
@@ -24,7 +22,7 @@ SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 	// Do first time initialization
 	QSettings settings("synczilla", "synczilla");
 	if (settings.value("firstRun").toString() == "true") {
-		qDebug() << "firstRun";
+		// TODO: make this work
 		profile()->newFromSettings("profile-funambol-local");
 		profile()->save();
 		profile()->newFromSettings("profile-myfunambol-web");

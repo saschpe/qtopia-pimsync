@@ -1,7 +1,6 @@
 #ifndef SYNCZILLA_H
 #define SYNCZILLA_H
 
-
 #include <QStackedWidget>
 
 class ConfigScreen;
