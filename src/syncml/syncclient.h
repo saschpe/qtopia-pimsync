@@ -43,6 +43,7 @@ public:
 	bool sync(SyncProfile *profile);
 
 	QString results();
+	QString error();
 
 	QString syncReport();
 

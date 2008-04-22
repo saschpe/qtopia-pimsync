@@ -26,8 +26,6 @@ public:
 	{
 		setName("contact");
 		setType("text/x-vcard");
-
-		//qDebug() << "ContactSyncSourceConfig::ContactSyncSourceConfig() Name:" << getName() << "Type:" << getType() << "URI:" << getURI() << "Last.Sync:" << lastSync << "Mode:" << getSync();
 	}
 };
 

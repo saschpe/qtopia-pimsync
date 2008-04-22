@@ -26,8 +26,6 @@ public:
 	{
 		setName("event");
 		setType("text/x-vcalendar");
-
-		//qDebug() << "AppointmentSyncSourceConfig::AppointmentSyncSourceConfig() Name:" << getName() << "Type:" << getType() << "URI:" << getURI() << "Last.Sync:" << lastSync << "Mode:" << getSync();
 	}
 };
 

@@ -33,7 +33,7 @@ SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 	setCurrentWidget(mainScreen());
 
 	// Do first time initialization
-	QSettings settings("synczilla", "synczilla");
+	/*QSettings settings("synczilla", "synczilla");
 	if (settings.value("firstRun").toString() == "true") {
 		// TODO: make this work
 		profile()->newFromSettings("profile-funambol-local");
@@ -45,7 +45,7 @@ SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 		profile()->newFromSettings("profile-mobical-web");
 		profile()->save();
 		settings.setValue("firstRun", "false");
-	}
+	}*/
 }
 
 QWidget *SyncZilla::mainScreen()
@@ -69,7 +69,8 @@ QWidget *SyncZilla::mainScreen()
 
 		m_mainScreen = new QWidget();
 		m_mainScreen->setLayout(layout);
-		QSoftMenuBar::menuFor(m_mainScreen);
+
+		QSoftMenuBar::menuFor(m_selector);
 		addWidget(m_mainScreen);
 	}
 	return m_mainScreen;
@@ -142,9 +143,11 @@ void SyncZilla::sync()
 		if (syncClient()->sync(m_profile)) {
 			m_logScreen->insertPlainText(tr("Ok\n\n"));
 			m_logScreen->insertPlainText(m_syncClient->results());
-		} else
-			m_logScreen->insertPlainText(tr("Failed\n"));
-			
+		} else {
+			m_logScreen->insertPlainText(tr("Failed\n\n"));
+			m_logScreen->insertPlainText(m_syncClient->error());
+			m_logScreen->insertPlainText(tr("\n\nPlease have a look at your provided configuration\n"));
+		}
 		qDebug() << m_syncClient->syncReport();
 	} else
 		m_logScreen->insertPlainText(tr("Failed\n"));
@@ -172,8 +175,11 @@ void SyncZilla::editProfile(const QContent &content)
 void SyncZilla::selectionChanged()
 {
 	QContent selected = m_selector->currentDocument();
-	if (selected.isNull())
+	if (selected.isNull()) {
 		m_sync->setEnabled(false);
-	else
+		m_syncAction->setEnabled(false);
+	} else {
 		m_sync->setEnabled(true);
+		m_syncAction->setEnabled(true);
+	}
 }

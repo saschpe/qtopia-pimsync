@@ -24,6 +24,7 @@ class QContent;
 class QTextEdit;
 class QPushButton;
 class QDocumentSelector;
+class QAction;
 
 class SyncZilla : public QStackedWidget
 {
@@ -56,6 +57,8 @@ private:
 
 	QDocumentSelector *m_selector;
 	QPushButton *m_sync;
+
+	QAction *m_syncAction;
 };
 
 #endif // SYNCZILLA_H

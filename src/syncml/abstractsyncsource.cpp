@@ -34,7 +34,7 @@ int AbstractSyncSource::addItem(SyncItem& item)
 {
 	QByteArray data((char *)item.getData());
 	QUniqueId uid = m_model->addRecord(data, QPimSource(), m_type);
-	qDebug() << "AbstractSyncSource::addItem() " /*<< toString(item)*/ << "Id:" << uid.toString();
+	//qDebug() << "AbstractSyncSource::addItem() " /*<< toString(item)*/ << "Id:" << uid.toString();
 	if (!uid.isNull())
 		return 201;	//ok, the requested item was added
 	else
@@ -49,7 +49,7 @@ int AbstractSyncSource::updateItem(SyncItem& item)
 	strId.append(":");
 	strId.append((char *)item.getKey());
 	QUniqueId id(strId);
-	qDebug() << "AbstractSyncSource::updateItem()" /*<< toString(item)*/ << "Id:" << id.toString();
+	//qDebug() << "AbstractSyncSource::updateItem()" /*<< toString(item)*/ << "Id:" << id.toString();
 
 	if (m_model->updateRecord(id, data, m_type))
 		return 200; //ok, the SyncML command completed successfully
@@ -64,7 +64,7 @@ int AbstractSyncSource::deleteItem(SyncItem& item)
 	strId.append(":");
 	strId.append((char *)item.getKey());
 	QUniqueId id(strId);
-	qDebug() << "AbstractSyncSource::deleteItem()" /*<< toString(item) */<< "Id:" << id.toString();
+	//qDebug() << "AbstractSyncSource::deleteItem()" /*<< toString(item) */<< "Id:" << id.toString();
 	if (m_model->removeRecord(id))
 		return 200; //ok, the SyncML command completed successfully
 	else
@@ -78,7 +78,7 @@ int AbstractSyncSource::beginSync()
 	modified = m_model->modified(m_lastSync);
 	removed = m_model->removed(m_lastSync);
 
-	qDebug() << "AbstractSyncSource::beginSync() Added:";
+	/*qDebug() << "AbstractSyncSource::beginSync() Added:";
 	for (int i = 0; i < added.size(); i++)
 		qDebug() << added[i].toString();
 	qDebug() << "AbstractSyncSource::beginSync() Modified:";
@@ -86,7 +86,7 @@ int AbstractSyncSource::beginSync()
 		qDebug() << modified[i].toString();
 	qDebug() << "AbstractSyncSource::beginSync() Removed:";
 	for (int i = 0; i < removed.size(); i++)
-		qDebug() << removed[i].toString();
+		qDebug() << removed[i].toString();*/
 
 	m_currentSync = QDateTime::currentDateTime().toUTC();
 	return 0;
@@ -99,18 +99,18 @@ int AbstractSyncSource::endSync()
 
 SyncItem *AbstractSyncSource::getFirst(ItemSet set, bool withData)
 {
-	qDebug() << "AbstractSyncSource::getFirst() From set" << set << "with data:" << withData;
+	//qDebug() << "AbstractSyncSource::getFirst() From set" << set << "with data:" << withData;
 	QUniqueId id;
 	SyncState state = SYNC_STATE_NONE;
 	bool endTransaction = false;
 
 	if (!m_model->startSyncTransaction(m_currentSync)) {
-		qDebug() << "AbstractSyncSource::getFirst() start sync failed" << m_currentSync;
+		//qDebug() << "AbstractSyncSource::getFirst() start sync failed" << m_currentSync;
 	} else {
 		if (set == All) {
 			m_indexAll = 0;
 			if (m_indexAll >= m_model->count()) {
-				qDebug() << "AbstractSyncSource::getFirst() No item available";
+				//qDebug() << "AbstractSyncSource::getFirst() No item available";
 				endTransaction = true;
 			} else {
 				id = m_model->id(m_indexAll);
@@ -118,7 +118,7 @@ SyncItem *AbstractSyncSource::getFirst(ItemSet set, bool withData)
 		} else if (set == New) {
 			m_indexNew = 0;
 			if (m_indexNew >= added.size()) {
-				qDebug() << "AbstractSyncSource::getFirst() No new item available";
+				//qDebug() << "AbstractSyncSource::getFirst() No new item available";
 				endTransaction = true;
 			} else {
 				state = SYNC_STATE_NEW;
@@ -127,7 +127,7 @@ SyncItem *AbstractSyncSource::getFirst(ItemSet set, bool withData)
 		} else if (set == Updated) {
 			m_indexUpdated = 0;
 			if (m_indexUpdated >= modified.size()) {
-				qDebug() << "AbstractSyncSource::getFirst() No updated item available";
+				//qDebug() << "AbstractSyncSource::getFirst() No updated item available";
 				endTransaction = true;
 			} else {
 				state = SYNC_STATE_UPDATED;
@@ -136,7 +136,7 @@ SyncItem *AbstractSyncSource::getFirst(ItemSet set, bool withData)
 		} else if (set == Deleted) {
 			m_indexDeleted = 0;
 			if (m_indexDeleted >= removed.size()) {
-				qDebug() << "AbstractSyncSource::getFirst() No deleted item available";
+				//qDebug() << "AbstractSyncSource::getFirst() No deleted item available";
 				endTransaction = true;
 			} else {
 				state = SYNC_STATE_DELETED;
@@ -146,20 +146,22 @@ SyncItem *AbstractSyncSource::getFirst(ItemSet set, bool withData)
 	}
 
 	if (endTransaction) {
-		if (!m_model->commitSyncTransaction())
-			qDebug() << "AbstractSyncSource::getFirst() commit sync failed" << m_currentSync;
+		if (!m_model->commitSyncTransaction()) {
+			//qDebug() << "AbstractSyncSource::getFirst() commit sync failed" << m_currentSync;
+		}
 	} else {
-		if (!id.isNull())
+		if (!id.isNull()) {
 			return createSyncItem(id, withData, state);
-		else
-			qDebug() << "AbstractSyncSource::getFirst() Invalid Id";
+		} else {
+			//qDebug() << "AbstractSyncSource::getFirst() Invalid Id";
+		}
 	}
 	return NULL;
 }
 
 SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 {
-	qDebug() << "AbstractSyncSource::getNext() From set" << set << "with data:" << withData;
+	//qDebug() << "AbstractSyncSource::getNext() From set" << set << "with data:" << withData;
 	QUniqueId id;
 	SyncState state = SYNC_STATE_NONE;
 	bool endTransaction = false;
@@ -167,7 +169,7 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 	if (set == All) {
 		m_indexAll++;
 		if (m_indexAll >= m_model->count()) {
-			qDebug() << "AbstractSyncSource::getNext() No further item available";
+			//qDebug() << "AbstractSyncSource::getNext() No further item available";
 			endTransaction = true;
 		} else {
 			id = m_model->id(m_indexAll);
@@ -175,7 +177,7 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 	} else if (set == New) {
 		m_indexNew++;
 		if (m_indexNew >= added.size()) {
-			qDebug() << "AbstractSyncSource::getNext() No further new item available";
+			//qDebug() << "AbstractSyncSource::getNext() No further new item available";
 			endTransaction = true;
 		} else {
 			state = SYNC_STATE_NEW;
@@ -184,7 +186,7 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 	} else if (set == Updated) {
 		m_indexUpdated++;
 		if (m_indexUpdated >= modified.size()) {
-			qDebug() << "AbstractSyncSource::getNext() No further updated item available";
+			//qDebug() << "AbstractSyncSource::getNext() No further updated item available";
 			endTransaction = true;
 		} else {
 			state = SYNC_STATE_UPDATED;
@@ -193,7 +195,7 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 	} else if (set == Deleted) {
 		m_indexDeleted++;
 		if (m_indexDeleted >= removed.size()) {
-			qDebug() << "AbstractSyncSource::getNext() No further deleted item available";
+			//qDebug() << "AbstractSyncSource::getNext() No further deleted item available";
 			endTransaction = true;
 		} else {
 			state = SYNC_STATE_DELETED;
@@ -202,13 +204,15 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 	}
 
 	if (endTransaction) {
-		if (!m_model->commitSyncTransaction())
-			qDebug() << "AbstractSyncSource::endFirst() commit sync failed" << m_currentSync;
+		if (!m_model->commitSyncTransaction()) {
+			//qDebug() << "AbstractSyncSource::endFirst() commit sync failed" << m_currentSync;
+		}
 	} else {
-		if (!id.isNull())
+		if (!id.isNull()) {
 			return createSyncItem(id, withData);
-		else
-			qDebug() << "AbstractSyncSource::getNext() Invalid Id";
+		} else {
+			//qDebug() << "AbstractSyncSource::getNext() Invalid Id";
+		}
 	}
 	return NULL;
 }

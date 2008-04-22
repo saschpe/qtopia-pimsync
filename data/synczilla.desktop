@@ -4,7 +4,7 @@ Context=SyncZilla
 Comment[Desktop Entry/Name]=Use soft hyphen (char U00AD) to indicate hyphenation
 
 [Desktop Entry]
-Comment[]=A PIM synchronization toool
+Comment[]=A PIM synchronization tool
 Exec=synczilla
 Icon=synczilla/SyncZilla
 Type=Application

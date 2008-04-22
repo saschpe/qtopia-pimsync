@@ -162,3 +162,8 @@ QString QtopiaSyncClient::results()
 	}
 	return str;
 }
+
+QString QtopiaSyncClient::error()
+{
+	return getSyncReport()->getLastErrorMsg();
+}

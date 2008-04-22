@@ -26,8 +26,6 @@ public:
 	{
 		setName("task");
 		setType("text/x-vcalendar");
-
-		//qDebug() << "TaskSyncSourceConfig::TaskSyncSourceConfig() Name:" << getName() << "Type:" << getType() << "URI:" << getURI() << "Last.Sync:" << lastSync << "Mode:" << getSync();
 	}
 };
 
