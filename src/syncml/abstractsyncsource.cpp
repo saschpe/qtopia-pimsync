@@ -34,7 +34,7 @@ int AbstractSyncSource::addItem(SyncItem& item)
 {
 	QByteArray data((char *)item.getData());
 	QUniqueId id = m_model->addRecord(data, QPimSource(), m_type);
-	qDebug() << "AbstractSyncSource::addItem() " /*<< toString(item)*/ << "Id:" << id.toString();
+	qDebug() << "AbstractSyncSource::addItem() " << toString(item) << "Id:" << id.toString();
 	if (!id.isNull())
 		return 201;	//ok, the requested item was added
 	else
@@ -45,7 +45,7 @@ int AbstractSyncSource::updateItem(SyncItem& item)
 {
 	QByteArray data((char *)item.getData());
 	QUniqueId id(QString((char *)item.getKey()));
-	qDebug() << "AbstractSyncSource::updateItem()" /*<< toString(item)*/ << "Id:" << id.toString();
+	qDebug() << "AbstractSyncSource::updateItem()" << toString(item) << "Id:" << id.toString();
 	if (m_model->updateRecord(id, data, m_type))
 		return 200; //ok, the SyncML command completed successfully
 	else
@@ -55,7 +55,7 @@ int AbstractSyncSource::updateItem(SyncItem& item)
 int AbstractSyncSource::deleteItem(SyncItem& item)
 {
 	QUniqueId id(QString((char *)item.getKey()));
-	qDebug() << "AbstractSyncSource::deleteItem()" /*<< toString(item) */<< "Id:" << id.toString();
+	qDebug() << "AbstractSyncSource::deleteItem()" << toString(item) << "Id:" << id.toString();
 	if (m_model->removeRecord(id))
 		return 200; //ok, the SyncML command completed successfully
 	else
@@ -82,6 +82,9 @@ int AbstractSyncSource::beginSync()
 	qDebug() << "AbstractSyncSource::beginSync() Removed:";
 	for (int i = 0; i < removed.size(); i++)
 		qDebug() << removed[i].toString();
+	qDebug() << "AbstractSyncSource::beginSync() All:";
+	for (int i = 0; i < m_model->count(); i++)
+		qDebug() << m_model->id(i).toString();// << " " << m_model->record(m_model->id(i), m_type).data();
 
 	m_currentSync = QDateTime::currentDateTime().toUTC();
 	return 0;
@@ -92,8 +95,8 @@ int AbstractSyncSource::endSync()
 	if (m_transactionRunning) {
 		m_model->commitSyncTransaction();
 		m_transactionRunning = false;
+		m_lastSync = m_currentSync;
 	}
-	m_lastSync = m_currentSync;
 	return 0;
 }
 
@@ -151,6 +154,7 @@ SyncItem *AbstractSyncSource::getFirst(ItemSet set, bool withData)
 		if (m_model->commitSyncTransaction()) {
 			qDebug() << "AbstractSyncSource::getFirst() Commit sync";
 			m_transactionRunning = false;
+			m_lastSync = m_currentSync;
 		} else {
 			qDebug() << "AbstractSyncSource::getFirst() Commit sync failed";
 		}
@@ -211,6 +215,7 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
 	if (endTransaction && m_transactionRunning) {
 		if (m_model->commitSyncTransaction()) {
 			m_transactionRunning = false;
+			m_lastSync = m_currentSync;
 			qDebug() << "AbstractSyncSource::getNext() Commit sync";
 		} else {
 			qDebug() << "AbstractSyncSource::getNext() Commit sync failed";

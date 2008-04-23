@@ -21,22 +21,36 @@
 
 #include <QtXml>
 #include <QContent>
+#include <QSettings>
+#include <QUuid>
 
 QtopiaSyncClient::QtopiaSyncClient()
 	: QObject(), SyncClient()
 {	
 	m_managerConfig = new SyncManagerConfig();
 
+	// Create a GUID for the current device once, used for identification
+	// with SyncML servers
+	QSettings cfg("synczilla", "funambol");
+	QUuid id = QUuid(cfg.value("device/id").toString());
+	if (id.isNull()) {
+		id = QUuid::createUuid();
+		//qDebug() << "QtopiaSyncClient::QtopiaSyncClient() Generate device GUID:" << id.toString();
+		cfg.setValue("device/id", id.toString());
+	} else {
+		//qDebug() << "QtopiaSyncClient::QtopiaSyncClient() Using device GUID:" << id.toString();
+	}
+
 	AccessConfig* ac = new AccessConfig();
 	ac->setUsername             ("");
 	ac->setPassword             ("");
-	//ac->setFirstTimeSyncMode    (SYNC_NONE);
-	ac->setFirstTimeSyncMode    (SYNC_SLOW);
+	ac->setFirstTimeSyncMode    (SYNC_NONE);
+	//ac->setFirstTimeSyncMode    (SYNC_SLOW);
 	ac->setUseProxy             (FALSE);
-	ac->setProxyHost            ("");
-	ac->setProxyPort            (8080);
-	ac->setProxyUsername        ("");
-	ac->setProxyPassword        ("");
+	//ac->setProxyHost            ("");
+	//ac->setProxyPort            (8080);
+	//ac->setProxyUsername        ("");
+	//ac->setProxyPassword        ("");
 	ac->setSyncURL              ("http://localhost:8080/funambol/ds");
 	ac->setBeginSync            (0);
 	ac->setEndSync              (0);
@@ -64,8 +78,8 @@ QtopiaSyncClient::QtopiaSyncClient()
 	dc->setFwv                  ("");
 	dc->setSwv                  ("");
 	dc->setHwv                  ("");
-	dc->setDevID                ("Greenphone");
-	dc->setDevType              ("smartphone");
+	dc->setDevID                (id.toString().toAscii());	// This should be a GUID
+	dc->setDevType              ("smartphone"); 			// Or pda,handheld,server,workstation,pager,phone
 	dc->setDsV                  ("");
 	dc->setUtc                  (TRUE);
 	dc->setLoSupport            (FALSE);
