@@ -45,7 +45,7 @@ public:
 	virtual ~SyncProfile();
 
 	void newProfile();
-	void newFromSettings(const QString &name);
+	//void load(const QString &name);
 	bool load(const QContent &profile);
 	bool save();
 	bool isSaved() const { return m_saved; }
@@ -103,6 +103,7 @@ public:
 
 private:
 	bool m_saved;
+	QString m_fileName;
 	QContent m_currentProfile;
 
 	QString m_name;

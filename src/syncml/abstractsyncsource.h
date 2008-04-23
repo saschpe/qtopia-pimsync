@@ -132,6 +132,7 @@ private:
 
 	QDateTime m_currentSync;
 	QDateTime m_lastSync;
+	bool m_transactionRunning;
 };
 
 #endif // ABSTRACTSYNCSOURCE_H

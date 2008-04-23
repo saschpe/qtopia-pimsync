@@ -17,6 +17,7 @@
 
 SyncProfile::SyncProfile()
 	: m_saved(false)
+	, m_fileName()
 	, m_currentProfile()
 {
 }
@@ -50,8 +51,9 @@ void SyncProfile::newProfile()
 	m_currentProfile = QContent();
 }
 
-void SyncProfile::newFromSettings(const QString &name)
+/*void SyncProfile::load(const QString &name)
 {
+	qDebug() << "SyncProfile::load()" << name;
 	QSettings settings("synczilla", name);
 	QString tmp;
 
@@ -103,9 +105,9 @@ void SyncProfile::newFromSettings(const QString &name)
 	m_transportUrl = settings.value("url").toString();
 	settings.endGroup();
 
+	m_fileName = name;
 	m_saved = false;
-	m_currentProfile = QContent();
-}
+}*/
 
 bool SyncProfile::load(const QContent &profile)
 {

@@ -15,6 +15,7 @@
 #define SYNCZILLA_H
 
 #include <QStackedWidget>
+#include <QDocumentSelector>
 
 class ConfigScreen;
 class QtopiaSyncClient;
@@ -23,8 +24,6 @@ class QKeyEvent;
 class QContent;
 class QTextEdit;
 class QPushButton;
-class QDocumentSelector;
-class QAction;
 
 class SyncZilla : public QStackedWidget
 {
@@ -42,6 +41,9 @@ private slots:
 	void editProfile(const QContent &content);
 	void selectionChanged();
 
+public slots:
+	void setDocument(const QString &fileName);
+
 private:
 	QWidget *mainScreen();
 	ConfigScreen *configScreen();
@@ -57,8 +59,6 @@ private:
 
 	QDocumentSelector *m_selector;
 	QPushButton *m_sync;
-
-	QAction *m_syncAction;
 };
 
 #endif // SYNCZILLA_H

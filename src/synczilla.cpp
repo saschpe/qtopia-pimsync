@@ -18,7 +18,6 @@
 
 #include <QtGui>
 #include <QContentFilter>
-#include <QDocumentSelector>
 #include <QSoftMenuBar>
 #include <QtopiaApplication>
 
@@ -32,8 +31,8 @@ SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 {
 	setCurrentWidget(mainScreen());
 
-	// Do first time initialization
-	/*QSettings settings("synczilla", "synczilla");
+	/*// Do first time initialization
+	QSettings settings("synczilla", "synczilla");
 	if (settings.value("firstRun").toString() == "true") {
 		// TODO: make this work
 		profile()->newFromSettings("profile-funambol-local");
@@ -45,6 +44,10 @@ SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 		profile()->newFromSettings("profile-mobical-web");
 		profile()->save();
 		settings.setValue("firstRun", "false");
+	QSettings foo("synczilla", "foo");
+	foo.setValue("foo", "1");
+	profile()->load("funambol-local.profile");
+	qDebug() << "Profile:" << profile()->name();
 	}*/
 }
 
@@ -69,12 +72,32 @@ QWidget *SyncZilla::mainScreen()
 
 		m_mainScreen = new QWidget();
 		m_mainScreen->setLayout(layout);
-
-		QSoftMenuBar::menuFor(m_selector);
 		addWidget(m_mainScreen);
 	}
 	return m_mainScreen;
 }
+
+/*QListWidget *SyncZilla::mainScreen()
+{
+	if (!m_selectionScreen) {
+		m_selectionScreen = new QListWidget(this);
+
+		QAction *newAction = new QAction(tr("New profile"), this);
+		QAction *editAction = new QAction(tr("Edit profile"), this);
+		QAction *deleteAction = new QAction(tr("Delete profile"), this);
+		QAction *syncAction = new QAction(tr("Start sync"), this);
+
+		QMenu *menu = QSoftMenuBar::menuFor(m_selectionScreen);
+		menu->addAction(newAction);
+		menu->addAction(editAction);
+		menu->addAction(deleteAction);
+		menu->addSeparator();
+		menu->addAction(syncAction);
+
+		addWidget(m_selectionScreen);
+	}
+	return m_selectionScreen;
+}*/
 
 ConfigScreen *SyncZilla::configScreen()
 {
@@ -177,9 +200,13 @@ void SyncZilla::selectionChanged()
 	QContent selected = m_selector->currentDocument();
 	if (selected.isNull()) {
 		m_sync->setEnabled(false);
-		m_syncAction->setEnabled(false);
 	} else {
 		m_sync->setEnabled(true);
-		m_syncAction->setEnabled(true);
 	}
+}
+
+void SyncZilla::setDocument(const QString &fileName)
+{
+	QContent doc(fileName);
+	editProfile(doc);
 }
