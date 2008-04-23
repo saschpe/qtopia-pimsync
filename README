@@ -4,8 +4,7 @@ SyncZilla
 
 SyncZilla let's you synchronize your contacts, events and appointments with your
 favorite groupware software solution or groupware web-service. Every SyncML-capable
-service offering should work with SyncZilla. SyncZilla ships several default 
-configuration profiles for different groupware solutions.
+service offering should work with SyncZilla.
 
 
 Prerequisites

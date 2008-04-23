@@ -46,9 +46,9 @@ libs.commands     = $(COPY) $${PATH_FUNAMBOL}/lib/libsync4j.so.3.0.0 $(INSTALL_R
 libs.path         = /lib
 INSTALLS         += libs
 
-settings.files    = data/settings/*
-settings.path     = /etc/synczilla
-INSTALLS         += settings
+profiles.files    = data/*.profile
+profiles.path     = /etc/synczilla
+INSTALLS         += profiles
 
 desktop.files     = data/synczilla.desktop
 desktop.path      = /apps/Applications

@@ -2,7 +2,10 @@
 TODO AND WISHLIST
 =================
 
-* Add qcontents for example profiles
+* Add QContents for example profiles
+  This one is pretty much impossible, one option would be moving away from
+  QContent back to stupid files with a listwidget and have a distinct
+  directory for profiles filled with some defaults, 
 
 
 
