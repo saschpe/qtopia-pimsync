@@ -39,6 +39,9 @@ signals:
 protected:
 	void keyPressEvent(QKeyEvent *event);
 
+private slots:
+	void slotSyncPressed();
+
 private:
 	void saveProfile();
 

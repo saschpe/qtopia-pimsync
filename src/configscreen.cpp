@@ -26,7 +26,7 @@ ConfigScreen::ConfigScreen(QWidget *parent)
 	m_protocol->addItem(tr("SyncML"));
 	m_comment = new QTextEdit(tr("Enter comment here"), this);
 	m_sync = new QPushButton(tr("Start sync"), this);
-	connect(m_sync, SIGNAL(clicked()), this, SIGNAL(syncPressed()));
+	connect(m_sync, SIGNAL(clicked()), this, SLOT(slotSyncPressed()));
 
 	m_mode = new QComboBox(this);
 	m_mode->addItem(tr("Slow"));
@@ -141,6 +141,19 @@ void ConfigScreen::setProfile(SyncProfile *profile)
 	m_sync->setFocus();
 }
 
+void ConfigScreen::keyPressEvent(QKeyEvent *event)
+{
+	if (event->key() == Qt::Key_Back)
+		saveProfile();
+	QTabWidget::keyPressEvent(event);
+}
+
+void ConfigScreen::slotSyncPressed()
+{
+	saveProfile();
+	emit syncPressed();
+}
+
 void ConfigScreen::saveProfile()
 {
 	m_profile->setName(m_name->text());
@@ -225,11 +238,4 @@ void ConfigScreen::saveProfile()
 				tr("Unable to save profile: %1").arg(m_profile->name()),
 				QMessageBox::Ok, QMessageBox::Ok);
 	}
-}
-
-void ConfigScreen::keyPressEvent(QKeyEvent *event)
-{
-	if (event->key() == Qt::Key_Back)
-		saveProfile();
-	QTabWidget::keyPressEvent(event);
 }
