@@ -89,6 +89,15 @@ public:
 	void setAppointmentsUrl(const QString &url);
 	QString appointmentsUrl() const { return m_appointmentsUrl; }
 
+	void setNotesEnabled(bool enabled);
+	bool notesEnabled() const { return m_notesEnabled; }
+
+	void setNotesLastSync(unsigned int timeStamp);
+	unsigned int notesLastSync() const { return m_notesLastSync; }
+
+	void setNotesUrl(const QString& url);
+	QString notesUrl() const { return m_notesUrl; }
+
 	void setTransportType(Transport transport);
 	Transport transportType() const { return m_transportType; }
 
@@ -122,6 +131,10 @@ private:
 	bool m_appointmentsEnabled;
 	unsigned int m_appointmentsLastSync;
 	QString m_appointmentsUrl;
+
+	bool m_notesEnabled;
+	unsigned int m_notesLastSync;
+	QString m_notesUrl;
 
 	Transport m_transportType;
 	QString m_transportUser;

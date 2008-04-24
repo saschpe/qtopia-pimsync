@@ -26,6 +26,7 @@ public:
 	{
 		setName("event");
 		setType("text/x-vcalendar");
+		//setSupportedTypes("text/x-vcalendar:");
 	}
 };
 

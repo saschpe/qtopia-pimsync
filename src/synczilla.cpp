@@ -20,6 +20,7 @@
 #include <QContentFilter>
 #include <QSoftMenuBar>
 #include <QtopiaApplication>
+#include <QDocumentSelector>
 
 SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 	: QStackedWidget(parent)
@@ -51,58 +52,27 @@ SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 	}*/
 }
 
-QWidget *SyncZilla::mainScreen()
+QDocumentSelector *SyncZilla::mainScreen()
 {
 	if (!m_mainScreen) {
-		m_selector = new QDocumentSelector(this);
-		m_selector->setFilter(QContentFilter::mimeType("application/vnd.trolltech-qsp-xml")
+		m_mainScreen = new QDocumentSelector(this);
+		m_mainScreen->setFilter(QContentFilter::mimeType("application/vnd.trolltech-qsp-xml")
 				& QContentFilter(QContentFilter::DRM, "Unprotected"));
-		m_selector->enableOptions(QDocumentSelector::NewDocument);
-		connect(m_selector, SIGNAL(newSelected()), this, SLOT(newProfile()));
-		connect(m_selector, SIGNAL(documentSelected(QContent)), this, SLOT(editProfile(QContent)));
-		connect(m_selector, SIGNAL(currentChanged()), this, SLOT(selectionChanged()));
+		m_mainScreen->enableOptions(QDocumentSelector::NewDocument);
+		connect(m_mainScreen, SIGNAL(newSelected()), this, SLOT(newProfile()));
+		//connect(m_mainScreen, SIGNAL(documentSelected(QContent)), this, SLOT(sync(QContent)));
+		connect(m_mainScreen, SIGNAL(documentSelected(QContent)), this, SLOT(editProfile(QContent)));
 
-		m_sync = new QPushButton(tr("Sync"), this);
-		m_sync->setEnabled(false);
-		connect(m_sync, SIGNAL(clicked()), this, SLOT(sync()));
-	
-		QVBoxLayout *layout = new QVBoxLayout();
-		layout->addWidget(m_selector);
-		layout->addWidget(m_sync);
-
-		m_mainScreen = new QWidget();
-		m_mainScreen->setLayout(layout);
 		addWidget(m_mainScreen);
 	}
 	return m_mainScreen;
 }
 
-/*QListWidget *SyncZilla::mainScreen()
-{
-	if (!m_selectionScreen) {
-		m_selectionScreen = new QListWidget(this);
-
-		QAction *newAction = new QAction(tr("New profile"), this);
-		QAction *editAction = new QAction(tr("Edit profile"), this);
-		QAction *deleteAction = new QAction(tr("Delete profile"), this);
-		QAction *syncAction = new QAction(tr("Start sync"), this);
-
-		QMenu *menu = QSoftMenuBar::menuFor(m_selectionScreen);
-		menu->addAction(newAction);
-		menu->addAction(editAction);
-		menu->addAction(deleteAction);
-		menu->addSeparator();
-		menu->addAction(syncAction);
-
-		addWidget(m_selectionScreen);
-	}
-	return m_selectionScreen;
-}*/
-
 ConfigScreen *SyncZilla::configScreen()
 {
 	if (!m_configScreen) {
 		m_configScreen = new ConfigScreen();
+		connect(m_configScreen, SIGNAL(syncPressed()), this, SLOT(sync()));
 		addWidget(m_configScreen);
 	}
 	return m_configScreen;
@@ -156,7 +126,7 @@ void SyncZilla::keyPressEvent(QKeyEvent *event)
 
 void SyncZilla::sync()
 {
-	QContent selected = m_selector->currentDocument();
+	QContent selected = m_mainScreen->currentDocument();
 	setCurrentWidget(logScreen());
 	m_logScreen->document()->clear();
 	m_logScreen->insertPlainText(tr("Loading profile \"%1\": ").arg(selected.name()));
@@ -192,16 +162,6 @@ void SyncZilla::editProfile(const QContent &content)
 		QMessageBox::critical(this, tr("Error"), 
 				tr("Unable to edit profile: %1").arg(content.name()),
 				QMessageBox::Ok, QMessageBox::Ok);
-	}
-}
-
-void SyncZilla::selectionChanged()
-{
-	QContent selected = m_selector->currentDocument();
-	if (selected.isNull()) {
-		m_sync->setEnabled(false);
-	} else {
-		m_sync->setEnabled(true);
 	}
 }
 

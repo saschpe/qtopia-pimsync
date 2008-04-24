@@ -43,6 +43,9 @@ void SyncProfile::newProfile()
 	m_appointmentsEnabled = true;
 	m_appointmentsLastSync = 0;
 	m_appointmentsUrl = "event";
+	m_notesEnabled = false;
+	m_notesLastSync = 0;
+	m_notesUrl = "note";
 	m_transportType = Http;
 	m_transportUser = "guest";
 	m_transportPassword = "guest";
@@ -90,6 +93,9 @@ void SyncProfile::newProfile()
 	m_appointmentsEnabled = settings.value("appointments.enabled").toString() == "true" ? true : false;
 	m_appointmentsLastSync = settings.value("appointments.timestamp").toUInt();
 	m_appointmentsUrl = settings.value("appointments.url").toString();
+	m_notesEnabled = settings.value("notes.enabled").toString() == "true" ? true : false;
+	m_notesLastSync = settings.value("notes.timestamp").toUInt();
+	m_notesUrl = settings.value("notes.url").toString();
 	settings.endGroup();
 
 	settings.beginGroup("Transport");
@@ -208,6 +214,18 @@ bool SyncProfile::load(const QContent &profile)
 		else
 			m_appointmentsUrl = "event";
 	}
+	QDomElement notes = sources.firstChildElement("notes");
+	if (!notes.isNull()) {
+		if (notes.firstChildElement("enabled").text() == "1")
+			m_notesEnabled = true;
+		else
+			m_notesEnabled = false;
+		m_notesLastSync = notes.firstChildElement("timestamp").text().toUInt();
+		if (!notes.firstChildElement("url").isNull())
+			m_notesUrl = notes.firstChildElement("url").text();
+		else
+			m_notesUrl = "note";
+	}
 
 	// Load transport settings
 	QDomElement transport = root.firstChildElement("transport");
@@ -295,6 +313,13 @@ bool SyncProfile::save()
 			"        <timestamp>" + QString::number(m_appointmentsLastSync) + "</timestamp>\n" \
 			"        <url>" + m_appointmentsUrl + "</url>\n" \
 			"      </appointments>\n" \
+			"      <notes>\n" \
+			"        <enabled>");
+	xml.append(m_notesEnabled ? "1" : "0");
+	xml.append("</enabled>\n" \
+			"        <timestamp>" + QString::number(m_notesLastSync) + "</timestamp>\n" \
+			"        <url>" + m_notesUrl + "</url>\n" \
+			"      </notes>\n" \
 			"    </sources>\n" \
 			"  </options>\n" \
 			"  <transport>\n" \
@@ -391,6 +416,24 @@ void SyncProfile::setAppointmentsUrl(const QString &url)
 {
 	m_saved = false;
 	m_appointmentsUrl = url;
+}
+
+void SyncProfile::setNotesEnabled(bool enabled)
+{
+	m_saved = false;
+	m_notesEnabled = enabled;
+}
+
+void SyncProfile::setNotesLastSync(unsigned int timeStamp)
+{
+	m_saved = false;
+	m_notesLastSync = timeStamp;
+}
+
+void SyncProfile::setNotesUrl(const QString &url)
+{
+	m_saved = false;
+	m_notesUrl = url;
 }
 
 void SyncProfile::setTransportType(Transport transport)

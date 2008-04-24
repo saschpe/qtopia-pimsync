@@ -12,9 +12,10 @@ HEADERS          += src/synczilla.h \
                     src/syncml/base.h \
                     src/syncml/syncclient.h \
                     src/syncml/abstractsyncsource.h \
-                    src/syncml/appointmentsyncsource.h \
                     src/syncml/contactsyncsource.h \
-                    src/syncml/tasksyncsource.h
+                    src/syncml/appointmentsyncsource.h \
+                    src/syncml/tasksyncsource.h \
+                    src/syncml/notesyncsource.h
 SOURCES          += src/main.cpp \
                     src/synczilla.cpp \
                     src/syncprofile.cpp \

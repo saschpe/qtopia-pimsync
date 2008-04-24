@@ -16,7 +16,7 @@
 
 #include "abstractsyncsource.h"
 
-#include <QNoteModel>
+//#include <QNoteModel>
 
 class NoteSyncSourceConfig : public AbstractSyncSourceConfig
 {
@@ -36,6 +36,7 @@ public:
 		: AbstractSyncSource(config, managerConfig)
 	{
 		// CURRENTLY NOT SUPPORTED BY PIM MODELS, ONE COULD CREATE ONE
+		// SO CALLING THE CONSTRUCTOR SHOULD NOT BE ALLOWED
 		//m_model = new QNoteModel(); 
 		//m_type = "vCalendar";
 	}

@@ -26,6 +26,7 @@ public:
 	{
 		setName("contact");
 		setType("text/x-vcard");
+		//setSupportedTypes("text/x-vcard:,text/vcard");
 	}
 };
 

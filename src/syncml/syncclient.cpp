@@ -16,6 +16,7 @@
 #include "contactsyncsource.h"
 #include "appointmentsyncsource.h"
 #include "tasksyncsource.h"
+#include "notesyncsource.h"
 
 #include <spds/SyncManagerConfig.h>
 
@@ -116,7 +117,7 @@ bool QtopiaSyncClient::sync(SyncProfile *profile)
 	}
 
 	int index = 0;
-	SyncSource *sourcesArray[] = {NULL, NULL, NULL, NULL};	// count sources + 1 -> '\0' terminated array
+	SyncSource *sourcesArray[] = {NULL, NULL, NULL, NULL, NULL};	// count sources + 1 -> '\0' terminated array
 
 	ContactSyncSource *contactSource = NULL;
 	if (profile->contactsEnabled()) {
@@ -136,6 +137,12 @@ bool QtopiaSyncClient::sync(SyncProfile *profile)
 		appointmentSource = new AppointmentSyncSource(appointmentConfig, m_managerConfig);
 		sourcesArray[index++] = appointmentSource;
 	}
+	NoteSyncSource *noteSource = NULL;
+	if (profile->notesEnabled()) {
+		NoteSyncSourceConfig *noteConfig = new NoteSyncSourceConfig(mode, profile->notesLastSync(), profile->notesUrl().toAscii());
+		noteSource = new NoteSyncSource(noteConfig, m_managerConfig);
+		sourcesArray[index++] = noteSource;
+	}
 
 	if (SyncClient::sync(*m_managerConfig, sourcesArray) == 0) {
 		if (profile->contactsEnabled())
@@ -144,6 +151,8 @@ bool QtopiaSyncClient::sync(SyncProfile *profile)
 			profile->setTasksLastSync(taskSource->lastSync());
 		if (profile->appointmentsEnabled())
 			profile->setAppointmentsLastSync(appointmentSource->lastSync());
+		if (profile->notesEnabled())
+			profile->setNotesLastSync(noteSource->lastSync());
 		profile->save();
 		return true;
 	}

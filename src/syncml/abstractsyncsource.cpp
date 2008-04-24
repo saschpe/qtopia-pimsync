@@ -34,6 +34,8 @@ int AbstractSyncSource::addItem(SyncItem& item)
 {
 	QByteArray data((char *)item.getData());
 	QUniqueId id = m_model->addRecord(data, QPimSource(), m_type);
+	item.setKey(id.toString().toAscii().data());
+	m_model->updateRecord(id, data, m_type);
 	qDebug() << "AbstractSyncSource::addItem() " << toString(item) << "Id:" << id.toString();
 	if (!id.isNull())
 		return 201;	//ok, the requested item was added

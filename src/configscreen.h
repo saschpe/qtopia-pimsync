@@ -18,11 +18,11 @@
 #include <QContent>
 
 class SyncProfile;
-class QLabel;
 class QLineEdit;
 class QCheckBox;
 class QComboBox;
 class QTextEdit;
+class QPushButton;
 
 class ConfigScreen : public QTabWidget
 {
@@ -33,28 +33,31 @@ public:
 
 	void setProfile(SyncProfile *profile);
 
+signals:
+	void syncPressed();
+
 protected:
 	void keyPressEvent(QKeyEvent *event);
 
 private:
+	void saveProfile();
+
 	SyncProfile *m_profile;
 
 	QLineEdit *m_name;
-	QTextEdit *m_comment;
 	QComboBox *m_protocol;
+	QTextEdit *m_comment;
+	QPushButton *m_sync;
+
 	QComboBox *m_mode;
-
 	QCheckBox *m_contacts;
-	QLabel    *m_contactsDate;
 	QLineEdit *m_contactsUrl;
-
 	QCheckBox *m_tasks;
-	QLabel    *m_tasksDate;
 	QLineEdit *m_tasksUrl;
-
 	QCheckBox *m_appointments;
-	QLabel    *m_appointmentsDate;
 	QLineEdit *m_appointmentsUrl;
+	QCheckBox *m_notes;
+	QLineEdit *m_notesUrl;
 
 	QComboBox *m_transportType;
 	QLineEdit *m_transportUserName;
