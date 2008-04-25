@@ -36,6 +36,10 @@ Prepare and build prerequisites for a greenphone target:
 	$ cd ../funambol
 	$ bash build_gp.sh
 
+Notice: These preparations steps should not be mandatory since the repository
+already contains pre-built binaries for those dependencies (for x86 and the 
+greenphone platforms).
+
 __ http://trolltech.com/products/qt/downloads
 __ http://trolltech.com/products/qtopia/downloads
 
@@ -66,6 +70,9 @@ following steps (a Qtopia phone edition build for greenphone target is needed):
 	$ make
 	$ make package
 	$ $QPE_GP_BUILDDIR/scripts/greenphone-sdk/scripts/gph -i    
+
+Notice: Using the application as a package is currently unsupported due to some
+limitations with the Qtopia content APIs.
 
 
 Authors

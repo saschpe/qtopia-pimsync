@@ -22,6 +22,8 @@
 #include <QtopiaApplication>
 #include <QContentSet>
 #include <QDocumentSelector>
+#include <QWaitWidget>
+
 
 SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 	: QStackedWidget(parent)
@@ -33,28 +35,40 @@ SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 {
 	setCurrentWidget(mainScreen());
 
+	connect(&mainScreen()->documents(), SIGNAL(changed()), this, SLOT(init()));
+}
+
+void SyncZilla::init()
+{
 	/* Do first time initialization. The Qtopia content systems lacks
 	 * support for it, so we do it programmatically.
 	 */
 	QSettings cfg("Trolltech", "SyncZilla");
+
 	QString firstRun = cfg.value("General/firstRun").toString();
-	if (firstRun.isNull() || firstRun == "true" || m_mainScreen->documents().count() == 0) {
+	if (firstRun.isNull() || firstRun == "true") {
+		// NOTE: Do first time start up customization here or provide the corresponding settings file
 		createDefaultProfiles();
+		cfg.setValue("General/createDefaultsWhenEmpty","true");
 		cfg.setValue("General/firstRun", "false");
+	} else if (mainScreen()->documents().isEmpty()) {
+		if (cfg.value("General/createDefaultsWhenEmpty").toBool()) {
+			createDefaultProfiles();
+			cfg.setValue("General/firstRun", "false");
+		}
 	}
+	// Don't forget to disconnect this slot otherwise it's called every time we change contents
+	disconnect(&mainScreen()->documents(), SIGNAL(changed()), this, SLOT(init()));
 }
 
 QDocumentSelector *SyncZilla::mainScreen()
 {
 	if (!m_mainScreen) {
 		m_mainScreen = new QDocumentSelector(this);
-		m_mainScreen->setFilter(QContentFilter::mimeType("application/vnd.trolltech-qsp-xml")
-				& QContentFilter(QContentFilter::DRM, "Unprotected"));
+		m_mainScreen->setFilter(QContentFilter::mimeType("application/vnd.trolltech-qsp-xml"));
 		m_mainScreen->enableOptions(QDocumentSelector::NewDocument);
 		connect(m_mainScreen, SIGNAL(newSelected()), this, SLOT(newProfile()));
-		//connect(m_mainScreen, SIGNAL(documentSelected(QContent)), this, SLOT(sync(QContent)));
 		connect(m_mainScreen, SIGNAL(documentSelected(QContent)), this, SLOT(editProfile(QContent)));
-
 		addWidget(m_mainScreen);
 	}
 	return m_mainScreen;
@@ -125,7 +139,14 @@ void SyncZilla::sync()
 	if (profile()->load(selected)) {
 		m_logScreen->insertPlainText(tr("Ok\n"));
 		m_logScreen->insertPlainText(tr("Sync with server: "));
-		if (syncClient()->sync(m_profile)) {
+
+		//QWaitWidget foo = new QWaitWidget(this);
+		//foo.show();
+		// TODO: put into thread
+		bool ret = syncClient()->sync(m_profile);
+		//delete foo;
+		
+		if (ret) {
 			m_logScreen->insertPlainText(tr("Ok\n\n"));
 			m_logScreen->insertPlainText(m_syncClient->results());
 		} else {
@@ -133,9 +154,14 @@ void SyncZilla::sync()
 			m_logScreen->insertPlainText(m_syncClient->error());
 			m_logScreen->insertPlainText(tr("\n\nPlease have a look at your provided configuration\n"));
 		}
-		qDebug() << m_syncClient->syncReport();
+		//qDebug() << m_syncClient->syncReport();
 	} else
 		m_logScreen->insertPlainText(tr("Failed\n"));
+}
+
+void SyncZilla::SyncThread::run()
+{
+	qDebug() << "SyncZilla::SyncThread::run()";
 }
 
 void SyncZilla::newProfile()
@@ -165,8 +191,6 @@ void SyncZilla::setDocument(const QString &fileName)
 
 void SyncZilla::createDefaultProfiles()
 {
-	qDebug() << "SyncZilla::createDefaultProfiles()";
-
 	profile()->newProfile();
 	profile()->setName("Funambol (local)");
 	profile()->setComment("This profile can be used if you have a Funambol DS server running locally.");

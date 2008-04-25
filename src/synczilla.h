@@ -15,6 +15,7 @@
 #define SYNCZILLA_H
 
 #include <QStackedWidget>
+#include <QThread>
 
 class ConfigScreen;
 class QtopiaSyncClient;
@@ -35,6 +36,7 @@ protected:
 	void keyPressEvent(QKeyEvent *event);
 
 private slots:
+	void init();
 	void sync();
 	void newProfile();
 	void editProfile(const QContent &content);
@@ -44,6 +46,12 @@ public slots:
 	void setDocument(const QString &fileName);
 
 private:
+	class SyncThread : public QThread
+	{
+	protected:
+		void run();
+	};
+
 	QDocumentSelector *mainScreen();
 	ConfigScreen *configScreen();
 	QTextEdit *logScreen();
