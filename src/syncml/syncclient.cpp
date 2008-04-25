@@ -32,12 +32,12 @@ QtopiaSyncClient::QtopiaSyncClient()
 
 	// Create a GUID for the current device once, used for identification
 	// with SyncML servers
-	QSettings cfg("synczilla", "funambol");
-	QUuid id = QUuid(cfg.value("device/id").toString());
+	QSettings cfg("Trolltech", "SyncZilla");
+	QUuid id = QUuid(cfg.value("Funambol/Device/Id").toString());
 	if (id.isNull()) {
 		id = QUuid::createUuid();
 		//qDebug() << "QtopiaSyncClient::QtopiaSyncClient() Generate device GUID:" << id.toString();
-		cfg.setValue("device/id", id.toString());
+		cfg.setValue("Device/Id", id.toString());
 	} else {
 		//qDebug() << "QtopiaSyncClient::QtopiaSyncClient() Using device GUID:" << id.toString();
 	}

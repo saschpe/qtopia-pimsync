@@ -20,6 +20,7 @@
 #include <QContentFilter>
 #include <QSoftMenuBar>
 #include <QtopiaApplication>
+#include <QContentSet>
 #include <QDocumentSelector>
 
 SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
@@ -32,24 +33,15 @@ SyncZilla::SyncZilla(QWidget *parent, Qt::WindowFlags /*flags*/)
 {
 	setCurrentWidget(mainScreen());
 
-	/*// Do first time initialization
-	QSettings settings("synczilla", "synczilla");
-	if (settings.value("firstRun").toString() == "true") {
-		// TODO: make this work
-		profile()->newFromSettings("profile-funambol-local");
-		profile()->save();
-		profile()->newFromSettings("profile-myfunambol-web");
-		profile()->save();
-		profile()->newFromSettings("profile-scheduleworld-web");
-		profile()->save();
-		profile()->newFromSettings("profile-mobical-web");
-		profile()->save();
-		settings.setValue("firstRun", "false");
-	QSettings foo("synczilla", "foo");
-	foo.setValue("foo", "1");
-	profile()->load("funambol-local.profile");
-	qDebug() << "Profile:" << profile()->name();
-	}*/
+	/* Do first time initialization. The Qtopia content systems lacks
+	 * support for it, so we do it programmatically.
+	 */
+	QSettings cfg("Trolltech", "SyncZilla");
+	QString firstRun = cfg.value("General/firstRun").toString();
+	if (firstRun.isNull() || firstRun == "true" || m_mainScreen->documents().count() == 0) {
+		createDefaultProfiles();
+		cfg.setValue("General/firstRun", "false");
+	}
 }
 
 QDocumentSelector *SyncZilla::mainScreen()
@@ -169,4 +161,57 @@ void SyncZilla::setDocument(const QString &fileName)
 {
 	QContent doc(fileName);
 	editProfile(doc);
+}
+
+void SyncZilla::createDefaultProfiles()
+{
+	qDebug() << "SyncZilla::createDefaultProfiles()";
+
+	profile()->newProfile();
+	profile()->setName("Funambol (local)");
+	profile()->setComment("This profile can be used if you have a Funambol DS server running locally.");
+	profile()->setContactsUrl("card");
+	profile()->setTasksUrl("task");
+	profile()->setAppointmentsUrl("event");
+	profile()->setNotesUrl("note");
+	profile()->setTransportUser("guest");
+	profile()->setTransportPassword("guest");
+	profile()->setTransportUrl("http://localhost:8080/funambol/ds");
+	profile()->save();
+
+	profile()->newProfile();
+	profile()->setName("ScheduleWorld (web)");
+	profile()->setComment("This profile is suitable for the ScheduleWorld web-service. You need a valid account to use it.");
+	profile()->setContactsUrl("card");
+	profile()->setTasksUrl("task");
+	profile()->setAppointmentsUrl("cal");
+	profile()->setNotesUrl("note");
+	profile()->setTransportUser("");
+	profile()->setTransportPassword("");
+	profile()->setTransportUrl("http://sync.scheduleworld.com/funambol/ds");
+	profile()->save();
+
+	profile()->newProfile();
+	profile()->setName("myFUNAMBOL (web)");
+	profile()->setComment("This profile is suitable for the myFUNAMBOl web-service. You need a valid account to use it.");
+	profile()->setContactsUrl("card");
+	profile()->setTasksUrl("task");
+	profile()->setAppointmentsUrl("event");
+	profile()->setNotesUrl("");
+	profile()->setTransportUser("");
+	profile()->setTransportPassword("");
+	profile()->setTransportUrl("http://my.funambol.com/sync");
+	profile()->save();
+
+	profile()->newProfile();
+	profile()->setName("mobical (web)");
+	profile()->setComment("This profile is suitable for the mobical web-service. You need a valid account to use it.");
+	profile()->setContactsUrl("con");
+	profile()->setTasksUrl("task");
+	profile()->setAppointmentsUrl("cal");
+	profile()->setNotesUrl("vnote");
+	profile()->setTransportUser("");
+	profile()->setTransportPassword("");
+	profile()->setTransportUrl("http://www.mobical.net/sync/server");
+	profile()->save();
 }

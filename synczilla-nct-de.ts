@@ -3,13 +3,13 @@
 <context>
     <name>SyncZilla</name>
     <message>
-        <location filename="tr28961.cpp" line="1"/>
+        <location filename="tr8310.cpp" line="1"/>
         <source>SyncZilla</source>
         <comment>Use soft hyphen (char U00AD) to indicate hyphenation</comment>
         <translation>SyncZilla</translation>
     </message>
     <message>
-        <location filename="tr28961.cpp" line="2"/>
+        <location filename="tr8310.cpp" line="2"/>
         <source>A PIM synchronization tool</source>
         <translation>Ein PIM Synchronizationswerkzeug</translation>
     </message>

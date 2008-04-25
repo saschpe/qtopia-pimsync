@@ -38,6 +38,7 @@ private slots:
 	void sync();
 	void newProfile();
 	void editProfile(const QContent &content);
+	void createDefaultProfiles();
 
 public slots:
 	void setDocument(const QString &fileName);
