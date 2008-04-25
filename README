@@ -75,6 +75,40 @@ Notice: Using the application as a package is currently unsupported due to some
 limitations with the Qtopia content APIs.
 
 
+Example configuration profiles
+==============================
+
+These act as a reference, a subset is shipped as default configuration profiles.
+
+Name:		Funambol DS server
+Url:		http://localhost:8080/funambol/ds
+Calendar:	event
+Contacts:	card
+Tasks:		task
+Notes:		?
+
+Name:		myFUNAMBOL web-service
+Url:		http://my.funambol.com/sync
+Calendar:	event	
+Contacts:	card
+Tasks:		task
+Notes:		?
+
+Name:		ScheduleWorld web-service
+Url:      	http://sync.scheduleworld.com/funambol/ds
+Calendar: 	cal
+Contacts: 	card
+Tasks:    	task
+Notes:    	note
+
+Name:		mobical web-service
+Url:		http://www.mobical.net/sync/server
+Calendar:	cal	(or caltask if tasks&calendar have same database)
+Contacts:	con
+Tasks:		task
+Notes:		vnote (or pnote if errors)
+
+
 Authors
 =======
 
