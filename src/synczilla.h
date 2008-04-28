@@ -15,15 +15,16 @@
 #define SYNCZILLA_H
 
 #include <QStackedWidget>
-#include <QThread>
 
-class ConfigScreen;
-class QtopiaSyncClient;
-class SyncProfile;
 class QKeyEvent;
 class QContent;
 class QTextEdit;
 class QDocumentSelector;
+class QWaitWidget;
+class ConfigScreen;
+class QtopiaSyncClient;
+class SyncProfile;
+class SyncThread;
 
 class SyncZilla : public QStackedWidget
 {
@@ -36,22 +37,19 @@ protected:
 	void keyPressEvent(QKeyEvent *event);
 
 private slots:
-	void init();
-	void sync();
-	void newProfile();
-	void editProfile(const QContent &content);
-	void createDefaultProfiles();
+	void setUp();
+
+	void startSync();
+	void finishSync(bool result);
 
 public slots:
 	void setDocument(const QString &fileName);
 
-private:
-	class SyncThread : public QThread
-	{
-	protected:
-		void run();
-	};
+	void newProfile();
+	void editProfile(const QContent &content);
+	void addDefaultProfiles();
 
+private:
 	QDocumentSelector *mainScreen();
 	ConfigScreen *configScreen();
 	QTextEdit *logScreen();
@@ -63,6 +61,11 @@ private:
 	QTextEdit *m_logScreen;
 	QtopiaSyncClient *m_syncClient;
 	SyncProfile *m_profile;
+
+	QWaitWidget *m_waitWidget;
+	SyncThread *m_syncThread;
+
+	friend class SyncThread;
 };
 
 #endif // SYNCZILLA_H

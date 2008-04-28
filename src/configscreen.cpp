@@ -41,15 +41,15 @@ ConfigScreen::ConfigScreen(QWidget *parent)
 	m_tasksUrl = new QLineEdit(this);
 	m_appointments = new QCheckBox(tr("Appointments"), this);
 	m_appointmentsUrl = new QLineEdit(this);
-	// TODO: Enable notes checkbox if Qtopia supports QNoteModel
 	m_notes = new QCheckBox(tr("Notes"), this);
+	// TODO: Enable notes checkbox and lineedit if Qtopia supports QNoteModel:
 	m_notes->setEnabled(false);
 	m_notesUrl = new QLineEdit(this);
 	m_notesUrl->setEnabled(false);
 
 	m_transportType = new QComboBox(this);
 	m_transportType->addItem(tr("Http"));
-	// TODO: uncomment this if bluetooth support was added:
+	// TODO: Uncomment the next line if bluetooth support was added:
 	//m_transportType->addItem(tr("Bluetooth"));
 	m_transportUserName = new QLineEdit(this);
 	m_transportPassword = new QLineEdit(this);

@@ -220,7 +220,7 @@ bool SyncProfile::save()
 	else
 		transport = "http";
 
-	// TODO: encoding in base64 would be nice
+	// TODO: Encoding in base64 would be nice
 
 	QString xml = \
 			"<?xml version=\"1.0\"?>\n" \
