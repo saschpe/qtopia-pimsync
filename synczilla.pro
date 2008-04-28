@@ -65,7 +65,7 @@ INSTALLS         += help
 
 pkg.name          = synczilla
 pkg.desc          = A PIM synchronization tool
-pkg.version       = 0.3
+pkg.version       = 1.0
 pkg.maintainer    = Trolltech (www.trolltech.com)
 pkg.license       = GPL
 pkg.domain        = trusted

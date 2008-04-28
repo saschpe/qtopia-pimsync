@@ -1,0 +1,5 @@
+Version 1.0
+
+    * Integration into greensuite partner solutions
+
+	* Shipping of default configuration profiles

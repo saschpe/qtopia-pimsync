@@ -26,3 +26,9 @@ synczilla.pro.cache
 3rdparty/libraries/curl/curl-7.18.1/
 3rdparty/libraries/curl/x86/*
 3rdparty/libraries/curl/gp/*
+.svn
+GS_INSTALL.txt
+GS_README.txt
+GS_RELEASE_NOTES.txt
+gs-build
+svn-commit.tmp
