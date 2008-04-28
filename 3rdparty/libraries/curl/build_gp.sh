@@ -13,7 +13,9 @@ tar xjf curl-7.18.1.tar.bz2
 cd curl-7.18.1
 export PATH=$PATH:$DIR_ARM_TOOLCHAIN_BIN
 ./configure --host=arm-linux --prefix=$DIR_PREFIX --without-random \
-	--disable-manual --disable-telnet --disable-ldap --disable-ldaps --disable-tftp --disable-dict
+	--disable-manual --disable-telnet --disable-ldap --disable-ldaps --disable-tftp \
+	--disable-dict --disable-verbose --disable-file --disable-ftp --disable-debug \
+	--disable-sspi --disable-ares --without-libssh2
 make
 make install
 cd ..

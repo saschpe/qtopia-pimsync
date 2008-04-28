@@ -4,7 +4,8 @@ TARGET            = synczilla
 CONFIG           += qtopia_main
 CONFIG           += no_quicklaunch
 CONFIG           += debug            # It's not debug it's a feature
-CONFIG           += no_singleexec    # Funambol client API license restrictions
+CONFIG           += no_singleexec    # Funambol client API license restrictions (can be resolved
+                                     # by buying a commercial license)
 
 HEADERS          += src/synczilla.h \
                     src/syncprofile.h \
@@ -66,6 +67,6 @@ INSTALLS         += help
 pkg.name          = synczilla
 pkg.desc          = A PIM synchronization tool
 pkg.version       = 1.0
-pkg.maintainer    = Trolltech (www.trolltech.com)
+pkg.maintainer    = speilick@trolltech.com
 pkg.license       = GPL
 pkg.domain        = trusted

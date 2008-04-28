@@ -9,7 +9,9 @@ DIR_PREFIX=$PWD/x86
 rm -rf curl-7.18.1
 tar xjf curl-7.18.1.tar.bz2
 cd curl-7.18.1
-./configure --prefix=$DIR_PREFIX --disable-manual --disable-telnet --disable-ldap --disable-ldaps --disable-tftp --disable-dict
+./configure --prefix=$DIR_PREFIX --disable-manual --disable-telnet --disable-ldap \
+	--disable-ldaps --disable-tftp --disable-dict --disable-verbose --disable-file \
+	--disable-ftp --disable-debug --disable-sspi --disable-ares --without-libssh2
 make
 make install
 cd ..
