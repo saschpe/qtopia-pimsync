@@ -88,7 +88,7 @@ pics.hint         = pics
 INSTALLS         += pics
 
 help.source       = data/help
-help.files        = *.html
+help.files        = synczilla.html
 help.hint         = help
 INSTALLS         += help
 

@@ -175,7 +175,7 @@ void SyncZilla::addDefaultProfiles()
 
 	profile()->newProfile();
 	profile()->setName("myFUNAMBOL (web)");
-	profile()->setComment("This profile is suitable for the myFUNAMBOl web-service. You need a valid account to use it.");
+	profile()->setComment("This profile is suitable for the myFUNAMBOL web-service. You need a valid account to use it.");
 	profile()->setContactsUrl("card");
 	profile()->setTasksUrl("task");
 	profile()->setAppointmentsUrl("event");
