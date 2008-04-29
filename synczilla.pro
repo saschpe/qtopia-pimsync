@@ -34,20 +34,20 @@ SOURCES          += src/main.cpp \
 linux-x86-g++ {
     PATH_FUNAMBOL       = 3rdparty/libraries/funambol/x86
     PATH_CURL           = 3rdparty/libraries/curl/x86
-	curl.commands       = (cd 3rdparty/libraries/curl && bash build_x86.sh)
-	funambol.commands   = (cd 3rdparty/libraries/funambol && bash build_x86.sh)
+    curl.commands       = (cd 3rdparty/libraries/curl && bash build_x86.sh)
+    funambol.commands   = (cd 3rdparty/libraries/funambol && bash build_x86.sh)
 }
 linux-generic-g++ {
     PATH_FUNAMBOL       = 3rdparty/libraries/funambol/x86
     PATH_CURL           = 3rdparty/libraries/curl/x86
-	curl.commands       = (cd 3rdparty/libraries/curl && bash build_x86.sh)
-	funambol.commands   = (cd 3rdparty/libraries/funambol && bash build_x86.sh)
+    curl.commands       = (cd 3rdparty/libraries/curl && bash build_x86.sh)
+    funambol.commands   = (cd 3rdparty/libraries/funambol && bash build_x86.sh)
 }
 linux-greenphone-g++ {
     PATH_FUNAMBOL       = 3rdparty/libraries/funambol/gp
     PATH_CURL           = 3rdparty/libraries/curl/gp
-	curl.commands       = (cd 3rdparty/libraries/curl && bash build_gp.sh)
-	funambol.commands   = (cd 3rdparty/libraries/funambol && bash build_gp.sh)
+    curl.commands       = (cd 3rdparty/libraries/curl && bash build_gp.sh)
+    funambol.commands   = (cd 3rdparty/libraries/funambol && bash build_gp.sh)
 }
 funambol.depends        = curl
 clean_3rdparty.commands = (cd 3rdparty/libraries/curl && bash clean.sh && cd ../funambol && bash clean.sh)
