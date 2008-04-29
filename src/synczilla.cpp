@@ -100,7 +100,6 @@ void SyncZilla::setUp()
 
 void SyncZilla::startSync()
 {
-	qDebug() << "SyncZilla::startSync()";
 	QContent selected = m_mainScreen->currentDocument();
 	setCurrentWidget(logScreen());
 	m_logScreen->document()->clear();
@@ -117,7 +116,6 @@ void SyncZilla::startSync()
 
 void SyncZilla::finishSync(bool result)
 {
-	qDebug() << "SyncZilla::finishSync()";
 	if (result) {
 		m_logScreen->insertPlainText(tr("Ok\n\n"));
 		m_logScreen->insertPlainText(m_syncClient->results());

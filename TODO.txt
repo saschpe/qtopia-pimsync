@@ -13,5 +13,3 @@
 
 * Tweak configuration managment: Change to base64 encoding and use QXmlStreamReader for faster
   profile loading.
-
-* 

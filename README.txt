@@ -7,8 +7,12 @@ favorite groupware software solution or groupware web-service. Every SyncML-capa
 service offering should work with SyncZilla.
 
 
-Prerequisites
-=============
+Optional Prerequisites
+======================
+
+Remark: 
+    These preparations steps should not be mandatory since the default
+    build routines already handle prerequisites building.
 
 SyncZilla extensivly uses the Qt toolkit version 4.4 and the Qtopia
 phone edition allowing embedded development with Qt (as well as providing
@@ -36,9 +40,6 @@ Prepare and build prerequisites for a greenphone target:
 	$ cd ../funambol
 	$ bash build_gp.sh
 
-Notice: These preparations steps should not be mandatory since the repository
-already contains pre-built binaries for those dependencies (for x86 and the 
-greenphone platforms).
 
 __ http://trolltech.com/products/qt/downloads
 __ http://trolltech.com/products/qtopia/downloads
@@ -71,14 +72,15 @@ following steps (a Qtopia phone edition build for greenphone target is needed):
 	$ make package
 	$ $QPE_GP_BUILDDIR/scripts/greenphone-sdk/scripts/gph -i    
 
-Notice: Using the application as a package is currently unsupported due to some
-limitations with the Qtopia content APIs.
+Remark: 
+    Using the application as a package is currently unsupported due to some
+    limitations with the Qtopia content APIs.
 
 
 Example configuration profiles
 ==============================
 
-These act as a reference, a subset is shipped as default configuration profiles.
+These act as a reference, since they are shipped as default configuration profiles.
 
 Name:		Funambol DS server
 Url:		http://localhost:8080/funambol/ds
