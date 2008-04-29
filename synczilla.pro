@@ -27,29 +27,32 @@ SOURCES          += src/main.cpp \
 
 #
 # Platform specific configuration and additional rules for the Makefile
-# ('make curl' and 'make funambol'). TARGET also depends on these.
+# 'make curl' and 'make funambol' should not be used directly since they are
+# invoked automatically. If you want to clean 3rdparty dependencies use
+# 'make clean_3rdparty'.
 #
 linux-x86-g++ {
-    PATH_FUNAMBOL     = 3rdparty/libraries/funambol/x86
-    PATH_CURL         = 3rdparty/libraries/curl/x86
-	curl.commands     = (cd 3rdparty/libraries/curl && bash build_x86.sh)
-	funambol.commands = (cd 3rdparty/libraries/funambol && bash build_x86.sh)
+    PATH_FUNAMBOL       = 3rdparty/libraries/funambol/x86
+    PATH_CURL           = 3rdparty/libraries/curl/x86
+	curl.commands       = (cd 3rdparty/libraries/curl && bash build_x86.sh)
+	funambol.commands   = (cd 3rdparty/libraries/funambol && bash build_x86.sh)
 }
 linux-generic-g++ {
-    PATH_FUNAMBOL     = 3rdparty/libraries/funambol/x86
-    PATH_CURL         = 3rdparty/libraries/curl/x86
-	curl.commands     = (cd 3rdparty/libraries/curl && bash build_x86.sh)
-	funambol.commands = (cd 3rdparty/libraries/funambol && bash build_x86.sh)
+    PATH_FUNAMBOL       = 3rdparty/libraries/funambol/x86
+    PATH_CURL           = 3rdparty/libraries/curl/x86
+	curl.commands       = (cd 3rdparty/libraries/curl && bash build_x86.sh)
+	funambol.commands   = (cd 3rdparty/libraries/funambol && bash build_x86.sh)
 }
 linux-greenphone-g++ {
-    PATH_FUNAMBOL     = 3rdparty/libraries/funambol/gp
-    PATH_CURL         = 3rdparty/libraries/curl/gp
-	curl.commands     = (cd 3rdparty/libraries/curl && bash build_gp.sh)
-	funambol.commands = (cd 3rdparty/libraries/funambol && bash build_gp.sh)
+    PATH_FUNAMBOL       = 3rdparty/libraries/funambol/gp
+    PATH_CURL           = 3rdparty/libraries/curl/gp
+	curl.commands       = (cd 3rdparty/libraries/curl && bash build_gp.sh)
+	funambol.commands   = (cd 3rdparty/libraries/funambol && bash build_gp.sh)
 }
-funambol.depends      = curl
-QMAKE_EXTRA_TARGETS  += curl funambol
-##PRE_TARGETDEPS       += curl funambol
+funambol.depends        = curl
+clean_3rdparty.commands = (cd 3rdparty/libraries/curl && bash clean.sh && cd ../funambol && bash clean.sh)
+QMAKE_EXTRA_TARGETS    += curl funambol clean_3rdparty
+PRE_TARGETDEPS         += curl funambol
 
 #
 # REMARK: The 'libs' install target might not need to deploy libcurl in Qtopia-4.4 because 
@@ -70,7 +73,9 @@ libs.commands    += $(COPY) $${PATH_CURL}/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/l
 libs.path         = /lib
 INSTALLS         += libs
 
-
+#
+# Content installation and package (security) setup stuff mostly.
+#
 desktop.files     = data/synczilla.desktop
 desktop.path      = /apps/Applications
 desktop.trtarget  = synczilla-nct

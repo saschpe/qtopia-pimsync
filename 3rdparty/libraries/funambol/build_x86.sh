@@ -4,6 +4,12 @@
 #
 echo "Executing x86 build script"
 
+# Check if we already built for this target, run clean.sh to reset everything.
+if [ -d x86/lib/ ]; then
+	echo "Target already built, done executing x86 build script"
+	exit 0; 
+fi
+
 DIR_PREFIX=$PWD/x86
 DIR_CURL_BIN=$DIR_PREFIX/../../curl/x86/bin
 

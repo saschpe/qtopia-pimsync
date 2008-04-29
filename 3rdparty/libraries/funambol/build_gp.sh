@@ -5,6 +5,12 @@
 #
 echo "Executing Greenphone build script"
 
+# Check if we already built for this target, run clean.sh to reset everything.
+if [ -d gp/lib/ ]; then
+	echo "Target already built, done executing Greenphone build script"
+	exit 0; 
+fi
+
 DIR_PREFIX=$PWD/gp
 DIR_CURL_BIN=$DIR_PREFIX/../../curl/gp/bin
 DIR_ARM_TOOLCHAIN_BIN=/opt/toolchains/greenphone/gcc-4.1.1-glibc-2.3.6/arm-linux/bin
