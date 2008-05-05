@@ -31,8 +31,6 @@ synczilla.pro.cache
 # Partner Trolltech repository ignore patterns
 #
 .svn
-GS_INSTALL.txt
-GS_README.txt
-GS_RELEASE_NOTES.txt
 gs-build
 svn-commit.tmp
+pkg

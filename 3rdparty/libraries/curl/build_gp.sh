@@ -25,7 +25,8 @@ export PATH=$PATH:$DIR_ARM_TOOLCHAIN_BIN
 make
 make install
 cd ..
-rm -rf x86/share
+rm -rf gp/share
+$DIR_ARM_TOOLCHAIN_BIN/arm-linux-strip gp/lib/libcurl.so.4.0.1
 
 echo "Done executing Greenphone build script"
 exit 0

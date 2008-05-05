@@ -25,6 +25,8 @@ export PATH=$PATH:$DIR_CURL_BIN
 ./configure --prefix=$DIR_PREFIX
 make
 make install
+cd ../../..
+strip x86/lib/libsync4j.so.3.0.0
 
 echo "Done executing x86 build script"
 exit 0

@@ -59,15 +59,15 @@ PRE_TARGETDEPS         += curl funambol
 #         it could be already shipped. This version of libcurl is stripped to the absolute 
 #         minimum and has a small footprint (supported features: HTTP and SSL).
 #
-#         If the above applies comment out the second 'libs.commands' rule to not install libcurl.
+#         If the above applies comment out the last three 'libs.commands' rule commands to not install libcurl.
 #         It is recommended to keep the dependency in the project so that it can be used at build-time.
 #
 INCLUDEPATH      += $${PATH_FUNAMBOL}/include/sync4j/common
 LIBS             += -L$${PATH_FUNAMBOL}/lib -L$${PATH_CURL}/lib -lsync4j -lcurl
 libs.commands     = $(COPY) $${PATH_FUNAMBOL}/lib/libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3.0.0; \
                     ln -fs libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so; \
-                    ln -fs libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3
-libs.commands    += $(COPY) $${PATH_CURL}/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4.0.1; \
+                    ln -fs libsync4j.so.3.0.0 $(INSTALL_ROOT)/lib/libsync4j.so.3; \
+                    $(COPY) $${PATH_CURL}/lib/libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4.0.1; \
                     ln -fs libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so; \
                     ln -fs libcurl.so.4.0.1 $(INSTALL_ROOT)/lib/libcurl.so.4
 libs.path         = /lib

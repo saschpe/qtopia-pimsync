@@ -22,6 +22,7 @@ make
 make install
 cd ..
 rm -rf x86/share
+strip x86/lib/libcurl.so.4.0.1
 
 echo "Done executing x86 build script"
 exit 0

@@ -1,0 +1,68 @@
+Installation guide
+==================
+
+This document gives information about the steps, which have to be taken to install (or integrate) the partner solution into Qtopia.
+
+
+Installation How-to
+===================
+
+SyncZilla extensivly uses the Qt toolkit version 4.4 and the Qtopia
+phone edition allowing embedded development with Qt (as well as providing
+distinct phone features). Qt should be available pre-built for your platform,
+see `Trolltech Qt homepage`__ for further infos.
+
+Qtopia phone edition version 4.3.1 has to be built from source for your 
+specific target platform, see `Trolltech Qtopia homepage`__ for further infos
+on how to extract and build it correctly.
+
+Default build scripts for libcurl and Funambol C++ Client API are provided,
+the necessray steps depend on the target platform you want to build for.
+
+Prepare and build prerequisites for a x86 target:
+
+	$ cd 3rdparty/libraries/curl/
+	$ bash build_x86.sh
+	$ cd ../funambol
+	$ bash build_x86.sh
+
+Prepare and build prerequisites for a greenphone target:
+
+	$ cd 3rdparty/libraries/curl/
+	$ bash build_gp.sh
+	$ cd ../funambol
+	$ bash build_gp.sh
+
+Notice: 
+
+    These preparations steps should not be mandatory since the repository
+    already contains pre-built binaries for those dependencies (for x86 and the 
+    greenphone platforms).
+
+
+To install and test with the x86 emulator (QVFb) you have to start it first:
+
+	$ $QPE_X86_BUILDDIR/bin/runqtopia
+
+Then build the project for the x86 emulator and/or to have it installed
+in the Qtopia flash-image (for an embedded device) you have to do
+these steps:
+
+	$ $QPE_X86_BUILDDIR/bin/qtopiamake
+	$ make
+	$ make install
+
+You should then be able to select the application in the Qtopia user interface
+application selector (an initial restart may be necessary to inform Qtopia of 
+the new application).
+
+Or to build a package for the Greenphone (physical embedded device) do the
+following steps (a Qtopia Phone Edition build for Greenphone target is needed):
+
+	$ $QPE_GP_BUILDDIR/bin/qtopiamake
+	$ make
+	$ make packages
+	$ $QPE_GP_BUILDDIR/scripts/greenphone-sdk/scripts/gph -i    
+
+__ http://trolltech.com/products/qt/downloads
+__ http://trolltech.com/products/qtopia/downloads

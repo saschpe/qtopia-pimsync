@@ -27,6 +27,8 @@ export PATH=$PATH:$DIR_CURL_BIN:$DIR_ARM_TOOLCHAIN_BIN
 ./configure --host=arm-linux --prefix=$DIR_PREFIX
 make
 make install
+cd ../../..
+$DIR_ARM_TOOLCHAIN_BIN/arm-linux-strip gp/lib/libsync4j.so.3.0.0
 
 echo "Done executing Greenphone build script"
 exit 0
