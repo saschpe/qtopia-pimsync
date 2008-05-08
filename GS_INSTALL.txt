@@ -42,7 +42,10 @@ following steps (a Qtopia Phone Edition build for Greenphone target is needed):
 	$ $QPE_GP_BUILDDIR/bin/qtopiamake
 	$ make
 	$ make packages
-	$ $QPE_GP_BUILDDIR/scripts/greenphone-sdk/scripts/gph -i    
+	$ $QPE_GP_BUILDDIR/scripts/greenphone-sdk/scripts/gph -i -qpk qpe-curl_1.0.0-1_arm      
+	$ $QPE_GP_BUILDDIR/scripts/greenphone-sdk/scripts/gph -i -qpk qpe-funambol_1.0.0-1_arm
+	$ $QPE_GP_BUILDDIR/scripts/greenphone-sdk/scripts/gph -i -qpk qpe-pimsync_1.0.0-1_arm
+
 
 __ http://trolltech.com/products/qt/downloads
 __ http://trolltech.com/products/qtopia/downloads
