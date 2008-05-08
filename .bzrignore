@@ -1,36 +1,22 @@
-#
-# Generic / qmake ignore patterns
-#
-Makefile
-Makefile.target
 .moc
 .obj
 .pch
 .qmake.cache
-synclog.txt
-synczilla
-synczilla.pro.cache
-.kdbgrc.synczilla
-
-#
-# Funambol ignore patterns
-#
-3rdparty/libraries/funambol/funambol/
-3rdparty/libraries/funambol/x86/*
-3rdparty/libraries/funambol/gp/*
-
-#
-# libcurl ignore patterns
-#
-#  
-3rdparty/libraries/curl/curl-7.18.1/
-3rdparty/libraries/curl/x86/*
-3rdparty/libraries/curl/gp/*
-
-#
-# Partner Trolltech repository ignore patterns
-#
+Makefile*
+pkg/
+*.pro.cache
+*.pri
+*.prl
 .svn
-gs-build
-svn-commit.tmp
-pkg
+
+3rdparty/libraries/curl/curl-7.18.1
+3rdparty/libraries/curl/bin
+3rdparty/libraries/curl/include
+3rdparty/libraries/curl/lib*
+3rdparty/libraries/curl/shared
+3rdparty/libraries/funambol/funambol
+3rdparty/libraries/funambol/include
+3rdparty/libraries/funambol/lib*
+3rdparty/libraries/funambol/shared
+
+pimsync/pimsync

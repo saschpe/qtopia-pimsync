@@ -13,14 +13,14 @@ Funambol Inc.
 Functionality overview
 ======================
 
-PIM sync solution based on SyncML.
+PIM synchronisation (OMA DS) bases on SyncML.
 
 
 Benefits
 ========
 
-There is no other solution which uses SyncML for the Qtopia platform. It's advantage is the adoption of an
-widely used industry standard. It shoul be able to sync with most SyncML-capable groupware solutons given
+There is no other solution which uses SyncML on the Qtopia platform. It's advantage is the adoption of an
+widely used industry standard. It should be able to sync with most SyncML-capable groupware solutons given
 proper configuration.
 
 
@@ -30,8 +30,8 @@ Content of delivery
 The application is delivered as source code together with all 3rd-party dependencies integrated for easy
 deployment.
 
-src/                         - Complete application source code
-data/                        - Help files, .desktop file and other content used by the application
+pimsync/src/                 - Complete application source code
+pimsync/data/                - Help files, .desktop file and other content used by the application
 3rdparty/                    - Necessary dependencies (see GS_INSTALL.txt for details)
 3rdparty/libraries/funambol/ - Funambol C++ client API (SyncML protocol implementation)
 3rdparty/libraries/curl/     - Libcurl HTTP transport layer implementation (Funambol dependency)
@@ -46,7 +46,6 @@ Other available documents
 GS_INSTALL.txt       - Installation guide
 GS_RELEASE_NOTES.txt - Release Notes
 README.txt           - Description, License notes, description of prerequisites and installation procedure
-help/*.hml           - Html help files displayed inside the application
 
 
 User guide

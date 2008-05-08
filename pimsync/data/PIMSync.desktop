@@ -1,0 +1,11 @@
+[Translation]
+File=pimsync-nct
+Context=PIMSync
+
+[Desktop Entry]
+Comment[]=PIM synchronization tool
+Exec=pimsync
+Icon=pimsync/PIMSync
+Type=Application
+Name[]=PIM Synchronisation
+MimeType="application/vnd.trolltech-qsp-xml"

@@ -5,12 +5,12 @@
 echo "Executing x86 build script"
 
 # Check if we already built for this target, run clean.sh to reset everything.
-if [ -d x86/lib/ ]; then
+if [ -d lib/ ]; then
 	echo "Target already built, done executing x86 build script"
 	exit 0; 
 fi
 
-DIR_PREFIX=$PWD/x86
+DIR_PREFIX=$PWD
 
 rm -rf curl-7.18.1
 tar xjf curl-7.18.1.tar.bz2
@@ -21,8 +21,8 @@ cd curl-7.18.1
 make
 make install
 cd ..
-rm -rf x86/share
-strip x86/lib/libcurl.so.4.0.1
+rm -rf share
+strip lib/libcurl.so.4.0.1
 
 echo "Done executing x86 build script"
 exit 0

@@ -7,7 +7,7 @@ This document gives information about the steps, which have to be taken to insta
 Installation How-to
 ===================
 
-SyncZilla extensivly uses the Qt toolkit version 4.4 and the Qtopia
+PIMSync extensivly uses the Qt toolkit version 4.4 and the Qtopia
 phone edition allowing embedded development with Qt (as well as providing
 distinct phone features). Qt should be available pre-built for your platform,
 see `Trolltech Qt homepage`__ for further infos.
@@ -17,27 +17,7 @@ specific target platform, see `Trolltech Qtopia homepage`__ for further infos
 on how to extract and build it correctly.
 
 Default build scripts for libcurl and Funambol C++ Client API are provided,
-the necessray steps depend on the target platform you want to build for.
-
-Prepare and build prerequisites for a x86 target:
-
-	$ cd 3rdparty/libraries/curl/
-	$ bash build_x86.sh
-	$ cd ../funambol
-	$ bash build_x86.sh
-
-Prepare and build prerequisites for a greenphone target:
-
-	$ cd 3rdparty/libraries/curl/
-	$ bash build_gp.sh
-	$ cd ../funambol
-	$ bash build_gp.sh
-
-Notice: 
-
-    These preparations steps should not be mandatory since the repository
-    already contains pre-built binaries for those dependencies (for x86 and the 
-    greenphone platforms).
+so there are no additional steps necessary.
 
 
 To install and test with the x86 emulator (QVFb) you have to start it first:
