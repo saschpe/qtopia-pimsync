@@ -10,137 +10,132 @@
     <message>
         <location filename="src/configscreen.cpp" line="133"/>
         <source>SyncML</source>
-        <translation>SyncML</translation>
+        <translation type="obsolete">SyncML</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="35"/>
+        <location filename="src/configscreen.cpp" line="33"/>
         <source>Enter comment here</source>
         <translation>Hier Kommentar eintragen</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="36"/>
+        <location filename="src/configscreen.cpp" line="34"/>
         <source>Start sync</source>
         <translation>Starte Abgleich</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="136"/>
+        <location filename="src/configscreen.cpp" line="107"/>
         <source>Slow</source>
         <translation>Slow</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="138"/>
+        <location filename="src/configscreen.cpp" line="109"/>
         <source>Two way</source>
         <translation>Two way</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="142"/>
+        <location filename="src/configscreen.cpp" line="113"/>
         <source>One way from client</source>
         <translation>One way from client</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="140"/>
+        <location filename="src/configscreen.cpp" line="111"/>
         <source>One way from server</source>
         <translation>One way from server</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="146"/>
+        <location filename="src/configscreen.cpp" line="117"/>
         <source>Refresh from client</source>
         <translation>Refresh from client</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="144"/>
+        <location filename="src/configscreen.cpp" line="115"/>
         <source>Refresh from server</source>
         <translation>Refresh from server</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="46"/>
+        <location filename="src/configscreen.cpp" line="44"/>
         <source>Contacts</source>
         <translation>Kontakte</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="48"/>
+        <location filename="src/configscreen.cpp" line="46"/>
         <source>Tasks</source>
         <translation>Aufgaben</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="50"/>
+        <location filename="src/configscreen.cpp" line="48"/>
         <source>Appointments</source>
         <translation>Termine</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="52"/>
+        <location filename="src/configscreen.cpp" line="50"/>
         <source>Notes</source>
         <translation>Notizen</translation>
     </message>
     <message>
         <location filename="src/configscreen.cpp" line="184"/>
         <source>Http</source>
-        <translation>Http</translation>
+        <translation type="obsolete">Http</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="69"/>
+        <location filename="src/configscreen.cpp" line="62"/>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
     <message>
         <location filename="src/configscreen.cpp" line="107"/>
         <source>Type:</source>
-        <translation>Typ:</translation>
+        <translation type="obsolete">Typ:</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="79"/>
+        <location filename="src/configscreen.cpp" line="70"/>
         <source>Mode:</source>
         <translation>Modus:</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="109"/>
+        <location filename="src/configscreen.cpp" line="84"/>
         <source>Username:</source>
         <translation>Benutzer:</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="111"/>
+        <location filename="src/configscreen.cpp" line="86"/>
         <source>Password:</source>
         <translation>Passwort:</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="93"/>
+        <location filename="src/configscreen.cpp" line="88"/>
         <source>Url:</source>
         <translation>Url:</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="120"/>
+        <location filename="src/configscreen.cpp" line="93"/>
         <source>Profile</source>
         <translation>Profil</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="121"/>
+        <location filename="src/configscreen.cpp" line="94"/>
         <source>Options</source>
         <translation>Optionen</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="122"/>
+        <location filename="src/configscreen.cpp" line="95"/>
         <source>Transport</source>
         <translation>Transport</translation>
     </message>
     <message>
         <location filename="src/configscreen.cpp" line="186"/>
         <source>Bluetooth</source>
-        <translation>Bluetooth</translation>
+        <translation type="obsolete">Bluetooth</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="271"/>
+        <location filename="src/configscreen.cpp" line="182"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="272"/>
+        <location filename="src/configscreen.cpp" line="183"/>
         <source>Unable to save profile: %1</source>
         <translation>Konnte Profil nicht speichern: %1</translation>
-    </message>
-    <message>
-        <location filename="src/configscreen.cpp" line="66"/>
-        <source>Setup ...</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
