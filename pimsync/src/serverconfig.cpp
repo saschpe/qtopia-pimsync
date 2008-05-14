@@ -19,27 +19,26 @@
 **
 ****************************************************************************/
 
-#include "syncprofile.h"
+#include "serverconfig.h"
 
 #include <QtXml>
 
-SyncProfile::SyncProfile()
+ServerConfig::ServerConfig()
 	: m_saved(false)
 	, m_currentProfile()
 {
 }
 
-SyncProfile::~SyncProfile()
+ServerConfig::~ServerConfig()
 {
 	if (!m_saved)
 		save();
 }
 
-void SyncProfile::newProfile()
+void ServerConfig::newProfile()
 {
 	m_name = "New profile";
 	m_comment = "Enter a comment here";
-	m_protocol = SyncML;
 	m_mode = TwoWay;
 	m_contactsEnabled = true;
 	m_contactsLastSync = 0;
@@ -53,7 +52,6 @@ void SyncProfile::newProfile()
 	m_notesEnabled = false;
 	m_notesLastSync = 0;
 	m_notesUrl = "note";
-	m_transportType = Http;
 	m_transportUser = "guest";
 	m_transportPassword = "guest";
 	m_transportUrl = "http://localhost:8080/funambol/ds";
@@ -62,7 +60,7 @@ void SyncProfile::newProfile()
 	m_currentProfile = QContent();
 }
 
-bool SyncProfile::load(const QContent &profile)
+bool ServerConfig::load(const QContent &profile)
 {
 	m_currentProfile = profile;
 
@@ -92,15 +90,6 @@ bool SyncProfile::load(const QContent &profile)
 	if (!el.isNull()) {
 		m_comment = el.text();
 	}
-
-	el = root.firstChildElement("protocol");
-	if (!el.isNull()) {
-		if (el.text() == "SyncML")
-			m_protocol = SyncML;
-		else
-			m_protocol = SyncML;
-	} else
-		m_protocol = SyncML;
 
 	QDomElement options = root.firstChildElement("options");
 
@@ -177,18 +166,10 @@ bool SyncProfile::load(const QContent &profile)
 	// Load transport settings
 	QDomElement transport = root.firstChildElement("transport");
 	if (!transport.isNull()) {
-		QDomElement type = transport.firstChildElement("type");
-		if (type.text() == "http")
-			m_transportType = Http;
-		else if (type.text() == "bluetooth")
-			m_transportType = Bluetooth;
-		else
-			m_transportType = Http;
 		m_transportUser = transport.firstChildElement("username").text();
 		m_transportPassword = transport.firstChildElement("password").text();
 		m_transportUrl = transport.firstChildElement("url").text();
 	} else {
-		m_transportType = Http;
 		m_transportUser = "guest";
 		m_transportPassword = "guest";
 		m_transportUrl = "http://localhost:8080/funambol/ds";
@@ -198,12 +179,8 @@ bool SyncProfile::load(const QContent &profile)
 	return true;
 }
 
-bool SyncProfile::save()
+bool ServerConfig::save()
 {
-	QString protocol;
-	if (m_protocol == SyncML)
-		protocol = "SyncML";
-
 	QString mode;
 	if (m_mode == Slow)
 		mode = "slow";
@@ -220,14 +197,6 @@ bool SyncProfile::save()
 	else
 		mode = "slow";
 
-	QString transport;
-	if (m_transportType == Http)
-		transport = "http";
-	else if (m_transportType == Bluetooth)
-		transport = "bluetooth";
-	else
-		transport = "http";
-
 	// TODO: Encoding in base64 would be nice
 
 	QString xml = \
@@ -235,7 +204,6 @@ bool SyncProfile::save()
 			"<qtopiasyncprofile version=\"1.0\">\n" \
 			"  <name>" + m_name + "</name>\n" \
 			"  <comment>" + m_comment + "</comment>\n" \
-			"  <protocol>" + protocol + "</protocol>\n" \
 			"  <options>\n" \
 			"    <mode>" + mode + "</mode>\n" \
 			"    <sources>\n" \
@@ -270,7 +238,6 @@ bool SyncProfile::save()
 			"    </sources>\n" \
 			"  </options>\n" \
 			"  <transport>\n" \
-			"    <type>" + transport + "</type>\n" \
 			"    <username>" + m_transportUser + "</username>\n" \
 			"    <password>" + m_transportPassword + "</password>\n" \
 			"    <url>" + m_transportUrl + "</url>\n" \
@@ -287,121 +254,109 @@ bool SyncProfile::save()
 	return true;
 }
 
-void SyncProfile::setName(const QString &name)
+void ServerConfig::setName(const QString &name)
 {
 	m_saved = false;
 	m_name = name;
 }
 
-void SyncProfile::setComment(const QString &comment)
+void ServerConfig::setComment(const QString &comment)
 {
 	m_saved = false;
 	m_comment = comment;
 }
 
-void SyncProfile::setProtocol(Protocol protocol)
-{
-	m_saved = false;
-	m_protocol = protocol;
-}
-
-void SyncProfile::setMode(Mode mode)
+void ServerConfig::setMode(Mode mode)
 {
 	m_saved = false;
 	m_mode = mode;
 }
 
-void SyncProfile::setContactsEnabled(bool enabled)
+void ServerConfig::setContactsEnabled(bool enabled)
 {
 	m_saved = false;
 	m_contactsEnabled = enabled;
 }
 
-void SyncProfile::setContactsLastSync(unsigned int timeStamp)
+void ServerConfig::setContactsLastSync(unsigned int timeStamp)
 {
 	m_saved = false;
 	m_contactsLastSync = timeStamp;
 }
 
-void SyncProfile::setContactsUrl(const QString &url)
+void ServerConfig::setContactsUrl(const QString &url)
 {
 	m_saved = false;
 	m_contactsUrl = url;
 }
 
-void SyncProfile::setTasksEnabled(bool enabled)
+void ServerConfig::setTasksEnabled(bool enabled)
 {
 	m_saved = false;
 	m_tasksEnabled = enabled;
 }
 
-void SyncProfile::setTasksLastSync(unsigned int timeStamp)
+void ServerConfig::setTasksLastSync(unsigned int timeStamp)
 {
 	m_saved = false;
 	m_tasksLastSync = timeStamp;
 }
 
-void SyncProfile::setTasksUrl(const QString &url)
+void ServerConfig::setTasksUrl(const QString &url)
 {
 	m_saved = false;
 	m_tasksUrl = url;
 }
 
-void SyncProfile::setAppointmentsEnabled(bool enabled)
+void ServerConfig::setAppointmentsEnabled(bool enabled)
 {
 	m_saved = false;
 	m_appointmentsEnabled = enabled;
 }
 
-void SyncProfile::setAppointmentsLastSync(unsigned int timeStamp)
+void ServerConfig::setAppointmentsLastSync(unsigned int timeStamp)
 {
 	m_saved = false;
 	m_appointmentsLastSync = timeStamp;
 }
 
-void SyncProfile::setAppointmentsUrl(const QString &url)
+void ServerConfig::setAppointmentsUrl(const QString &url)
 {
 	m_saved = false;
 	m_appointmentsUrl = url;
 }
 
-void SyncProfile::setNotesEnabled(bool enabled)
+void ServerConfig::setNotesEnabled(bool enabled)
 {
 	m_saved = false;
 	m_notesEnabled = enabled;
 }
 
-void SyncProfile::setNotesLastSync(unsigned int timeStamp)
+void ServerConfig::setNotesLastSync(unsigned int timeStamp)
 {
 	m_saved = false;
 	m_notesLastSync = timeStamp;
 }
 
-void SyncProfile::setNotesUrl(const QString &url)
+void ServerConfig::setNotesUrl(const QString &url)
 {
 	m_saved = false;
 	m_notesUrl = url;
 }
 
-void SyncProfile::setTransportType(Transport transport)
-{
-	m_saved = false;
-	m_transportType = transport;
-}
-
-void SyncProfile::setTransportUser(const QString &userName)
+void ServerConfig::setTransportUser(const QString &userName)
 {
 	m_saved = false;
 	m_transportUser = userName;
 }
 
-void SyncProfile::setTransportPassword(const QString &password)
+void ServerConfig::setTransportPassword(const QString &password)
 {
 	m_saved = false;
 	m_transportPassword = password;
 }
 
-void SyncProfile::setTransportUrl(const QString &url)
+void ServerConfig::setTransportUrl(const QString &url)
 {
 	m_saved = false;
 	m_transportUrl = url;

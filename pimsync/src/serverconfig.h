@@ -19,22 +19,18 @@
 **
 ****************************************************************************/
 
-#ifndef SYNCPROFILE_H
-#define SYNCPROFILE_H
+#ifndef SERVERCONFIG_H
+#define SERVERCONFIG_H
 
 #include <QString>
 #include <QContent>
 
 /*!
- * Responsible for accessing a sync profile.
+ * Responsible for accessing a SyncML server configuration profile.
  */
-class SyncProfile
+class ServerConfig
 {
 public:
-	enum Protocol {
-		SyncML = 0x0,
-	};
-
 	enum Mode {
 		Slow = 0x0,
 		TwoWay = 0x1,
@@ -44,13 +40,8 @@ public:
 		RefreshFromClient = 0x5,
 	};
 
-	enum Transport {
-		Http = 0x0,
-		Bluetooth = 0x1,
-	};
-
-	SyncProfile();
-	virtual ~SyncProfile();
+	ServerConfig();
+	virtual ~ServerConfig();
 
 	void newProfile();
 	bool load(const QContent &profile);
@@ -62,9 +53,6 @@ public:
 
 	void setComment(const QString &comment);
 	QString comment() const { return m_comment; }
-
-	void setProtocol(Protocol protocol);
-	Protocol protocol() const { return m_protocol; }
 
 	void setMode(Mode mode);
 	Mode mode() const { return m_mode; }
@@ -105,9 +93,6 @@ public:
 	void setNotesUrl(const QString& url);
 	QString notesUrl() const { return m_notesUrl; }
 
-	void setTransportType(Transport transport);
-	Transport transportType() const { return m_transportType; }
-
 	void setTransportUser(const QString &user);
 	QString transportUser() const { return m_transportUser; }
 
@@ -123,7 +108,6 @@ private:
 
 	QString m_name;
 	QString m_comment;
-	Protocol m_protocol;
 	Mode m_mode;
 
 	bool m_contactsEnabled;
@@ -142,10 +126,9 @@ private:
 	unsigned int m_notesLastSync;
 	QString m_notesUrl;
 
-	Transport m_transportType;
 	QString m_transportUser;
 	QString m_transportPassword;
 	QString m_transportUrl;
 };
 
-#endif // SYNCPROFILE_H
+#endif

@@ -31,7 +31,7 @@ class QDocumentSelector;
 class QWaitWidget;
 class ConfigScreen;
 class QtopiaSyncClient;
-class SyncProfile;
+class ServerConfig;
 class SyncThread;
 
 class PimSync : public QStackedWidget
@@ -63,16 +63,16 @@ private:
 	ConfigScreen *configScreen();
 	QTextEdit *logScreen();
 	QtopiaSyncClient *syncClient();
-	SyncProfile *profile();
+	ServerConfig *profile();
 
 	QDocumentSelector *m_mainScreen;
 	ConfigScreen *m_configScreen;
 	QTextEdit *m_logScreen;
 	QtopiaSyncClient *m_syncClient;
-	SyncProfile *m_profile;
+	ServerConfig *m_profile;
 
 	QWaitWidget *m_waitWidget;
 	SyncThread *m_syncThread;
 };
 
-#endif // PIMSYNC_H
+#endif

@@ -21,7 +21,7 @@
 
 #include "pimsync.h"
 #include "configscreen.h"
-#include "syncprofile.h"
+#include "serverconfig.h"
 #include "syncml/syncclient.h"
 
 #include <QtGui>
@@ -256,10 +256,10 @@ QtopiaSyncClient *PimSync::syncClient()
 	return m_syncClient;
 }
 
-SyncProfile *PimSync::profile()
+ServerConfig *PimSync::profile()
 {
 	if (!m_profile) {
-		m_profile = new SyncProfile();
+		m_profile = new ServerConfig();
 	}
 	return m_profile;
 }

@@ -32,6 +32,7 @@ deployment.
 
 pimsync/src/                 - Complete application source code
 pimsync/data/                - Help files, .desktop file and other content used by the application
+pkg/                         - Generated QPK packages will be stored here
 3rdparty/                    - Necessary dependencies (see GS_INSTALL.txt for details)
 3rdparty/libraries/funambol/ - Funambol C++ client API (SyncML protocol implementation)
 3rdparty/libraries/curl/     - Libcurl HTTP transport layer implementation (Funambol dependency)

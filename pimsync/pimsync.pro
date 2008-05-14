@@ -8,7 +8,7 @@ AVAILABLE_LANGUAGES=en_US de fr
 LANGUAGES=$$AVAILABLE_LANGUAGES
 
 HEADERS += src/pimsync.h \
-           src/syncprofile.h \
+           src/serverconfig.h \
            src/configscreen.h \
            src/syncml/syncclient.h \
            src/syncml/abstractsyncsource.h \
@@ -18,12 +18,12 @@ HEADERS += src/pimsync.h \
            src/syncml/notesyncsource.h
 SOURCES += src/main.cpp \
            src/pimsync.cpp \
-           src/syncprofile.cpp \
+           src/serverconfig.cpp \
            src/configscreen.cpp \
            src/syncml/syncclient.cpp \
            src/syncml/abstractsyncsource.cpp
 
-desktop.files    = data/PIMSync.desktop
+desktop.files    = data/PimSync.desktop
 desktop.path     = /apps/Applications
 desktop.trtarget = pimsync-nct
 desktop.hint     = desktop nct

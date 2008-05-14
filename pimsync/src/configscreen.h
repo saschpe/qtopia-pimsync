@@ -25,13 +25,12 @@
 #include <QTabWidget>
 #include <QContent>
 
-class SyncProfile;
 class QLineEdit;
 class QCheckBox;
 class QComboBox;
 class QTextEdit;
 class QPushButton;
-class QStackedWidget;
+class ServerConfig;
 
 class ConfigScreen : public QTabWidget
 {
@@ -40,7 +39,7 @@ class ConfigScreen : public QTabWidget
 public:
 	ConfigScreen(QWidget *parent = 0);
 
-	void setProfile(SyncProfile *profile);
+	void setProfile(ServerConfig *profile);
 
 signals:
 	void syncPressed();
@@ -50,15 +49,13 @@ protected:
 
 private slots:
 	void slotSyncPressed();
-	void slotTransportTypeChanged();
 
 private:
 	void saveProfile();
 
-	SyncProfile *m_profile;
+	ServerConfig *m_profile;
 
 	QLineEdit *m_name;
-	QComboBox *m_protocol;
 	QTextEdit *m_comment;
 	QPushButton *m_sync;
 
@@ -72,15 +69,9 @@ private:
 	QCheckBox *m_notes;
 	QLineEdit *m_notesUrl;
 
-	QComboBox *m_transportType;
 	QLineEdit *m_transportUserName;
 	QLineEdit *m_transportPassword;	
-	QStackedWidget *m_transportTypeOptions;
-	QWidget *m_transportTypeHttpWidget;
-	QWidget *m_transportTypeBluetoothWidget;
-	QTextEdit *m_transportTypeHttpUrl;
-	QPushButton *m_transportTypeBluetoothConfig;
+	QTextEdit *m_transportUrl;
 };
 
-#endif // CONFIGSCREEN_H
-
+#endif

@@ -20,7 +20,7 @@
 ****************************************************************************/
 
 #include "syncclient.h"
-#include "../syncprofile.h"
+#include "../serverconfig.h"
 #include "contactsyncsource.h"
 #include "appointmentsyncsource.h"
 #include "tasksyncsource.h"
@@ -107,7 +107,7 @@ QtopiaSyncClient::~QtopiaSyncClient()
 		delete m_managerConfig;
 }
 
-bool QtopiaSyncClient::sync(SyncProfile *profile)
+bool QtopiaSyncClient::sync(ServerConfig *profile)
 {
 	m_managerConfig->getAccessConfig().setUsername(profile->transportUser().toAscii());
 	m_managerConfig->getAccessConfig().setPassword(profile->transportPassword().toAscii());
@@ -116,12 +116,12 @@ bool QtopiaSyncClient::sync(SyncProfile *profile)
 	// This is more or less a direkt mapping of supported sync modes
 	AbstractSyncSourceConfig::Mode mode = AbstractSyncSourceConfig::TwoWay;
 	switch (profile->mode()) {
-		case SyncProfile::Slow:					mode = AbstractSyncSourceConfig::Slow;				break;
-		case SyncProfile::TwoWay:				mode = AbstractSyncSourceConfig::TwoWay;			break;
-		case SyncProfile::OneWayFromServer:		mode = AbstractSyncSourceConfig::OneWayFromServer;	break;
-		case SyncProfile::OneWayFromClient:		mode = AbstractSyncSourceConfig::OneWayFromClient;	break;
-		case SyncProfile::RefreshFromServer:	mode = AbstractSyncSourceConfig::RefreshFromServer;	break;
-		case SyncProfile::RefreshFromClient:	mode = AbstractSyncSourceConfig::RefreshFromClient;	break;
+		case ServerConfig::Slow:					mode = AbstractSyncSourceConfig::Slow;				break;
+		case ServerConfig::TwoWay:				mode = AbstractSyncSourceConfig::TwoWay;			break;
+		case ServerConfig::OneWayFromServer:		mode = AbstractSyncSourceConfig::OneWayFromServer;	break;
+		case ServerConfig::OneWayFromClient:		mode = AbstractSyncSourceConfig::OneWayFromClient;	break;
+		case ServerConfig::RefreshFromServer:	mode = AbstractSyncSourceConfig::RefreshFromServer;	break;
+		case ServerConfig::RefreshFromClient:	mode = AbstractSyncSourceConfig::RefreshFromClient;	break;
 	}
 
 	int index = 0;

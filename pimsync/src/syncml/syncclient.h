@@ -27,9 +27,9 @@
 
 #include <QObject>
 
-class SyncProfile;
-class SyncManagerConfig;
 class QString;
+class ServerConfig;
+class SyncManagerConfig;
 
 /*!
  * This is the main class which looks at the configuration,
@@ -47,7 +47,7 @@ public:
 	 * Trigger the sync with a remote server. Make sure that everything
 	 * was configured correctly or the sync may fail.
 	 */
-	bool sync(SyncProfile *profile);
+	bool sync(ServerConfig *profile);
 
 	QString results();
 	QString error();
@@ -58,4 +58,4 @@ private:
 	SyncManagerConfig *m_managerConfig;
 };
 
-#endif // QTOPIASYNCCLIENT_H
+#endif
