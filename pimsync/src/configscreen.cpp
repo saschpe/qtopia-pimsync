@@ -116,14 +116,15 @@ void ConfigScreen::setProfile(ServerConfig *profile)
 	else if(m_profile->mode() == ServerConfig::RefreshFromClient)
 		m_mode->setCurrentIndex(m_mode->findText(tr("Refresh from client")));
 
-	m_contacts->setChecked(m_profile->contactsEnabled());
-	m_contactsUrl->setText(m_profile->contactsUrl());
-	m_tasks->setChecked(m_profile->tasksEnabled());
-	m_tasksUrl->setText(m_profile->tasksUrl());
-	m_appointments->setChecked(m_profile->appointmentsEnabled());
-	m_appointmentsUrl->setText(m_profile->appointmentsUrl());
-	m_notes->setChecked(m_profile->notesEnabled());
-	m_notesUrl->setText(m_profile->notesUrl());
+	m_contacts->setChecked(m_profile->sourceEnabled(ServerConfig::Contacts));
+	m_tasks->setChecked(m_profile->sourceEnabled(ServerConfig::Tasks));
+	m_appointments->setChecked(m_profile->sourceEnabled(ServerConfig::Appointments));
+	m_notes->setChecked(m_profile->sourceEnabled(ServerConfig::Notes));
+
+	m_contactsUrl->setText(m_profile->sourceUrl(ServerConfig::Contacts));
+	m_tasksUrl->setText(m_profile->sourceUrl(ServerConfig::Tasks));
+	m_appointmentsUrl->setText(m_profile->sourceUrl(ServerConfig::Appointments));
+	m_notesUrl->setText(m_profile->sourceUrl(ServerConfig::Notes));
 
 	m_transportUserName->setText(m_profile->transportUser());
 	m_transportPassword->setText(m_profile->transportPassword());
@@ -164,16 +165,16 @@ void ConfigScreen::saveProfile()
 	else if (m_mode->currentText() == "Refresh from client")
 		m_profile->setMode(ServerConfig::RefreshFromClient);
 
-	m_profile->setContactsEnabled(m_contacts->isChecked());
-	m_profile->setContactsUrl(m_contactsUrl->text());
-	m_profile->setTasksEnabled(m_tasks->isChecked());
-	m_profile->setTasksUrl(m_tasksUrl->text());
-	m_profile->setAppointmentsEnabled(m_appointments->isChecked());
-	m_profile->setAppointmentsUrl(m_appointmentsUrl->text());
-	m_profile->setNotesEnabled(m_notes->isChecked());
-	m_profile->setNotesUrl(m_notesUrl->text());
-	m_profile->setNotesEnabled(m_notes->isChecked());
-	m_profile->setNotesUrl(m_notesUrl->text());
+	m_profile->setSourceEnabled(ServerConfig::Contacts, m_contacts->isChecked());
+	m_profile->setSourceEnabled(ServerConfig::Tasks, m_tasks->isChecked());
+	m_profile->setSourceEnabled(ServerConfig::Appointments, m_appointments->isChecked());
+	m_profile->setSourceEnabled(ServerConfig::Notes, m_notes->isChecked());
+
+	m_profile->setSourceUrl(ServerConfig::Contacts, m_contactsUrl->text());
+	m_profile->setSourceUrl(ServerConfig::Tasks, m_tasksUrl->text());
+	m_profile->setSourceUrl(ServerConfig::Appointments, m_appointmentsUrl->text());
+	m_profile->setSourceUrl(ServerConfig::Notes, m_notesUrl->text());
+
 	m_profile->setTransportUser(m_transportUserName->text());
 	m_profile->setTransportPassword(m_transportPassword->text());
 	m_profile->setTransportUrl(m_transportUrl->toPlainText());

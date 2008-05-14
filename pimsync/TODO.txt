@@ -1,5 +1,2 @@
 * Have notes synced, the application has already complete support for that, but it needs some
   sort of support from Qtopia platform (see QPimModel APIs for details).
-
-* Tweak configuration managment: Change to base64 encoding and use QXmlStreamReader for faster
-  profile loading.

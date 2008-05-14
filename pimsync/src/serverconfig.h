@@ -40,6 +40,13 @@ public:
 		RefreshFromClient = 0x5,
 	};
 
+	enum Source {
+		Contacts = 0x0,
+		Tasks = 0x1,
+		Appointments = 0x2,
+		Notes = 0x3
+	};
+
 	ServerConfig();
 	virtual ~ServerConfig();
 
@@ -56,42 +63,15 @@ public:
 
 	void setMode(Mode mode);
 	Mode mode() const { return m_mode; }
-	
-	void setContactsEnabled(bool enabled);
-	bool contactsEnabled() const { return m_contactsEnabled; }
 
-	void setContactsLastSync(unsigned int timeStamp);
-	unsigned int contactsLastSync() const { return m_contactsLastSync; }
+	void setSourceEnabled(Source source, bool enabled);
+	bool sourceEnabled(Source source) const;
 
-	void setContactsUrl(const QString &url);
-	QString contactsUrl() const { return m_contactsUrl; }
+	void setSourceLastSync(Source source, unsigned int timeStamp);
+	unsigned int sourceLastSync(Source source) const;
 
-	void setTasksEnabled(bool enabled);
-	bool tasksEnabled() const { return m_tasksEnabled; }
-
-	void setTasksLastSync(unsigned int timeStamp);
-	unsigned int tasksLastSync() const { return m_tasksLastSync; }
-
-	void setTasksUrl(const QString &url);
-	QString tasksUrl() const { return m_tasksUrl; }
-
-	void setAppointmentsEnabled(bool enabled);
-	bool appointmentsEnabled() const { return m_appointmentsEnabled; }
-
-	void setAppointmentsLastSync(unsigned int timeStamp);
-	unsigned int appointmentsLastSync() const { return m_appointmentsLastSync; }
-
-	void setAppointmentsUrl(const QString &url);
-	QString appointmentsUrl() const { return m_appointmentsUrl; }
-
-	void setNotesEnabled(bool enabled);
-	bool notesEnabled() const { return m_notesEnabled; }
-
-	void setNotesLastSync(unsigned int timeStamp);
-	unsigned int notesLastSync() const { return m_notesLastSync; }
-
-	void setNotesUrl(const QString& url);
-	QString notesUrl() const { return m_notesUrl; }
+	void setSourceUrl(Source source, const QString &url);
+	QString sourceUrl(Source source) const;
 
 	void setTransportUser(const QString &user);
 	QString transportUser() const { return m_transportUser; }

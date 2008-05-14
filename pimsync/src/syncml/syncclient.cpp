@@ -128,39 +128,35 @@ bool QtopiaSyncClient::sync(ServerConfig *profile)
 	SyncSource *sourcesArray[] = {NULL, NULL, NULL, NULL, NULL};	// count sources + 1 -> '\0' terminated array
 
 	ContactSyncSource *contactSource = NULL;
-	if (profile->contactsEnabled()) {
-		ContactSyncSourceConfig *contactConfig = new ContactSyncSourceConfig(mode, profile->contactsLastSync(), profile->contactsUrl().toAscii());
+	if (profile->sourceEnabled(ServerConfig::Contacts)) {
+		ContactSyncSourceConfig *contactConfig = new ContactSyncSourceConfig(mode, profile->sourceLastSync(ServerConfig::Contacts), profile->sourceUrl(ServerConfig::Contacts).toAscii());
 		contactSource = new ContactSyncSource(contactConfig, m_managerConfig);
 		sourcesArray[index++] = contactSource;
 	}
 	TaskSyncSource *taskSource = NULL;
-	if (profile->tasksEnabled()) {
-		TaskSyncSourceConfig *taskConfig = new TaskSyncSourceConfig(mode, profile->tasksLastSync(), profile->tasksUrl().toAscii());
+	if (profile->sourceEnabled(ServerConfig::Tasks)) {
+		TaskSyncSourceConfig *taskConfig = new TaskSyncSourceConfig(mode, profile->sourceLastSync(ServerConfig::Tasks), profile->sourceUrl(ServerConfig::Tasks).toAscii());
 		taskSource = new TaskSyncSource(taskConfig, m_managerConfig);
 		sourcesArray[index++] = taskSource;
 	}
 	AppointmentSyncSource *appointmentSource = NULL;
-	if (profile->appointmentsEnabled()) {
-		AppointmentSyncSourceConfig *appointmentConfig = new AppointmentSyncSourceConfig(mode, profile->appointmentsLastSync(), profile->appointmentsUrl().toAscii());
+	if (profile->sourceEnabled(ServerConfig::Appointments)) {
+		AppointmentSyncSourceConfig *appointmentConfig = new AppointmentSyncSourceConfig(mode, profile->sourceLastSync(ServerConfig::Appointments), profile->sourceUrl(ServerConfig::Appointments).toAscii());
 		appointmentSource = new AppointmentSyncSource(appointmentConfig, m_managerConfig);
 		sourcesArray[index++] = appointmentSource;
 	}
 	NoteSyncSource *noteSource = NULL;
-	if (profile->notesEnabled()) {
-		NoteSyncSourceConfig *noteConfig = new NoteSyncSourceConfig(mode, profile->notesLastSync(), profile->notesUrl().toAscii());
+	if (profile->sourceEnabled(ServerConfig::Notes)) {
+		NoteSyncSourceConfig *noteConfig = new NoteSyncSourceConfig(mode, profile->sourceLastSync(ServerConfig::Notes), profile->sourceUrl(ServerConfig::Notes).toAscii());
 		noteSource = new NoteSyncSource(noteConfig, m_managerConfig);
 		sourcesArray[index++] = noteSource;
 	}
 
 	if (SyncClient::sync(*m_managerConfig, sourcesArray) == 0) {
-		if (profile->contactsEnabled())
-			profile->setContactsLastSync(contactSource->lastSync());
-		if (profile->tasksEnabled())
-			profile->setTasksLastSync(taskSource->lastSync());
-		if (profile->appointmentsEnabled())
-			profile->setAppointmentsLastSync(appointmentSource->lastSync());
-		if (profile->notesEnabled())
-			profile->setNotesLastSync(noteSource->lastSync());
+		if (profile->sourceEnabled(ServerConfig::Contacts))		profile->setSourceLastSync(ServerConfig::Contacts, contactSource->lastSync());
+		if (profile->sourceEnabled(ServerConfig::Tasks))		profile->setSourceLastSync(ServerConfig::Tasks, taskSource->lastSync());
+		if (profile->sourceEnabled(ServerConfig::Appointments))	profile->setSourceLastSync(ServerConfig::Appointments, appointmentSource->lastSync());
+		if (profile->sourceEnabled(ServerConfig::Notes))		profile->setSourceLastSync(ServerConfig::Notes, noteSource->lastSync());
 		profile->save();
 		return true;
 	}
