@@ -85,8 +85,8 @@ ConfigScreen::ConfigScreen(QWidget *parent)
 	transportLayout->addWidget(m_transportUserName, 1, 1);
 	transportLayout->addWidget(new QLabel(tr("Password:")), 2, 0);
 	transportLayout->addWidget(m_transportPassword, 2, 1);
-	transportLayout->addWidget(new QLabel(tr("Url:")), 3, 0);
-	transportLayout->addWidget(m_transportUrl, 3, 1);
+	transportLayout->addWidget(new QLabel(tr("Server URL:")), 3, 0);
+	transportLayout->addWidget(m_transportUrl, 4, 0, 1, 2);
 	QWidget *transportTab = new QWidget();
 	transportTab->setLayout(transportLayout);
 
