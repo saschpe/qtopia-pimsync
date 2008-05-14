@@ -57,12 +57,13 @@ ConfigScreen::ConfigScreen(QWidget *parent)
 
 	m_transportType = new QComboBox(this);
 	m_transportType->addItem(tr("Http"));
-	// TODO: Uncomment the next line if bluetooth support was added:
-	//m_transportType->addItem(tr("Bluetooth"));
+	m_transportType->addItem(tr("Bluetooth"));
+	connect(m_transportType, SIGNAL(currentIndexChanged(int)), this, SLOT(slotTransportTypeChanged()));
 	m_transportUserName = new QLineEdit(this);
 	m_transportPassword = new QLineEdit(this);
 	m_transportPassword->setEchoMode(QLineEdit::Password);
-	m_transportUrl = new QTextEdit(this);
+	m_transportTypeHttpUrl = new QTextEdit(this);
+	m_transportTypeBluetoothConfig = new QPushButton(tr("Setup ..."), this);
 
 	QGridLayout *profileLayout = new QGridLayout();
 	profileLayout->addWidget(new QLabel(tr("Name:")), 0, 0);
@@ -88,6 +89,20 @@ ConfigScreen::ConfigScreen(QWidget *parent)
 	QWidget *syncTab = new QWidget();
 	syncTab->setLayout(syncLayout);
 
+	QGridLayout *transportTypeHttpLayout = new QGridLayout();
+	transportTypeHttpLayout->addWidget(new QLabel(tr("Url:")), 0, 0);
+	transportTypeHttpLayout->addWidget(m_transportTypeHttpUrl, 0, 1);
+	m_transportTypeHttpWidget = new QWidget();
+	m_transportTypeHttpWidget->setLayout(transportTypeHttpLayout);
+	QGridLayout *transportTypeBluetoothLayout = new QGridLayout();
+	transportTypeBluetoothLayout->addWidget(m_transportTypeBluetoothConfig, 0, 0);
+	m_transportTypeBluetoothWidget = new QWidget();
+	m_transportTypeBluetoothWidget->setLayout(transportTypeBluetoothLayout);
+
+	m_transportTypeOptions = new QStackedWidget();
+	m_transportTypeOptions->addWidget(m_transportTypeHttpWidget);
+	m_transportTypeOptions->addWidget(m_transportTypeBluetoothWidget);
+
 	QGridLayout *transportLayout = new QGridLayout();
 	transportLayout->addWidget(new QLabel(tr("Type:")), 0, 0);
 	transportLayout->addWidget(m_transportType, 0, 1);
@@ -95,8 +110,10 @@ ConfigScreen::ConfigScreen(QWidget *parent)
 	transportLayout->addWidget(m_transportUserName, 1, 1);
 	transportLayout->addWidget(new QLabel(tr("Password:")), 2, 0);
 	transportLayout->addWidget(m_transportPassword, 2, 1);
-	transportLayout->addWidget(new QLabel(tr("Url:")), 3, 0);
-	transportLayout->addWidget(m_transportUrl, 3, 1);
+	QFrame *spacer = new QFrame();
+	spacer->setFrameStyle(QFrame::HLine);
+	transportLayout->addWidget(spacer, 3, 0, 1, 2);
+	transportLayout->addWidget(m_transportTypeOptions, 4, 0, 1, 2);
 	QWidget *transportTab = new QWidget();
 	transportTab->setLayout(transportLayout);
 
@@ -143,7 +160,7 @@ void ConfigScreen::setProfile(SyncProfile *profile)
 		m_transportType->setCurrentIndex(m_transportType->findText(tr("Bluetooth")));
 	m_transportUserName->setText(m_profile->transportUser());
 	m_transportPassword->setText(m_profile->transportPassword());
-	m_transportUrl->setText(m_profile->transportUrl());
+	m_transportTypeHttpUrl->setText(m_profile->transportUrl());
 
 	setCurrentIndex(0);
 	m_sync->setFocus();
@@ -160,6 +177,15 @@ void ConfigScreen::slotSyncPressed()
 {
 	saveProfile();
 	emit syncPressed();
+}
+
+void ConfigScreen::slotTransportTypeChanged()
+{
+	if (m_transportType->currentText() == tr("Http")) {
+		m_transportTypeOptions->setCurrentWidget(m_transportTypeHttpWidget);
+	} else if (m_transportType->currentText() == tr("Bluetooth")) {
+		m_transportTypeOptions->setCurrentWidget(m_transportTypeBluetoothWidget);
+	}
 }
 
 void ConfigScreen::saveProfile()
@@ -198,7 +224,7 @@ void ConfigScreen::saveProfile()
 		m_profile->setTransportType(SyncProfile::Bluetooth);
 	m_profile->setTransportUser(m_transportUserName->text());
 	m_profile->setTransportPassword(m_transportPassword->text());
-	m_profile->setTransportUrl(m_transportUrl->toPlainText());
+	m_profile->setTransportUrl(m_transportTypeHttpUrl->toPlainText());
 
 	if (!m_profile->save()) {
 		QMessageBox::critical(this, tr("Error"), 
@@ -239,7 +265,7 @@ void ConfigScreen::saveProfile()
 		m_profile->setTransportType(SyncProfile::Bluetooth);
 	m_profile->setTransportUser(m_transportUserName->text());
 	m_profile->setTransportPassword(m_transportPassword->text());
-	m_profile->setTransportUrl(m_transportUrl->toPlainText());
+	m_profile->setTransportUrl(m_transportTypeHttpUrl->toPlainText());
 
 	if (!m_profile->save()) {
 		QMessageBox::critical(this, tr("Error"), 

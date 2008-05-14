@@ -31,6 +31,7 @@ class QCheckBox;
 class QComboBox;
 class QTextEdit;
 class QPushButton;
+class QStackedWidget;
 
 class ConfigScreen : public QTabWidget
 {
@@ -49,6 +50,7 @@ protected:
 
 private slots:
 	void slotSyncPressed();
+	void slotTransportTypeChanged();
 
 private:
 	void saveProfile();
@@ -73,7 +75,11 @@ private:
 	QComboBox *m_transportType;
 	QLineEdit *m_transportUserName;
 	QLineEdit *m_transportPassword;	
-	QTextEdit *m_transportUrl;
+	QStackedWidget *m_transportTypeOptions;
+	QWidget *m_transportTypeHttpWidget;
+	QWidget *m_transportTypeBluetoothWidget;
+	QTextEdit *m_transportTypeHttpUrl;
+	QPushButton *m_transportTypeBluetoothConfig;
 };
 
 #endif // CONFIGSCREEN_H

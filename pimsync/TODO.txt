@@ -1,12 +1,7 @@
 
-* Deployment as qpk package is currently not possible due to Qtopia PIM library limitations.
-  This should be addressed in upcomming releases.
-
 * Add OBEX sending/receiving capabilities (in conjunction with Bluetooth support). Bluetooth
   stuff is already in Qtopia platform and ready to use. The OBEX functionality should be added
-  in the Funambol 3rd-party library since the HTTP transport is implemented there.
-
-* Add unit tests
+  in the Funambol 3rd-party library since the HTTP transport is also implemented there.
 
 * Have notes synced, the application has already complete support for that, but it needs some
   sort of support from Qtopia platform (see QPimModel APIs for details).

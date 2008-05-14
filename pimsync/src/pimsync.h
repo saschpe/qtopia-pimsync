@@ -37,6 +37,7 @@ class SyncThread;
 class PimSync : public QStackedWidget
 {
 	Q_OBJECT
+	friend class SyncThread;
 	
 public:
 	PimSync(QWidget *parent = 0, Qt::WindowFlags flags = 0);
@@ -72,8 +73,6 @@ private:
 
 	QWaitWidget *m_waitWidget;
 	SyncThread *m_syncThread;
-
-	friend class SyncThread;
 };
 
 #endif // PIMSYNC_H
