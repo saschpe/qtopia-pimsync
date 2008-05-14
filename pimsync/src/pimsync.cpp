@@ -90,16 +90,16 @@ void PimSync::setUp()
 	 */
 	QSettings cfg("Trolltech", "PimSync");
 
-	QString firstRun = cfg.value("General/firstRun").toString();
+	QString firstRun = cfg.value("General/FirstRun").toString();
 	if (firstRun.isNull() || firstRun == "true") {
 		// NOTE: Do first time start up customization here or provide the corresponding settings file
 		addDefaultProfiles();
-		cfg.setValue("General/createDefaultsWhenEmpty","true");
-		cfg.setValue("General/firstRun", "false");
+		cfg.setValue("General/CreateDefaultsWhenEmpty","true");
+		cfg.setValue("General/FirstRun", "false");
 	} else if (mainScreen()->documents().isEmpty()) {
-		if (cfg.value("General/createDefaultsWhenEmpty").toBool()) {
+		if (cfg.value("General/CreateDefaultsWhenEmpty").toBool()) {
 			addDefaultProfiles();
-			cfg.setValue("General/firstRun", "false");
+			cfg.setValue("General/FirstRun", "false");
 		}
 	}
 	// Don't forget to disconnect this slot otherwise it's called every time we change contents

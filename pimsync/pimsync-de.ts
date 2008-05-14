@@ -104,8 +104,8 @@
     </message>
     <message>
         <location filename="src/configscreen.cpp" line="88"/>
-        <source>Url:</source>
-        <translation>Url:</translation>
+        <source>Server URL:</source>
+        <translation>Server URL:</translation>
     </message>
     <message>
         <location filename="src/configscreen.cpp" line="93"/>
