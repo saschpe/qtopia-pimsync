@@ -4,6 +4,7 @@ qtopia_project(subdirs)
 # following features are available:
 #
 #     - PIM synchronisation over SyncML (OMA DS)
+#
 
 
 # The 3rd-party dependencies for all the components are located here.

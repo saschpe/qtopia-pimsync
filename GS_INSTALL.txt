@@ -1,7 +1,8 @@
 Installation guide
 ==================
 
-This document gives information about the steps, which have to be taken to install (or integrate) the partner solution into Qtopia.
+This document gives information about the steps, which have to be taken to install
+(or integrate) the partner solution into Qtopia.
 
 
 Installation How-to
