@@ -20,3 +20,7 @@ pkg/
 3rdparty/libraries/funambol/shared
 
 pimsync/pimsync
+pimsync/translatables.pro
+pimsync/translatables2.pro
+pimsync/pimsync-nct-en_US.ts
+pimsync/pimsync-en_US.ts

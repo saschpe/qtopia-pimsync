@@ -25,6 +25,10 @@
 #include <QXmlStreamReader>
 #include <QXmlStreamWriter>
 
+/*!
+	\brief This class reads PimSync server configuration files.
+
+*/
 class ServerConfigXmlReader : public QXmlStreamReader
 {
 public:
@@ -229,6 +233,7 @@ bool ServerConfig::load(const QContent &profile)
 bool ServerConfig::save()
 {
 	QBuffer buffer;
+	buffer.open(QBuffer::ReadWrite);
 	QXmlStreamWriter xmlsw;
 	xmlsw.setDevice(&buffer);
 	xmlsw.setAutoFormatting(true);
@@ -286,10 +291,13 @@ bool ServerConfig::save()
 
 	xmlsw.writeEndDocument();
 
+	// Note: Use this MimeType for testing (you can then edit the file with the 'Notes' app)
+	//m_currentProfile.setType("text/xml");
 	m_currentProfile.setType("application/vnd.trolltech-qsp-xml");
 	m_currentProfile.setName(m_name);
 	if (!m_currentProfile.save(buffer.data()))
 		return false;
+	buffer.close();
 	if (!m_currentProfile.commit())
 		return false;
 	m_saved = true;

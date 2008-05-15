@@ -128,12 +128,12 @@
         <translation type="obsolete">Bluetooth</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="182"/>
+        <location filename="src/configscreen.cpp" line="183"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="src/configscreen.cpp" line="183"/>
+        <location filename="src/configscreen.cpp" line="184"/>
         <source>Unable to save profile: %1</source>
         <translation>Enregistration du profil n&apos;est pas possible: %1</translation>
     </message>
@@ -141,36 +141,36 @@
 <context>
     <name>PimSync</name>
     <message>
-        <location filename="src/pimsync.cpp" line="60"/>
+        <location filename="src/pimsync.cpp" line="68"/>
         <source>Syncing ...</source>
         <translation>Synchronisée ...</translation>
     </message>
     <message>
-        <location filename="src/pimsync.cpp" line="114"/>
+        <location filename="src/pimsync.cpp" line="120"/>
         <source>Loading profile &quot;%1&quot;: </source>
         <translation>Charger le profil &quot;%1&quot;: </translation>
     </message>
     <message>
-        <location filename="src/pimsync.cpp" line="116"/>
+        <location filename="src/pimsync.cpp" line="122"/>
         <source>Ok
 </source>
         <translation>Ok
 </translation>
     </message>
     <message>
-        <location filename="src/pimsync.cpp" line="117"/>
+        <location filename="src/pimsync.cpp" line="123"/>
         <source>Sync with server: </source>
         <translation>Sync avec le serveur: </translation>
     </message>
     <message>
-        <location filename="src/pimsync.cpp" line="122"/>
+        <location filename="src/pimsync.cpp" line="128"/>
         <source>Failed
 </source>
         <translation>Manquée
 </translation>
     </message>
     <message>
-        <location filename="src/pimsync.cpp" line="128"/>
+        <location filename="src/pimsync.cpp" line="136"/>
         <source>Ok
 
 </source>
@@ -179,7 +179,7 @@
 </translation>
     </message>
     <message>
-        <location filename="src/pimsync.cpp" line="131"/>
+        <location filename="src/pimsync.cpp" line="139"/>
         <source>Failed
 
 </source>
@@ -188,7 +188,7 @@
 </translation>
     </message>
     <message>
-        <location filename="src/pimsync.cpp" line="133"/>
+        <location filename="src/pimsync.cpp" line="141"/>
         <source>
 
 Please check your configuration
@@ -199,51 +199,59 @@ Réviser vôtre configuration s&apos;il vouz plaît
 </translation>
     </message>
     <message>
-        <location filename="src/pimsync.cpp" line="152"/>
+        <location filename="src/pimsync.cpp" line="159"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="src/pimsync.cpp" line="153"/>
+        <location filename="src/pimsync.cpp" line="160"/>
         <source>Unable to edit profile: %1</source>
         <translation>Èditer le profil n&apos;est pas possible: %1</translation>
     </message>
     <message>
-        <location filename="src/pimsync.cpp" line="245"/>
+        <location filename="src/pimsync.cpp" line="253"/>
         <source>Back</source>
         <translation>Retour</translation>
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="src/serverconfig.cpp" line="92"/>
+        <source>The file is not a server configuration file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QtopiaSyncClient</name>
     <message>
-        <location filename="src/syncml/syncclient.cpp" line="185"/>
+        <location filename="src/syncml/syncclient.cpp" line="181"/>
         <source>Results for </source>
         <translation>Résultats pour</translation>
     </message>
     <message>
-        <location filename="src/syncml/syncclient.cpp" line="186"/>
+        <location filename="src/syncml/syncclient.cpp" line="182"/>
         <source>  client   server
 </source>
         <translation>  client   serveur
 </translation>
     </message>
     <message>
-        <location filename="src/syncml/syncclient.cpp" line="188"/>
+        <location filename="src/syncml/syncclient.cpp" line="184"/>
         <source> new
 </source>
         <translation> nouveau
 </translation>
     </message>
     <message>
-        <location filename="src/syncml/syncclient.cpp" line="190"/>
+        <location filename="src/syncml/syncclient.cpp" line="186"/>
         <source> modified
 </source>
         <translation> modifié
 </translation>
     </message>
     <message>
-        <location filename="src/syncml/syncclient.cpp" line="192"/>
+        <location filename="src/syncml/syncclient.cpp" line="188"/>
         <source> deleted
 
 </source>

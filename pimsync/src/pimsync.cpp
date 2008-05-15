@@ -33,6 +33,10 @@
 #include <QWaitWidget>
 #include <QThread>
 
+/*!
+	\brief This class provides threaded means to start and stop the sync process.
+	
+*/
 class SyncThread : public QThread
 {
 	Q_OBJECT
@@ -42,6 +46,11 @@ public:
 
 signals:
 	void syncFinished(bool result);
+
+public slots:
+	// FIXME: Find a nicer way to stop/cancel Funambol C++ client API than thread termination
+	// NOTE: Currently not possible, Funambol API provides no hooks for safe cancelation
+	void cancelSync() { terminate(); }
 
 protected:
 	void run() { emit syncFinished(m_parent->syncClient()->sync(m_parent->profile())); }
@@ -56,11 +65,13 @@ PimSync::PimSync(QWidget *parent, Qt::WindowFlags /*flags*/)
 	, m_mainScreen(0), m_configScreen(0), m_logScreen(0)
 	, m_syncClient(0), m_profile(0)
 {
-	m_waitWidget = new QWaitWidget(this);
-	m_waitWidget->setText(tr("Syncing ..."));
-
 	m_syncThread = new SyncThread(this);
 	connect(m_syncThread, SIGNAL(syncFinished(bool)), this, SLOT(finishSync(bool)));
+
+	m_waitWidget = new QWaitWidget(this);
+	m_waitWidget->setText(tr("Syncing ..."));
+	m_waitWidget->setCancelEnabled(true);
+	connect(m_waitWidget, SIGNAL(cancelled()), m_syncThread, SLOT(cancelSync()));
 
 	setCurrentWidget(mainScreen());
 	connect(&mainScreen()->documents(), SIGNAL(changed()), this, SLOT(setUp()));
@@ -109,8 +120,7 @@ void PimSync::setUp()
 void PimSync::startSync()
 {
 	QContent selected = m_mainScreen->currentDocument();
-	setCurrentWidget(logScreen());
-	m_logScreen->document()->clear();
+	logScreen()->document()->clear();
 	m_logScreen->insertPlainText(tr("Loading profile \"%1\": ").arg(selected.name()));
 	if (profile()->load(selected)) {
 		m_logScreen->insertPlainText(tr("Ok\n"));
@@ -124,6 +134,8 @@ void PimSync::startSync()
 
 void PimSync::finishSync(bool result)
 {
+	setCurrentWidget(logScreen());
+	m_waitWidget->hide();
 	if (result) {
 		m_logScreen->insertPlainText(tr("Ok\n\n"));
 		m_logScreen->insertPlainText(m_syncClient->results());
@@ -133,7 +145,6 @@ void PimSync::finishSync(bool result)
 		m_logScreen->insertPlainText(tr("\n\nPlease check your configuration\n"));
 	}
 	//qDebug() << m_syncClient->syncReport();
-	m_waitWidget->hide();
 }
 
 void PimSync::newProfile()
@@ -216,6 +227,8 @@ QDocumentSelector *PimSync::mainScreen()
 {
 	if (!m_mainScreen) {
 		m_mainScreen = new QDocumentSelector(this);
+		// Note: Use this MimeType for testing (you can then edit the file with the 'Notes' app)
+		//m_mainScreen->setFilter(QContentFilter::mimeType("text/xml"));
 		m_mainScreen->setFilter(QContentFilter::mimeType("application/vnd.trolltech-qsp-xml"));
 		m_mainScreen->enableOptions(QDocumentSelector::NewDocument);
 		connect(m_mainScreen, SIGNAL(newSelected()), this, SLOT(newProfile()));

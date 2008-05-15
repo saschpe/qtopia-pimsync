@@ -31,7 +31,7 @@ ConfigScreen::ConfigScreen(QWidget *parent)
 {
 	m_name = new QLineEdit(tr("New profile"), this);
 	m_comment = new QTextEdit(tr("Enter comment here"), this);
-	m_sync = new QPushButton(tr("Start sync"), this);
+	m_sync = new QPushButton(QIcon(":icon/ok"), tr("Start synchronisation"), this);
 	connect(m_sync, SIGNAL(clicked()), this, SLOT(slotSyncPressed()));
 
 	m_mode = new QComboBox(this);
@@ -90,9 +90,9 @@ ConfigScreen::ConfigScreen(QWidget *parent)
 	QWidget *transportTab = new QWidget();
 	transportTab->setLayout(transportLayout);
 
-	addTab(profileTab, tr("Profile"));
-	addTab(syncTab, tr("Options"));
-	addTab(transportTab, tr("Transport"));
+	addTab(profileTab, QIcon(":icon/home"), tr("Profile"));
+	addTab(syncTab, QIcon(":icon/settings"), tr("Options"));
+	addTab(transportTab, QIcon(":icon/options"), tr("Transport"));
 	QSoftMenuBar::menuFor(this);
 }
 

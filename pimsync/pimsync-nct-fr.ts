@@ -16,12 +16,12 @@
 <context>
     <name>PimSync</name>
     <message>
-        <location filename="tr3218.cpp" line="1"/>
+        <location filename="tr4421.cpp" line="1"/>
         <source>PIM Synchronisation</source>
         <translation>Synchronisation PIM</translation>
     </message>
     <message>
-        <location filename="tr3218.cpp" line="2"/>
+        <location filename="tr4421.cpp" line="2"/>
         <source>PIM synchronization tool</source>
         <translation>Outil de la synchronisation PIM</translation>
     </message>

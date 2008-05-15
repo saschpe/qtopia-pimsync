@@ -4,9 +4,6 @@ depends(3rdparty/libraries/funambol)
 TARGET   = pimsync
 CONFIG  += qtopia_main no_quicklaunch
 
-AVAILABLE_LANGUAGES=en_US de fr
-LANGUAGES=$$AVAILABLE_LANGUAGES
-
 HEADERS += src/pimsync.h \
            src/serverconfig.h \
            src/configscreen.h \

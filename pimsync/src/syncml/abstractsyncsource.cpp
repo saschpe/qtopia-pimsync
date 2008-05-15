@@ -119,7 +119,7 @@ ArrayElement *AbstractSyncSource::clone()
 
 void AbstractSyncSource::setItemStatus(const char *key, int status)
 {
-	//TODO: Implement to set proper item status
+	//FIXME: Implement to set proper item status
 	qDebug() << "AbstractSyncSource::setItemStatus(" << key << "," << status << ")";
 
 	/*if (status == SYNC_STATE_NONE) {
