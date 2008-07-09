@@ -8,6 +8,7 @@ pkg/
 *.pri
 *.prl
 .svn
+.git
 
 3rdparty/libraries/curl/curl-7.18.1
 3rdparty/libraries/curl/bin
