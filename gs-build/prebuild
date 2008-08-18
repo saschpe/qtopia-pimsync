@@ -1,5 +1,0 @@
-#!/bin/sh
-
-[ ! -d gs-build ] && { echo "Please call this script from the base directory"; exit 1; }
-
-exit 0

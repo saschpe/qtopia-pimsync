@@ -1,24 +1,6 @@
 README
 ======
 
-This document gives general information about the partner solution.
-
-
-Provider
-========
-
-Funambol Inc.
-
-
-Functionality overview
-======================
-
-PIM synchronisation (OMA DS) bases on SyncML.
-
-
-Benefits
-========
-
 There is no other solution which uses SyncML on the Qtopia platform. It's advantage is the 
 adoption of an widely used industry standard. It should be able to sync with most 
 SyncML-capable groupware solutons given proper configuration.
@@ -41,14 +23,6 @@ The contents in the 3rd-party folder belong to their respective owners and fall 
 licensing terms. All other content, sources and documentation belong to Trolltech ASA.
 
 
-Other available documents
-=========================
-
-GS_INSTALL.txt       - Installation guide
-GS_RELEASE_NOTES.txt - Release Notes
-README.txt           - Description, License notes, description of prerequisites and installation procedure
-
-
 User guide
 ==========
 
@@ -60,10 +34,10 @@ needed, see README.txt for web-service configuration profiles.
 
 The same examples can be shown on the greenphone device, it is possible to sync with the locally
 installed groupware server via the cable or to sync to the web via internet access (GPRS, WLAN, 
-GSM, Bluetooth DUN, ...).
+GSM, Bluetooth DUN, etc.).
 
 
 Required environment
 ====================
 
-QPE 4.3.1 + SDK (see master document for further infos)
+Qtopia Phone Edition version 4.3.1 + SDK

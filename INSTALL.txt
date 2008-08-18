@@ -2,32 +2,28 @@ Installation guide
 ==================
 
 This document gives information about the steps, which have to be taken to install
-(or integrate) the partner solution into Qtopia.
+(or integrate) the SyncML DS solution into Qtopia.
 
 
 Installation How-to
 ===================
 
-PIMSync extensivly uses the Qt toolkit version 4.4 and the Qtopia
+Qtopia-PIMSync extensivly uses the Qt toolkit version 4.4 and the Qtopia
 phone edition allowing embedded development with Qt (as well as providing
 distinct phone features). Qt should be available pre-built for your platform,
 see `Trolltech Qt homepage`__ for further infos.
 
 Qtopia phone edition version 4.3.1 has to be built from source for your 
 specific target platform, see `Trolltech Qtopia homepage`__ for further infos
-on how to extract and build it correctly.
-
-Default build scripts for libcurl and Funambol C++ Client API are provided,
-so there are no additional steps necessary.
-
+on how to extract and build it correctly. Default build scripts for libcurl and 
+Funambol C++ Client API are provided, so there are no additional steps necessary.
 
 To install and test with the x86 emulator (QVFb) you have to start it first:
 
 	$ $QPE_X86_BUILDDIR/bin/runqtopia
 
 Then build the project for the x86 emulator and/or to have it installed
-in the Qtopia flash-image (for an embedded device) you have to do
-these steps:
+in the Qtopia flash-image (for an embedded device) you have to do these steps:
 
 	$ $QPE_X86_BUILDDIR/bin/qtopiamake
 	$ make

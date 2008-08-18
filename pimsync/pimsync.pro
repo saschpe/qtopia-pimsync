@@ -1,6 +1,7 @@
 qtopia_project(qtopia app)
 depends(libraries/qtopiapim)
 depends(3rdparty/libraries/funambol)
+
 TARGET   = pimsync
 CONFIG  += qtopia_main no_quicklaunch
 
@@ -25,10 +26,12 @@ desktop.path     = /apps/Applications
 desktop.trtarget = pimsync-nct
 desktop.hint     = desktop nct
 INSTALLS        += desktop
+
 pics.files       = data/pics/*
 pics.path        = /pics/pimsync
 pics.hint        = pics
 INSTALLS        += pics
+
 help.source      = data/help
 help.files       = pimsync.*
 help.hint        = help

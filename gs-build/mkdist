@@ -1,6 +1,0 @@
-#!/bin/sh
-
-[ ! -d gs-build ] && { echo "Please call this script from the base directory"; exit 1; }
-[ ! -d "$QTOPIA_SOURCE" ] && { echo "Please set QTOPIA_SOURCE env variable!"; exit 2; }
-
-exit 0
