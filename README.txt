@@ -2,7 +2,7 @@ README
 ======
 
 There is no other solution which uses SyncML on the Qtopia platform. It's advantage is the 
-adoption of an widely used industry standard. It should be able to sync with most 
+adoption of an widely used industry standard and thus should be able to sync with most 
 SyncML-capable groupware solutons given proper configuration.
 
 
