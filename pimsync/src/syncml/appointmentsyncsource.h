@@ -26,27 +26,27 @@
 
 #include <QAppointmentModel>
 
-class AppointmentSyncSourceConfig : public AbstractSyncSourceConfig
+class AppointmentSyncSourceConfig : public AbstractSyncSourceConfig2
 {
 public:
-	AppointmentSyncSourceConfig(Mode syncMode, unsigned int lastSync, const char *uri) 
-		: AbstractSyncSourceConfig(syncMode, lastSync, uri)
-	{
-		setName("event");
-		setType("text/x-vcalendar");
-		//setSupportedTypes("text/x-vcalendar:");
-	}
+    AppointmentSyncSourceConfig(Mode syncMode, unsigned int lastSync, const char *uri)
+        : AbstractSyncSourceConfig2(syncMode, lastSync, uri)
+    {
+        setName("event");
+        setType("text/x-vcalendar");
+        //setSupportedTypes("text/x-vcalendar:");
+    }
 };
 
 class AppointmentSyncSource : public AbstractSyncSource
 {
 public:
-	AppointmentSyncSource(AppointmentSyncSourceConfig *config, SyncManagerConfig *managerConfig)
-		: AbstractSyncSource(config, managerConfig)
-	{ 
-		m_model = new QAppointmentModel(); 
-		m_type = "vCalendar";
-	}
+    AppointmentSyncSource(AppointmentSyncSourceConfig *config, SyncManagerConfig *managerConfig)
+        : AbstractSyncSource(config, managerConfig)
+    {
+        m_model = new QAppointmentModel();
+        m_type = "vCalendar";
+    }
 };
 
 #endif // APPOINTMENTSYNCSOURCE_H

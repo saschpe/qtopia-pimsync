@@ -26,34 +26,34 @@
 
 #include <QContactModel>
 
-class ContactSyncSourceConfig : public AbstractSyncSourceConfig
+class ContactSyncSourceConfig : public AbstractSyncSourceConfig2
 {
 public:
-	ContactSyncSourceConfig(Mode syncMode, unsigned int lastSync, const char *uri) 
-		: AbstractSyncSourceConfig(syncMode, lastSync, uri)
-	{
-		setName("contact");
-		setType("text/x-vcard");
-		//setSupportedTypes("text/x-vcard:,text/vcard");
-	}
+    ContactSyncSourceConfig(Mode syncMode, unsigned int lastSync, const char *uri)
+        : AbstractSyncSourceConfig2(syncMode, lastSync, uri)
+    {
+        setName("contact");
+        setType("text/x-vcard");
+        //setSupportedTypes("text/x-vcard:,text/vcard");
+    }
 };
 
 class ContactSyncSource : public AbstractSyncSource
 {
 public:
-	ContactSyncSource(ContactSyncSourceConfig *config, SyncManagerConfig *managerConfig)
-		: AbstractSyncSource(config, managerConfig)
-	{ 
-		m_model = new QContactModel(); 
+    ContactSyncSource(ContactSyncSourceConfig *config, SyncManagerConfig *managerConfig)
+        : AbstractSyncSource(config, managerConfig)
+    {
+        m_model = new QContactModel();
 
-		// Ignore SIM or other sources by default because it's unclear
-		// how to sync them (modifying a SIM contact on a server leads to
-		// problem when we want to reimport it)
-		QSet<QPimSource> sources;
-		sources.insert(m_model->defaultSource());
-		m_model->setVisibleSources(sources);
-		m_type = "vCard";
-	}
+        // Ignore SIM or other sources by default because it's unclear
+        // how to sync them (modifying a SIM contact on a server leads to
+        // problem when we want to reimport it)
+        QSet<QPimSource> sources;
+        sources.insert(m_model->defaultSource());
+        m_model->setVisibleSources(sources);
+        m_type = "vCard";
+    }
 };
 
 #endif // CONTACTSYNCSOURCE_H

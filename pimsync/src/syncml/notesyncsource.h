@@ -26,28 +26,28 @@
 
 //#include <QNoteModel>
 
-class NoteSyncSourceConfig : public AbstractSyncSourceConfig
+class NoteSyncSourceConfig : public AbstractSyncSourceConfig2
 {
 public:
-	NoteSyncSourceConfig(Mode syncMode, unsigned int lastSync, const char *uri) 
-		: AbstractSyncSourceConfig(syncMode, lastSync, uri)
-	{
-		setName("note");
-		setType("text/plain");
-	}
+    NoteSyncSourceConfig(Mode syncMode, unsigned int lastSync, const char *uri)
+        : AbstractSyncSourceConfig2(syncMode, lastSync, uri)
+    {
+        setName("note");
+        setType("text/plain");
+    }
 };
 
 class NoteSyncSource : public AbstractSyncSource
 {
 public:
-	NoteSyncSource(NoteSyncSourceConfig *config, SyncManagerConfig *managerConfig)
-		: AbstractSyncSource(config, managerConfig)
-	{
-		// CURRENTLY NOT SUPPORTED BY PIM MODELS, ONE COULD CREATE ONE
-		// SO CALLING THE CONSTRUCTOR SHOULD NOT BE ALLOWED
-		//m_model = new QNoteModel(); 
-		//m_type = "vCalendar";
-	}
+    NoteSyncSource(NoteSyncSourceConfig *config, SyncManagerConfig *managerConfig)
+        : AbstractSyncSource(config, managerConfig)
+    {
+        // CURRENTLY NOT SUPPORTED BY PIM MODELS, ONE COULD CREATE ONE
+        // SO CALLING THE CONSTRUCTOR SHOULD NOT BE ALLOWED
+        //m_model = new QNoteModel();
+        //m_type = "vCalendar";
+    }
 };
 
 #endif // TASKSYNCSOURCE_H

@@ -26,26 +26,26 @@
 
 #include <QTaskModel>
 
-class TaskSyncSourceConfig : public AbstractSyncSourceConfig
+class TaskSyncSourceConfig : public AbstractSyncSourceConfig2
 {
 public:
-	TaskSyncSourceConfig(Mode syncMode, unsigned int lastSync, const char *uri) 
-		: AbstractSyncSourceConfig(syncMode, lastSync, uri)
-	{
-		setName("task");
-		setType("text/x-vcalendar");
-	}
+    TaskSyncSourceConfig(Mode syncMode, unsigned int lastSync, const char *uri)
+        : AbstractSyncSourceConfig2(syncMode, lastSync, uri)
+    {
+        setName("task");
+        setType("text/x-vcalendar");
+    }
 };
 
 class TaskSyncSource : public AbstractSyncSource
 {
 public:
-	TaskSyncSource(TaskSyncSourceConfig *config, SyncManagerConfig *managerConfig)
-		: AbstractSyncSource(config, managerConfig)
-	{
-		m_model = new QTaskModel(); 
-		m_type = "vCalendar";
-	}
+    TaskSyncSource(TaskSyncSourceConfig *config, SyncManagerConfig *managerConfig)
+        : AbstractSyncSource(config, managerConfig)
+    {
+        m_model = new QTaskModel();
+        m_type = "vCalendar";
+    }
 };
 
 #endif // TASKSYNCSOURCE_H

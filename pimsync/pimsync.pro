@@ -1,7 +1,6 @@
 qtopia_project(qtopia app)
 depends(libraries/qtopiapim)
 depends(3rdparty/libraries/funambol)
-
 TARGET   = pimsync
 CONFIG  += qtopia_main no_quicklaunch
 

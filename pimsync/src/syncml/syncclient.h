@@ -37,25 +37,25 @@ class SyncManagerConfig;
  */
 class QtopiaSyncClient : public QObject, public SyncClient
 {
-	Q_OBJECT
+    Q_OBJECT
 
-public:	
-	QtopiaSyncClient();
-	virtual ~QtopiaSyncClient();
+public:
+    QtopiaSyncClient();
+    virtual ~QtopiaSyncClient();
 
-	/*!
-	 * Trigger the sync with a remote server. Make sure that everything
-	 * was configured correctly or the sync may fail.
-	 */
-	bool sync(ServerConfig *profile);
+    /*!
+     * Trigger the sync with a remote server. Make sure that everything
+     * was configured correctly or the sync may fail.
+     */
+    bool sync(ServerConfig *profile);
 
-	QString results();
-	QString error();
+    QString results();
+    QString error();
 
-	QString syncReport();
+    QString syncReport();
 
 private:
-	SyncManagerConfig *m_managerConfig;
+    SyncManagerConfig *m_managerConfig;
 };
 
 #endif

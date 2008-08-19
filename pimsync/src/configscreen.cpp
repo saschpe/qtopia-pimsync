@@ -27,161 +27,161 @@
 #include <QSoftMenuBar>
 
 ConfigScreen::ConfigScreen(QWidget *parent)
-	: QTabWidget(parent)
+    : QTabWidget(parent)
 {
-	m_name = new QLineEdit(tr("New profile"), this);
-	m_comment = new QTextEdit(tr("Enter comment here"), this);
-	m_sync = new QPushButton(QIcon(":icon/ok"), tr("Start synchronisation"), this);
-	connect(m_sync, SIGNAL(clicked()), this, SLOT(slotSyncPressed()));
+    m_name = new QLineEdit(tr("New profile"), this);
+    m_comment = new QTextEdit(tr("Enter comment here"), this);
+    m_sync = new QPushButton(QIcon(":icon/ok"), tr("Start synchronisation"), this);
+    connect(m_sync, SIGNAL(clicked()), this, SLOT(slotSyncPressed()));
 
-	m_mode = new QComboBox(this);
-	m_mode->addItem(tr("Slow"));
-	m_mode->addItem(tr("Two way"));
-	m_mode->addItem(tr("One way from client"));
-	m_mode->addItem(tr("One way from server"));
-	m_mode->addItem(tr("Refresh from client"));
-	m_mode->addItem(tr("Refresh from server"));
-	m_contacts = new QCheckBox(tr("Contacts"), this);
-	m_contactsUrl = new QLineEdit(this);
-	m_tasks = new QCheckBox(tr("Tasks"), this);
-	m_tasksUrl = new QLineEdit(this);
-	m_appointments = new QCheckBox(tr("Appointments"), this);
-	m_appointmentsUrl = new QLineEdit(this);
-	m_notes = new QCheckBox(tr("Notes"), this);
-	// TODO: Enable notes checkbox and lineedit if Qtopia supports QNoteModel:
-	m_notes->setEnabled(false);
-	m_notesUrl = new QLineEdit(this);
-	m_notesUrl->setEnabled(false);
+    m_mode = new QComboBox(this);
+    m_mode->addItem(tr("Slow"));
+    m_mode->addItem(tr("Two way"));
+    m_mode->addItem(tr("One way from client"));
+    m_mode->addItem(tr("One way from server"));
+    m_mode->addItem(tr("Refresh from client"));
+    m_mode->addItem(tr("Refresh from server"));
+    m_contacts = new QCheckBox(tr("Contacts"), this);
+    m_contactsUrl = new QLineEdit(this);
+    m_tasks = new QCheckBox(tr("Tasks"), this);
+    m_tasksUrl = new QLineEdit(this);
+    m_appointments = new QCheckBox(tr("Appointments"), this);
+    m_appointmentsUrl = new QLineEdit(this);
+    m_notes = new QCheckBox(tr("Notes"), this);
+    // TODO: Enable notes checkbox and lineedit if Qtopia supports QNoteModel:
+    m_notes->setEnabled(false);
+    m_notesUrl = new QLineEdit(this);
+    m_notesUrl->setEnabled(false);
 
-	m_transportUserName = new QLineEdit(this);
-	m_transportPassword = new QLineEdit(this);
-	m_transportPassword->setEchoMode(QLineEdit::Password);
-	m_transportUrl = new QTextEdit(this);
+    m_transportUserName = new QLineEdit(this);
+    m_transportPassword = new QLineEdit(this);
+    m_transportPassword->setEchoMode(QLineEdit::Password);
+    m_transportUrl = new QTextEdit(this);
 
-	QGridLayout *profileLayout = new QGridLayout();
-	profileLayout->addWidget(new QLabel(tr("Name:")), 0, 0);
-	profileLayout->addWidget(m_name, 0, 1);
-	profileLayout->addWidget(m_comment, 2, 0, 1, 3);
-	profileLayout->addWidget(m_sync, 3, 0, 1, 3);
-	QWidget *profileTab = new QWidget();
-	profileTab->setLayout(profileLayout);
+    QGridLayout *profileLayout = new QGridLayout();
+    profileLayout->addWidget(new QLabel(tr("Name:")), 0, 0);
+    profileLayout->addWidget(m_name, 0, 1);
+    profileLayout->addWidget(m_comment, 2, 0, 1, 3);
+    profileLayout->addWidget(m_sync, 3, 0, 1, 3);
+    QWidget *profileTab = new QWidget();
+    profileTab->setLayout(profileLayout);
 
-	QGridLayout *syncLayout = new QGridLayout();
-	syncLayout->addWidget(new QLabel(tr("Mode:")), 0, 0);
-	syncLayout->addWidget(m_mode, 0, 1, 1, 2);
-	syncLayout->addWidget(m_contacts, 1, 0, 1, 2);
-	syncLayout->addWidget(m_contactsUrl, 1, 2);
-	syncLayout->addWidget(m_tasks, 2, 0, 1, 2);
-	syncLayout->addWidget(m_tasksUrl, 2, 2);
-	syncLayout->addWidget(m_appointments, 3, 0, 1, 2);
-	syncLayout->addWidget(m_appointmentsUrl, 3, 2);
-	syncLayout->addWidget(m_notes, 4, 0, 1, 2);
-	syncLayout->addWidget(m_notesUrl, 4, 2);
-	QWidget *syncTab = new QWidget();
-	syncTab->setLayout(syncLayout);
+    QGridLayout *syncLayout = new QGridLayout();
+    syncLayout->addWidget(new QLabel(tr("Mode:")), 0, 0);
+    syncLayout->addWidget(m_mode, 0, 1, 1, 2);
+    syncLayout->addWidget(m_contacts, 1, 0, 1, 2);
+    syncLayout->addWidget(m_contactsUrl, 1, 2);
+    syncLayout->addWidget(m_tasks, 2, 0, 1, 2);
+    syncLayout->addWidget(m_tasksUrl, 2, 2);
+    syncLayout->addWidget(m_appointments, 3, 0, 1, 2);
+    syncLayout->addWidget(m_appointmentsUrl, 3, 2);
+    syncLayout->addWidget(m_notes, 4, 0, 1, 2);
+    syncLayout->addWidget(m_notesUrl, 4, 2);
+    QWidget *syncTab = new QWidget();
+    syncTab->setLayout(syncLayout);
 
-	QGridLayout *transportLayout = new QGridLayout();
-	transportLayout->addWidget(new QLabel(tr("Username:")), 1, 0);
-	transportLayout->addWidget(m_transportUserName, 1, 1);
-	transportLayout->addWidget(new QLabel(tr("Password:")), 2, 0);
-	transportLayout->addWidget(m_transportPassword, 2, 1);
-	transportLayout->addWidget(new QLabel(tr("Server URL:")), 3, 0);
-	transportLayout->addWidget(m_transportUrl, 4, 0, 1, 2);
-	QWidget *transportTab = new QWidget();
-	transportTab->setLayout(transportLayout);
+    QGridLayout *transportLayout = new QGridLayout();
+    transportLayout->addWidget(new QLabel(tr("Username:")), 1, 0);
+    transportLayout->addWidget(m_transportUserName, 1, 1);
+    transportLayout->addWidget(new QLabel(tr("Password:")), 2, 0);
+    transportLayout->addWidget(m_transportPassword, 2, 1);
+    transportLayout->addWidget(new QLabel(tr("Server URL:")), 3, 0);
+    transportLayout->addWidget(m_transportUrl, 4, 0, 1, 2);
+    QWidget *transportTab = new QWidget();
+    transportTab->setLayout(transportLayout);
 
-	addTab(profileTab, QIcon(":icon/home"), tr("Profile"));
-	addTab(syncTab, QIcon(":icon/settings"), tr("Options"));
-	addTab(transportTab, QIcon(":icon/options"), tr("Transport"));
-	QSoftMenuBar::menuFor(this);
+    addTab(profileTab, QIcon(":icon/home"), tr("Profile"));
+    addTab(syncTab, QIcon(":icon/settings"), tr("Options"));
+    addTab(transportTab, QIcon(":icon/options"), tr("Transport"));
+    QSoftMenuBar::menuFor(this);
 }
 
 void ConfigScreen::setProfile(ServerConfig *profile)
 {
-	m_profile = profile;
+    m_profile = profile;
 
-	m_name->setText(m_profile->name());
-	m_comment->setText(m_profile->comment());
+    m_name->setText(m_profile->name());
+    m_comment->setText(m_profile->comment());
 
-	if (m_profile->mode() == ServerConfig::Slow)
-		m_mode->setCurrentIndex(m_mode->findText(tr("Slow")));
-	else if(m_profile->mode() == ServerConfig::TwoWay)
-		m_mode->setCurrentIndex(m_mode->findText(tr("Two way")));
-	else if(m_profile->mode() == ServerConfig::OneWayFromServer)
-		m_mode->setCurrentIndex(m_mode->findText(tr("One way from server")));
-	else if(m_profile->mode() == ServerConfig::OneWayFromClient)
-		m_mode->setCurrentIndex(m_mode->findText(tr("One way from client")));
-	else if(m_profile->mode() == ServerConfig::RefreshFromServer)
-		m_mode->setCurrentIndex(m_mode->findText(tr("Refresh from server")));
-	else if(m_profile->mode() == ServerConfig::RefreshFromClient)
-		m_mode->setCurrentIndex(m_mode->findText(tr("Refresh from client")));
+    if (m_profile->mode() == ServerConfig::Slow)
+        m_mode->setCurrentIndex(m_mode->findText(tr("Slow")));
+    else if(m_profile->mode() == ServerConfig::TwoWay)
+        m_mode->setCurrentIndex(m_mode->findText(tr("Two way")));
+    else if(m_profile->mode() == ServerConfig::OneWayFromServer)
+        m_mode->setCurrentIndex(m_mode->findText(tr("One way from server")));
+    else if(m_profile->mode() == ServerConfig::OneWayFromClient)
+        m_mode->setCurrentIndex(m_mode->findText(tr("One way from client")));
+    else if(m_profile->mode() == ServerConfig::RefreshFromServer)
+        m_mode->setCurrentIndex(m_mode->findText(tr("Refresh from server")));
+    else if(m_profile->mode() == ServerConfig::RefreshFromClient)
+        m_mode->setCurrentIndex(m_mode->findText(tr("Refresh from client")));
 
-	m_contacts->setChecked(m_profile->sourceEnabled(ServerConfig::Contacts));
-	m_tasks->setChecked(m_profile->sourceEnabled(ServerConfig::Tasks));
-	m_appointments->setChecked(m_profile->sourceEnabled(ServerConfig::Appointments));
-	m_notes->setChecked(m_profile->sourceEnabled(ServerConfig::Notes));
+    m_contacts->setChecked(m_profile->sourceEnabled(ServerConfig::Contacts));
+    m_tasks->setChecked(m_profile->sourceEnabled(ServerConfig::Tasks));
+    m_appointments->setChecked(m_profile->sourceEnabled(ServerConfig::Appointments));
+    m_notes->setChecked(m_profile->sourceEnabled(ServerConfig::Notes));
 
-	m_contactsUrl->setText(m_profile->sourceUrl(ServerConfig::Contacts));
-	m_tasksUrl->setText(m_profile->sourceUrl(ServerConfig::Tasks));
-	m_appointmentsUrl->setText(m_profile->sourceUrl(ServerConfig::Appointments));
-	m_notesUrl->setText(m_profile->sourceUrl(ServerConfig::Notes));
+    m_contactsUrl->setText(m_profile->sourceUrl(ServerConfig::Contacts));
+    m_tasksUrl->setText(m_profile->sourceUrl(ServerConfig::Tasks));
+    m_appointmentsUrl->setText(m_profile->sourceUrl(ServerConfig::Appointments));
+    m_notesUrl->setText(m_profile->sourceUrl(ServerConfig::Notes));
 
-	m_transportUserName->setText(m_profile->transportUser());
-	m_transportPassword->setText(m_profile->transportPassword());
-	m_transportUrl->setText(m_profile->transportUrl());
+    m_transportUserName->setText(m_profile->transportUser());
+    m_transportPassword->setText(m_profile->transportPassword());
+    m_transportUrl->setText(m_profile->transportUrl());
 
-	setCurrentIndex(0);
-	m_sync->setFocus();
+    setCurrentIndex(0);
+    m_sync->setFocus();
 }
 
 void ConfigScreen::keyPressEvent(QKeyEvent *event)
 {
-	if (event->key() == Qt::Key_Back)
-		saveProfile();
-	QTabWidget::keyPressEvent(event);
+    if (event->key() == Qt::Key_Back)
+        saveProfile();
+    QTabWidget::keyPressEvent(event);
 }
 
 void ConfigScreen::slotSyncPressed()
 {
-	saveProfile();
-	emit syncPressed();
+    saveProfile();
+    emit syncPressed();
 }
 
 void ConfigScreen::saveProfile()
 {
-	m_profile->setName(m_name->text());
-	m_profile->setComment(m_comment->toPlainText());
+    m_profile->setName(m_name->text());
+    m_profile->setComment(m_comment->toPlainText());
 
-	if (m_mode->currentText() == "Slow")
-		m_profile->setMode(ServerConfig::Slow);
-	else if (m_mode->currentText() == "Two way")
-		m_profile->setMode(ServerConfig::TwoWay);
-	else if (m_mode->currentText() == "One way from server")
-		m_profile->setMode(ServerConfig::OneWayFromServer);
-	else if (m_mode->currentText() == "One way from client")
-		m_profile->setMode(ServerConfig::OneWayFromClient);
-	else if (m_mode->currentText() == "Refresh from server")
-		m_profile->setMode(ServerConfig::RefreshFromServer);
-	else if (m_mode->currentText() == "Refresh from client")
-		m_profile->setMode(ServerConfig::RefreshFromClient);
+    if (m_mode->currentText() == "Slow")
+        m_profile->setMode(ServerConfig::Slow);
+    else if (m_mode->currentText() == "Two way")
+        m_profile->setMode(ServerConfig::TwoWay);
+    else if (m_mode->currentText() == "One way from server")
+        m_profile->setMode(ServerConfig::OneWayFromServer);
+    else if (m_mode->currentText() == "One way from client")
+        m_profile->setMode(ServerConfig::OneWayFromClient);
+    else if (m_mode->currentText() == "Refresh from server")
+        m_profile->setMode(ServerConfig::RefreshFromServer);
+    else if (m_mode->currentText() == "Refresh from client")
+        m_profile->setMode(ServerConfig::RefreshFromClient);
 
-	m_profile->setSourceEnabled(ServerConfig::Contacts, m_contacts->isChecked());
-	m_profile->setSourceEnabled(ServerConfig::Tasks, m_tasks->isChecked());
-	m_profile->setSourceEnabled(ServerConfig::Appointments, m_appointments->isChecked());
-	m_profile->setSourceEnabled(ServerConfig::Notes, m_notes->isChecked());
+    m_profile->setSourceEnabled(ServerConfig::Contacts, m_contacts->isChecked());
+    m_profile->setSourceEnabled(ServerConfig::Tasks, m_tasks->isChecked());
+    m_profile->setSourceEnabled(ServerConfig::Appointments, m_appointments->isChecked());
+    m_profile->setSourceEnabled(ServerConfig::Notes, m_notes->isChecked());
 
-	m_profile->setSourceUrl(ServerConfig::Contacts, m_contactsUrl->text());
-	m_profile->setSourceUrl(ServerConfig::Tasks, m_tasksUrl->text());
-	m_profile->setSourceUrl(ServerConfig::Appointments, m_appointmentsUrl->text());
-	m_profile->setSourceUrl(ServerConfig::Notes, m_notesUrl->text());
+    m_profile->setSourceUrl(ServerConfig::Contacts, m_contactsUrl->text());
+    m_profile->setSourceUrl(ServerConfig::Tasks, m_tasksUrl->text());
+    m_profile->setSourceUrl(ServerConfig::Appointments, m_appointmentsUrl->text());
+    m_profile->setSourceUrl(ServerConfig::Notes, m_notesUrl->text());
 
-	m_profile->setTransportUser(m_transportUserName->text());
-	m_profile->setTransportPassword(m_transportPassword->text());
-	m_profile->setTransportUrl(m_transportUrl->toPlainText());
+    m_profile->setTransportUser(m_transportUserName->text());
+    m_profile->setTransportPassword(m_transportPassword->text());
+    m_profile->setTransportUrl(m_transportUrl->toPlainText());
 
-	if (!m_profile->save()) {
-		QMessageBox::critical(this, tr("Error"), 
-				tr("Unable to save profile: %1").arg(m_profile->name()),
-				QMessageBox::Ok, QMessageBox::Ok);
-	}
+    if (!m_profile->save()) {
+        QMessageBox::critical(this, tr("Error"),
+                tr("Unable to save profile: %1").arg(m_profile->name()),
+                QMessageBox::Ok, QMessageBox::Ok);
+    }
 }

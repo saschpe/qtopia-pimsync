@@ -34,44 +34,44 @@ class ServerConfig;
 
 class ConfigScreen : public QTabWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	ConfigScreen(QWidget *parent = 0);
+    ConfigScreen(QWidget *parent = 0);
 
-	void setProfile(ServerConfig *profile);
+    void setProfile(ServerConfig *profile);
 
 signals:
-	void syncPressed();
+    void syncPressed();
 
 protected:
-	void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event);
 
 private slots:
-	void slotSyncPressed();
+    void slotSyncPressed();
 
 private:
-	void saveProfile();
+    void saveProfile();
 
-	ServerConfig *m_profile;
+    ServerConfig *m_profile;
 
-	QLineEdit *m_name;
-	QTextEdit *m_comment;
-	QPushButton *m_sync;
+    QLineEdit *m_name;
+    QTextEdit *m_comment;
+    QPushButton *m_sync;
 
-	QComboBox *m_mode;
-	QCheckBox *m_contacts;
-	QLineEdit *m_contactsUrl;
-	QCheckBox *m_tasks;
-	QLineEdit *m_tasksUrl;
-	QCheckBox *m_appointments;
-	QLineEdit *m_appointmentsUrl;
-	QCheckBox *m_notes;
-	QLineEdit *m_notesUrl;
+    QComboBox *m_mode;
+    QCheckBox *m_contacts;
+    QLineEdit *m_contactsUrl;
+    QCheckBox *m_tasks;
+    QLineEdit *m_tasksUrl;
+    QCheckBox *m_appointments;
+    QLineEdit *m_appointmentsUrl;
+    QCheckBox *m_notes;
+    QLineEdit *m_notesUrl;
 
-	QLineEdit *m_transportUserName;
-	QLineEdit *m_transportPassword;	
-	QTextEdit *m_transportUrl;
+    QLineEdit *m_transportUserName;
+    QLineEdit *m_transportPassword;
+    QTextEdit *m_transportUrl;
 };
 
 #endif

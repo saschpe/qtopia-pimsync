@@ -36,43 +36,43 @@ class SyncThread;
 
 class PimSync : public QStackedWidget
 {
-	Q_OBJECT
-	friend class SyncThread;
-	
+    Q_OBJECT
+    friend class SyncThread;
+
 public:
-	PimSync(QWidget *parent = 0, Qt::WindowFlags flags = 0);
+    PimSync(QWidget *parent = 0, Qt::WindowFlags flags = 0);
 
 protected:
-	void keyPressEvent(QKeyEvent *event);
+    void keyPressEvent(QKeyEvent *event);
 
 private slots:
-	void setUp();
+    void setUp();
 
-	void startSync();
-	void finishSync(bool result);
+    void startSync();
+    void finishSync(bool result);
 
 public slots:
-	void setDocument(const QString &fileName);
+    void setDocument(const QString &fileName);
 
-	void newProfile();
-	void editProfile(const QContent &content);
-	void addDefaultProfiles();
+    void newProfile();
+    void editProfile(const QContent &content);
+    void addDefaultProfiles();
 
 private:
-	QDocumentSelector *mainScreen();
-	ConfigScreen *configScreen();
-	QTextEdit *logScreen();
-	QtopiaSyncClient *syncClient();
-	ServerConfig *profile();
+    QDocumentSelector *mainScreen();
+    ConfigScreen *configScreen();
+    QTextEdit *logScreen();
+    QtopiaSyncClient *syncClient();
+    ServerConfig *profile();
 
-	QDocumentSelector *m_mainScreen;
-	ConfigScreen *m_configScreen;
-	QTextEdit *m_logScreen;
-	QtopiaSyncClient *m_syncClient;
-	ServerConfig *m_profile;
+    QDocumentSelector *m_mainScreen;
+    ConfigScreen *m_configScreen;
+    QTextEdit *m_logScreen;
+    QtopiaSyncClient *m_syncClient;
+    ServerConfig *m_profile;
 
-	QWaitWidget *m_waitWidget;
-	SyncThread *m_syncThread;
+    QWaitWidget *m_waitWidget;
+    SyncThread *m_syncThread;
 };
 
 #endif

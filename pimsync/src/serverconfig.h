@@ -31,84 +31,84 @@
 class ServerConfig
 {
 public:
-	enum Mode {
-		Slow = 0x0,
-		TwoWay = 0x1,
-		OneWayFromServer = 0x2,
-		OneWayFromClient = 0x3,
-		RefreshFromServer = 0x4,
-		RefreshFromClient = 0x5,
-	};
+    enum Mode {
+        Slow = 0x0,
+        TwoWay = 0x1,
+        OneWayFromServer = 0x2,
+        OneWayFromClient = 0x3,
+        RefreshFromServer = 0x4,
+        RefreshFromClient = 0x5,
+    };
 
-	enum Source {
-		Contacts = 0x0,
-		Tasks = 0x1,
-		Appointments = 0x2,
-		Notes = 0x3
-	};
+    enum Source {
+        Contacts = 0x0,
+        Tasks = 0x1,
+        Appointments = 0x2,
+        Notes = 0x3
+    };
 
-	ServerConfig();
-	virtual ~ServerConfig();
+    ServerConfig();
+    virtual ~ServerConfig();
 
-	void newProfile();
-	bool load(const QContent &profile);
-	bool save();
-	bool isSaved() const { return m_saved; }
+    void newProfile();
+    bool load(const QContent &profile);
+    bool save();
+    bool isSaved() const { return m_saved; }
 
-	void setName(const QString &name);
-	QString name() const { return m_name; }
+    void setName(const QString &name);
+    QString name() const { return m_name; }
 
-	void setComment(const QString &comment);
-	QString comment() const { return m_comment; }
+    void setComment(const QString &comment);
+    QString comment() const { return m_comment; }
 
-	void setMode(Mode mode);
-	Mode mode() const { return m_mode; }
+    void setMode(Mode mode);
+    Mode mode() const { return m_mode; }
 
-	void setSourceEnabled(Source source, bool enabled);
-	bool sourceEnabled(Source source) const;
+    void setSourceEnabled(Source source, bool enabled);
+    bool sourceEnabled(Source source) const;
 
-	void setSourceLastSync(Source source, unsigned int timeStamp);
-	unsigned int sourceLastSync(Source source) const;
+    void setSourceLastSync(Source source, unsigned int timeStamp);
+    unsigned int sourceLastSync(Source source) const;
 
-	void setSourceUrl(Source source, const QString &url);
-	QString sourceUrl(Source source) const;
+    void setSourceUrl(Source source, const QString &url);
+    QString sourceUrl(Source source) const;
 
-	void setTransportUser(const QString &user);
-	QString transportUser() const { return m_transportUser; }
+    void setTransportUser(const QString &user);
+    QString transportUser() const { return m_transportUser; }
 
-	void setTransportPassword(const QString &password);
-	QString transportPassword() const { return m_transportPassword; }
+    void setTransportPassword(const QString &password);
+    QString transportPassword() const { return m_transportPassword; }
 
-	void setTransportUrl(const QString &url);
-	QString transportUrl() const { return m_transportUrl; }
+    void setTransportUrl(const QString &url);
+    QString transportUrl() const { return m_transportUrl; }
 
 private:
-	bool m_saved;
-	QContent m_currentProfile;
+    bool m_saved;
+    QContent m_currentProfile;
 
-	QString m_name;
-	QString m_comment;
-	Mode m_mode;
+    QString m_name;
+    QString m_comment;
+    Mode m_mode;
 
-	bool m_contactsEnabled;
-	unsigned int m_contactsLastSync;
-	QString m_contactsUrl;
+    bool m_contactsEnabled;
+    unsigned int m_contactsLastSync;
+    QString m_contactsUrl;
 
-	bool m_tasksEnabled;
-	unsigned int m_tasksLastSync;
-	QString m_tasksUrl;
+    bool m_tasksEnabled;
+    unsigned int m_tasksLastSync;
+    QString m_tasksUrl;
 
-	bool m_appointmentsEnabled;
-	unsigned int m_appointmentsLastSync;
-	QString m_appointmentsUrl;
+    bool m_appointmentsEnabled;
+    unsigned int m_appointmentsLastSync;
+    QString m_appointmentsUrl;
 
-	bool m_notesEnabled;
-	unsigned int m_notesLastSync;
-	QString m_notesUrl;
+    bool m_notesEnabled;
+    unsigned int m_notesLastSync;
+    QString m_notesUrl;
 
-	QString m_transportUser;
-	QString m_transportPassword;
-	QString m_transportUrl;
+    QString m_transportUser;
+    QString m_transportPassword;
+    QString m_transportUrl;
 };
 
 #endif
