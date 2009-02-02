@@ -23,6 +23,7 @@ automake -a -c -f
 autoconf -f
 export PATH=$PATH:$DIR_CURL_BIN
 ./configure --prefix=$DIR_PREFIX
+export LD_RUN_PATH=$DIR_PREFIX/../curl/lib
 make
 make install
 cd ../../..

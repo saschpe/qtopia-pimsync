@@ -59,11 +59,11 @@ public:
         m_lastSync = lastSync;
 
         switch (syncMode) {
-            case Slow:                setSync("slow");                break;
+            case Slow:              setSync("slow");                   break;
             case TwoWay:            setSync("two-way");                break;
-            case OneWayFromServer:    setSync("one-way-from-server");    break;
-            case OneWayFromClient:    setSync("one-way-from-client");    break;
-            case RefreshFromServer:    setSync("refresh-from-server");    break;
+            case OneWayFromServer:  setSync("one-way-from-server");    break;
+            case OneWayFromClient:  setSync("one-way-from-client");    break;
+            case RefreshFromServer: setSync("refresh-from-server");    break;
             case RefreshFromClient: setSync("refresh-from-client");    break;
         }
     }
