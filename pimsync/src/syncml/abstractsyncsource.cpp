@@ -270,7 +270,7 @@ SyncItem *AbstractSyncSource::getNext(ItemSet set, bool withData)
         }
     } else {
         if (!id.isNull()) {
-            return createSyncItem(id, withData);
+            return createSyncItem(id, withData, state);
         } else {
             //qDebug() << "AbstractSyncSource::getNext() Invalid Id";
         }
